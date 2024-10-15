@@ -1,0 +1,26 @@
+.wrapper {
+    @apply text-sm;
+}
+
+.hr {
+    /* background: rgb(10, 82, 154); */
+    /* background: linear-gradient(90deg, rgba(10, 82, 154, 1) 0%, rgba(10, 82, 154, 1) 28%, rgba(7, 154, 57, 1) 100%); */
+    @apply h-1 mb-8;
+}
+
+.bottom {
+    background: rgb(7, 134, 41);
+    background: linear-gradient(90deg, rgba(7, 134, 41, 1) 0%, rgba(238, 90, 0, 1) 100%);
+    @apply mt-5;
+}
+
+.bottom-wrapper {
+    @apply flex flex-col md:flex-row gap-2 w-full justify-between py-2 text-white items-center;
+}
+
+.reserved {
+    background: #1C1D31;
+    padding: 10px 15px;
+    font-size: 13px;
+    @apply text-center text-white flex items-center justify-center flex-wrap gap-y-2;
+}

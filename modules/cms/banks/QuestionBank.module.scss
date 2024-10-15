@@ -1,0 +1,19 @@
+.itemgrid {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7;
+}
+
+.itemgridCourseBank {
+  @apply grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-7;
+}
+
+.body {
+  @apply grid grid-cols-1 md:grid-cols-4 gap-5 mt-5;
+}
+
+.contentTd > div {
+  border: none;
+  word-break: break-word;
+}
+
+.questionTitle {
+}

@@ -1,0 +1,29 @@
+.dot {
+  display: block;
+  height: 4px;
+  width: 4px;
+  background-color: #64707A;
+  border-radius: 50%;
+}
+
+.actions {
+  transition: all 200ms;
+  opacity: 0;
+  visibility: hidden;
+  &:global(.show) {
+    opacity: 1;
+    visibility: visible;
+  }
+  @apply hidden md:block
+}
+
+.activity-block {
+  &:hover {
+    .actions {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  @apply md:pl-9 pl-5 py-3 pr-3 hover:bg-[#E5F4FF] rounded-md
+}

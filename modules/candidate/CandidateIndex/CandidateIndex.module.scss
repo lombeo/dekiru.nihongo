@@ -1,0 +1,15 @@
+.table {
+  background: #fff;
+  th {
+    background-color: #064DB1;
+    color: #fff !important;
+  }
+  thead tr th, tbody tr td {
+    padding: 10px 16px;
+  }
+  :global(.nthRow) {
+    td {
+      background: #F8F9FA;
+    }
+  }
+}

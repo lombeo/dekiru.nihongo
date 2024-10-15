@@ -1,0 +1,10 @@
+.editor :global(.tox-tinymce) {
+  height: 240px !important;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.editor :global(.tox-tinymce) :global(iframe) {
+  background: #FAFAFA;
+}
+
+/*# sourceMappingURL=ModalRegisterMentor.module.css.map */

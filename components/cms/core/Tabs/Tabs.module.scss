@@ -1,0 +1,10 @@
+.root {
+    button[data-active] {
+        background: #eff6fc;
+        @apply text-navy-primary;
+    }
+    button[data-active]:hover {
+        background: #eff6fc;
+        @apply text-navy-primary;
+    }
+}

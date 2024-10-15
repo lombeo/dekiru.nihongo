@@ -1,0 +1,9 @@
+.table th {
+  background-color: #3498db;
+  color: #fff !important;
+}
+.table thead tr th, .table tbody tr td {
+  padding: 10px 16px;
+}
+
+/*# sourceMappingURL=FriendSetting.module.css.map */

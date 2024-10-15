@@ -1,0 +1,76 @@
+.wrapper {
+  @apply h-full flex flex-col mt-4;
+}
+
+.roomList {
+  @apply flex-grow overflow-y-auto pb-3;
+}
+
+.user-item {
+  @apply flex items-center relative;
+}
+
+.wrap-user-info {
+  width: calc(100% - 3rem);
+}
+
+.wrap-user-item {
+  width: calc(100% - 1rem);
+  @apply flex relative gap-3;
+}
+
+.chat-item {
+  @apply flex items-center relative p-1 hover:bg-gray-200 rounded-full;
+}
+
+.wrap-chat-item {
+  @apply flex items-center cursor-pointer relative gap-3;
+  width: calc(100% - 35px);
+}
+
+.wrap-chat-info {
+  width: calc(100% - 3rem);
+}
+
+.sub-menu {
+  box-shadow: 0px 4px 16px 0px rgba(31, 59, 157, 0.15);
+}
+
+.chat-room-root {
+  :global(.sub-menu-btn) {
+    visibility: hidden;
+    opacity: 0;
+    right: 40px;
+    &:hover {
+      background-color: #E9EBFB !important;
+    }
+    @apply absolute top-2/4 translate-y-[-50%] rounded-full transition-colors w-9 h-9 inline-flex cursor-pointer items-center justify-center;
+  }
+
+  &:hover > :global(.sub-menu-btn) {
+    visibility: visible;
+    opacity: 1;
+    @apply bg-white shadow-[0_2px_6px_rgba(0,_0,_0,_0.1)];
+  }
+}
+
+.has-notice {
+  display: block;
+  content: '';
+  z-index: 1;
+  position: absolute;
+  transform: translateX(-50%) translateY(-50%);
+  height: 10px;
+  width: 10px;
+  @apply shadow-md bg-blue-primary rounded-full;
+}
+
+.underline {
+  display: none;
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: -2px;
+  height: 2px;
+  background: #2C31CF;
+}

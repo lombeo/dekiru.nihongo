@@ -1,0 +1,22 @@
+.wrapper {
+    background: rgb(10, 82, 154);
+    background: linear-gradient(90deg, rgba(10, 82, 154, 1) 0%, rgba(10, 82, 154, 1) 28%, rgba(7, 154, 57, 1) 100%);
+    @apply fixed z-100 my-2 md:my-0 left-2 md:left-0 right-2 md:right-0 rounded-lg md:rounded-none;
+}
+
+.inner {
+
+    @apply flex gap-3 justify-between h-14 md:h-12;
+}
+.headerBottom {
+    @apply block md:hidden;
+    height: 27px;
+    width: 100%;
+    position: absolute;
+    /* background-image: url("/header_bottom.png"); */
+    top: 63px;
+    left: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}

@@ -1,0 +1,7 @@
+.comment {
+    :global(a) {
+      text-decoration: underline;
+      @apply text-blue-primary;
+    }
+  }
+  

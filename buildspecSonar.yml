@@ -1,0 +1,38 @@
+version: 0.2
+ 
+env:
+  variables:
+    AWS_DEFAULT_OUTPUT: "json"
+    SONAR_SCANNER_HOME: "./sonar-scanner/bin"
+    BUILD_VERSION: ""
+ 
+phases:
+  install:
+    runtime-versions:
+      java: corretto11
+    commands:
+      - echo === Java version ===
+      - java -version
+      - echo === Gradle version ===
+      - gradle -v
+  pre_build:
+    commands:
+      - echo Install sonar-scanner
+      - wget https://github.com/SonarSource/sonar-scanner-cli/releases/download/4.4.0.2170/sonar-scanner-cli-4.4.0.2170-linux.zip
+      - unzip sonar-scanner-cli-4.4.0.2170-linux.zip
+      - mv sonar-scanner-4.4.0.2170-linux /opt/sonar-scanner
+  build:
+    commands:
+      - gradle build
+      - echo Sonar scan started on `date`
+      - |
+        if [ $BUILD_BRANCH = "develop" ] || [ $BUILD_BRANCH = "master" ] || [ $BUILD_BRANCH = "devops/integrate_cicd" ]; then
+          /opt/sonar-scanner/bin/sonar-scanner -X -Dsonar.host.url="$SONAR_SERVER" -Dsonar.login="$SONAR_LOGIN" -Dsonar.sources=$CODEBUILD_SRC_DIR -Dsonar.projectName=$PROJECT_NAME -Dsonar.sourceEncoding=UTF-8 -Dsonar.projectKey=$PROJECT_NAME -Dsonar.projectBaseDir=$CODEBUILD_SRC_DIR -Dsonar.exclusions="**/wwwroot/**, **/obj/**, **/bin/**" -Dsonar.branch.name=$BUILD_BRANCH
+        else
+          /opt/sonar-scanner/bin/sonar-scanner -X -Dsonar.host.url="$SONAR_SERVER" -Dsonar.login="$SONAR_LOGIN" -Dsonar.sources=$CODEBUILD_SRC_DIR -Dsonar.projectName=$PROJECT_NAME -Dsonar.sourceEncoding=UTF-8 -Dsonar.projectKey=$PROJECT_NAME -Dsonar.projectBaseDir=$CODEBUILD_SRC_DIR -Dsonar.exclusions="**/wwwroot/**, **/obj/**, **/bin/**" -Dsonar.branch.name=$BUILD_BRANCH -Dsonar.branch.target=develop
+        fi
+ 
+  post_build:
+    commands:
+      #-------------
+      - echo Sonar scan completed on `date`

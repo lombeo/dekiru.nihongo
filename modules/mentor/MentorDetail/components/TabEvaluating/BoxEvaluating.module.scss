@@ -1,0 +1,39 @@
+.comment {
+  :global(a) {
+    text-decoration: underline;
+    @apply text-blue-primary;
+  }
+  @apply text-sm mt-2;
+}
+
+.editor {
+  :global(.tox-tinymce) {
+    height: 80px !important;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    :global(iframe) {
+      background: #FAFAFA;
+    }
+  }
+}
+
+.content {
+  overflow: hidden;
+  max-height: 100px;
+  &:global(.expand) {
+    max-height: 4000px;
+  }
+  :global(*) {
+    margin: 0;
+  }
+  :global(p) {
+    font-size: 14px;
+    margin-bottom: 0;
+  }
+  :global(img) {
+    max-height: 500px;
+  }
+  :global(a) {
+    @apply text-primary underline
+  }
+}

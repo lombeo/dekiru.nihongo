@@ -1,0 +1,58 @@
+.edn-table {
+  overflow: hidden;
+  @apply border;
+  border-radius: 4px;
+  overflow-x: auto;
+
+  & > table {
+    border-collapse: collapse;
+  }
+
+  th {
+    @apply bg-smoke;
+    @apply border-b-4;
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+
+  td {
+    @apply border-b;
+  }
+}
+
+.md {
+  th,
+  td {
+    padding: 16px 8px;
+  }
+}
+
+.xs {
+  th,
+  td {
+    padding: 8px 4px;
+  }
+}
+
+.sm {
+  th,
+  td {
+    padding: 12px 8px;
+  }
+}
+
+.lg {
+  th,
+  td {
+    padding: 20px 12px;
+  }
+}
+
+.xl {
+  th,
+  td {
+    padding: 24px 16px;
+  }
+}

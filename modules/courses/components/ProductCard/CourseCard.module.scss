@@ -1,0 +1,81 @@
+.card {
+    @apply border overflow-hidden h-96 rounded-lg
+}
+
+.skrew{
+    @apply -skew-y-12
+}
+
+.typebase{
+    @apply absolute w-full -bottom-32 -top-5
+}
+
+.type {
+    border-top-right-radius: 24px;
+    @apply typebase bg-white;
+}
+
+.avatar{
+    @apply absolute z-30 border-8 rounded-sm bg-white h-20 w-20 bottom-0 left-5 overflow-hidden flex items-center justify-center border-white
+}
+.head{
+    @apply bg-gray-200 h-44 relative aspect-auto bg-center bg-no-repeat bg-origin-content;
+}
+.body{
+    @apply relative h-52
+}
+.content{
+    @apply flex flex-col h-full px-4 relative
+}
+/* Variant */
+.small{
+    @apply border hover:shadow-md overflow-hidden rounded bg-white
+}
+
+.comming {
+    @apply flex items-center justify-center px-5 pt-5 flex-col relative;
+}
+
+.cardcomming {
+    background-color: #D4E7F3;
+}
+
+.imgcomming {
+    @apply relative;
+}
+
+.commingtext {
+    @apply text-lg font-bold text-center;
+    color: rgba(0, 0, 0, 0.1);
+}
+
+.commingBage {
+    position: absolute;
+    background-color: #D4E7F3;
+    height: 58px;
+    top: -38px;
+    width: calc(100% + 50px);
+    transform: rotate(-7deg);
+}
+
+.rateWrap {
+    :global(.star-container) {
+        &:first-child {
+
+        }
+        padding-right: 2px !important;
+        padding-left: 0px !important;
+    }
+}
+
+.online {
+    padding: 4px 6px 3px;
+    font-size: 10px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 13px;
+    background: #ffab00;
+    @apply text-white
+}

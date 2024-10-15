@@ -1,0 +1,19 @@
+.full {
+    @apply w-full mx-auto px-5
+}
+
+.xl {
+    @apply w-full mx-auto max-w-screen-xl px-5
+}
+
+.lg {
+    @apply w-full mx-auto max-w-screen-lg px-5
+}
+
+.md {
+    @apply w-full mx-auto max-w-screen-md px-5
+}
+
+.custom {
+    @apply w-full mx-auto max-w-screen-custom px-5
+}

@@ -1,0 +1,1 @@
+edunext_deploy_noaws("chatapp","nodejs")

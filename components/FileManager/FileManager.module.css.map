@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AACI,eADW,CACX,GAAG,CAAA;EACC,QAAQ,EAAE,MAAM;EAChB,UAAU,EAAE,KAAK;CACpB;;AAGL,AAAA,QAAQ,CAAA;EACJ,MAAM,CAAN,uGAAM;CACT;;AACD,AAAA,aAAa,CAAA;EACT,QAAQ,EAAE,MAAM;EAChB,aAAa,EAAE,QAAQ;EACvB,OAAO,EAAE,WAAW;EACpB,kBAAkB,EAAE,CAAC;EACrB,kBAAkB,EAAE,QAAQ;CAC/B",
+    "sources": [
+        "FileManager.module.scss"
+    ],
+    "names": [],
+    "file": "FileManager.module.css"
+}

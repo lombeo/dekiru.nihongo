@@ -1,0 +1,49 @@
+.Header {
+  :global(#hamburger-icon-header) {
+    background: #3b3c54;
+    &:before,
+    &:after {
+      background: #3b3c54;
+    }
+  }
+
+  &:global(.isLanding) {
+    :global(#hamburger-icon-header) {
+      background: #fff;
+      &:before,
+      &:after {
+        background: #fff;
+      }
+    }
+    &:global(:not(.highlight)) {
+      :global(.img-invert) {
+        @apply invert brightness-0;
+      }
+    }
+  }
+
+ &:global(.highlight) {
+   :global(.btn-login) {
+     color: #2c31cf;
+     background: transparent;
+     &:hover {
+       color: #fff;
+     }
+   }
+   :global(#hamburger-icon-header) {
+     background: #3b3c54;
+     &:before,
+     &:after {
+       background: #3b3c54;
+     }
+   }
+
+   :global(.header-content) {
+     height: 68px;
+     padding: 0;
+   }
+
+   @apply bg-white shadow-[0_2px_10px_0_rgba(0,0,0,.1)]
+ }
+}
+

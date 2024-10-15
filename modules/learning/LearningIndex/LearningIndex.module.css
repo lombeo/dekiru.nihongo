@@ -1,0 +1,9 @@
+.input input {
+  font-size: 0.875rem;
+}
+.input input::placeholder {
+  color: #888;
+  font-style: italic;
+}
+
+/*# sourceMappingURL=LearningIndex.module.css.map */

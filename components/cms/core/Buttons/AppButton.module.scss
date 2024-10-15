@@ -1,0 +1,176 @@
+.app-button {
+  height: 40px;
+  min-width: 120px;
+  transition: all 300ms;
+  font-weight: 500;
+  &.xs {
+    height: 32px;
+  }
+  &.sm {
+    height: 36px;
+  }
+  &.lg {
+    font-size: 1rem;
+    height: 48px;
+  }
+  img {
+    filter: var(--img-color);
+  }
+  &.square-style {
+    min-width: auto;
+    @apply h-12 w-12 p-0 rounded-sm;
+    &.xs {
+      @apply h-6 w-6;
+    }
+    &.sm {
+      @apply h-9 w-9;
+    }
+    &.md {
+      @apply h-12 w-12;
+    }
+    &.lg {
+      @apply h-14 w-14;
+    }
+    &.xl {
+      @apply h-16 w-16;
+    }
+  }
+  &.primary-button {
+    --box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.1);
+    --bg: var(--color-blue);
+    --hover-bg: var(--color-blue-hover);
+    --disabled-bg: var(--color-blue-light);
+    --disable-img-color: invert(100%) sepia(0%) saturate(2052%) hue-rotate(151deg) brightness(111%) contrast(99%);
+    @apply bg-navy-primary text-white;
+    img {
+      filter: invert(100%) sepia(0%) saturate(2052%) hue-rotate(151deg) brightness(111%) contrast(99%);
+    }
+    &:hover:not(:disabled) {
+      // box-shadow: var(--box-shadow);
+      // background: var(--hover-bg);
+      @apply opacity-80;
+    }
+    &:disabled {
+      // color: var(--color-white);
+      // background: var(--disabled-bg);
+      // img {
+      //   filter: var(--disable-img-color);
+      // }
+    }
+  }
+  &.secondary-button {
+    --color: var(--color-dark);
+    --border-color: var(--color-dark);
+    --box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.1);
+    --active-bg: var(--color-smoke);
+    --disabled-color: var(--color-silver);
+    --disabled-border: var(--color-silver);
+    --disabled-bg: transparent;
+    color: var(--color);
+    border-color: var(--border-color);
+    --img-color: invert(0%) sepia(3%) saturate(7222%) hue-rotate(77deg) brightness(97%) contrast(87%);
+    --disable-img-color: invert(78%) sepia(10%) saturate(0%) hue-rotate(197deg) brightness(92%) contrast(85%);
+    &:hover:not(:disabled) {
+      box-shadow: var(--box-shadow);
+    }
+    &:active {
+      background: var(--active-bg);
+    }
+    &:disabled {
+      color: var(--disabled-border);
+      border-color: var(--disabled-border);
+      background: var(--disabled-bg);
+      img {
+        filter: var(--disable-img-color);
+      }
+    }
+  }
+
+  &.tetiary-button {
+    --color: var(--color-blue);
+    --hover-bg: var(--color-smoke);
+    --active-bg: var(gray-light);
+    --hover-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.1);
+    --img-color: invert(30%) sepia(44%) saturate(6817%) hue-rotate(191deg) brightness(97%) contrast(102%);
+    color: var(--color);
+    min-width: auto;
+    &:hover:not(:disabled) {
+      background: var(--hover-bg);
+      box-shadow: var(--hover-box-shadow);
+    }
+    &:active {
+      background: var(--active-bg);
+    }
+    &:disabled {
+      opacity: 0.6;
+    }
+  }
+  &.subtle-button {
+    --color: var(--color-blue);
+    --color-hover: var(--color-blue-pressed);
+    --img-color: invert(30%) sepia(44%) saturate(6817%) hue-rotate(191deg) brightness(97%) contrast(102%);
+    --hover-img-color: invert(11%) sepia(90%) saturate(6922%) hue-rotate(196deg) brightness(89%) contrast(101%);
+    color: var(--color);
+    min-width: auto;
+    @apply p-0;
+    height: auto;
+    &:hover:not(:disabled) {
+      background: transparent;
+      color: var(--color-hover);
+      img {
+        filter: var(--hover-img-color);
+      }
+    }
+    &:active {
+      color: var(--color-hover);
+    }
+    &:disabled {
+      opacity: 0.8;
+    }
+  }
+  &.red {
+    --color: var(--color-critical);
+    --color-hover: var(--color-critical);
+    --border-color: var(--color-critical);
+    --bg: var(--color-critical);
+    --hover-bg: var(--color-critical-active);
+    --active-bg: var(--color-critical-active);
+    --box-shadow: 0px 1px 2px rgba(235, 87, 87, 0.1), 0px 4px 8px rgba(235, 87, 87, 0.1);
+    --disabled-color: var(--color-critical);
+    --disabled-border: var(--color-critical);
+    --disabled-bg: var(--color-critical-background);
+    --img-color: invert(44%) sepia(54%) saturate(733%) hue-rotate(313deg) brightness(97%) contrast(90%);
+    --hover-img-color: invert(44%) sepia(54%) saturate(733%) hue-rotate(313deg) brightness(97%) contrast(90%);
+    --disable-img-color: invert(44%) sepia(54%) saturate(733%) hue-rotate(313deg) brightness(97%) contrast(90%);
+  }
+  &.blue {
+    --color: var(--color-blue);
+    --color-hover: var(--color-blue);
+    --border-color: var(--color-blue);
+    --bg: var(--color-blue);
+    --hover-bg: var(--color-blue-light);
+    --active-bg: var(--color-blue-light);
+    --box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.1);
+    --disabled-color: var(--color-blue-light);
+    --disabled-border: var(--color-blue-light);
+    --disabled-bg: var(--color-smoke);
+    --img-color: invert(30%) sepia(44%) saturate(6817%) hue-rotate(191deg) brightness(97%) contrast(102%);
+    --hover-img-color: invert(30%) sepia(44%) saturate(6817%) hue-rotate(191deg) brightness(97%) contrast(102%);
+    --disable-img-color: invert(44%) sepia(54%) saturate(733%) hue-rotate(313deg) brightness(97%) contrast(90%);
+  }
+  &.dark {
+    --color: var(--color-black);
+    --color-hover: var(--color-black);
+    --border-color: var(--color-black);
+    --bg: var(--color-black);
+    --hover-bg: var(--color-gray-lighter);
+    --active-bg: var(--color-gray-lighter);
+    --box-shadow: 0px 1px 2px rgba(17, 17, 17, 0.1), 0px 4px 8px rgba(17, 17, 17, 0.1);
+    --disabled-color: var(--color-silver);
+    --disabled-border: var(--color-gray-lighter);
+    --disabled-bg: var(--color-gray-lighter);
+    --img-color: invert(0%) sepia(85%) saturate(1124%) hue-rotate(126deg) brightness(95%) contrast(87%);
+    --hover-img-color: invert(0%) sepia(85%) saturate(1124%) hue-rotate(126deg) brightness(95%) contrast(87%);
+    --disable-img-color: invert(81%) sepia(0%) saturate(2010%) hue-rotate(20deg) brightness(101%) contrast(64%);
+  }
+}

@@ -1,0 +1,15 @@
+.event-test-result {
+  margin-top: calc(15vh - 50px);
+}
+
+@media screen and (max-width: 767px) {
+  .event-test-result {
+    margin-top: 50px;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .event-test-result {
+    margin-top: 0px;
+  }
+}

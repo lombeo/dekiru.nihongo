@@ -1,0 +1,29 @@
+.level {
+  font-size: 12px;
+  padding: 1px 7px;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-transform: capitalize;
+}
+.level:global(.easy) {
+  background: #7bc043;
+}
+.level:global(.medium) {
+  background: #f69046;
+}
+.level:global(.hard) {
+  background: #ee4035;
+}
+
+.select-language {
+  @apply bg-white w-[110px] border border-[#cecece];
+}
+
+.content :global(img) {
+  max-width: 100%;
+}
+
+/*# sourceMappingURL=Description.module.css.map */

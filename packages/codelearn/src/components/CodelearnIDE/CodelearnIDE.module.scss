@@ -1,0 +1,11 @@
+.wrapper {
+    /* @apply flex flex-col border-b max-w-full; */
+    height: 100%;
+}
+.layout {
+    /* header: 68px + 60px */
+    @apply block md:flex h-full md:h-[calc(100vh_-_128px)] w-full overflow-auto md:overflow-hidden;
+}
+.sidebar {
+    @apply border-r;
+}

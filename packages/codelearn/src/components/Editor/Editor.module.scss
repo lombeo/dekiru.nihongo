@@ -1,0 +1,8 @@
+.editor {
+    :global(.editor-widget) {
+        display: none;
+    }
+    :global(.findMatch) {
+        border: 1px solid yellow;
+    }
+}

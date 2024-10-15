@@ -1,0 +1,10 @@
+.list-user-role li {
+  list-style: none;
+  display: inline;
+}
+.list-user-role li:after {
+  content: "\00b7";
+}
+.list-user-role li:last-child:after {
+  content: none;
+}

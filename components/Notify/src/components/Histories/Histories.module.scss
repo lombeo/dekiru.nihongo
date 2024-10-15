@@ -1,0 +1,87 @@
+.wrap-notify {
+  min-height: 200px;
+  @apply py-4;
+}
+
+.notify-item {
+  padding: 0 40px 0 20px;
+  position: relative;
+  font-size: 13px;
+
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
+
+  .notify-date {
+    padding-top: 5px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #65676b;
+  }
+
+  &.new {
+    .notify-date {
+      @apply text-blue-primary font-[700];
+    }
+  }
+
+  .notify-content {
+    font-size: 14px;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #65676b;
+  }
+
+  &.new {
+    .notify-content {
+      color: #111;
+    }
+  }
+
+  // Mark read
+  .mark-read::before {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  &.new .mark-read {
+    cursor: pointer;
+    border: 5px transparent;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: block;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    padding: 10px;
+
+    &::before {
+      position: absolute;
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: block;
+      top: 5px;
+      right: 5px;
+      @apply bg-blue-primary;
+      z-index: 1;
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+}
+
+//Tabs
+.notify-tabs {
+  :global(.tab) {
+    @apply cursor-pointer text-sm font-bold px-2 py-1 rounded-lg;
+  }
+  .active {
+    @apply text-blue-primary bg-[#EBF5FF];
+  }
+}

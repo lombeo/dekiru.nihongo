@@ -1,0 +1,29 @@
+.table {
+  background: rgb(222, 226, 230);
+  border: 1px solid rgb(222, 226, 230);
+}
+.table :global(.head) {
+  color: #fff;
+}
+.table :global(.head) :global(.row) > div {
+  background-color: #3498db;
+  @apply font-bold;
+}
+.table :global(.body) {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.table :global(.row) {
+  display: grid;
+  grid-template-columns: 40px 1fr 1fr 120px 80px;
+}
+.table :global(.row) > div {
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  @apply text-sm;
+}
+
+/*# sourceMappingURL=MentorIndex.module.css.map */

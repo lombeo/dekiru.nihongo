@@ -1,0 +1,95 @@
+.answer-item {
+  display: block;
+}
+.answer-item label {
+  display: block;
+  padding-left: 0;
+}
+.answer-item:global([data-checked="true"]) {
+  background: #4d96ff;
+}
+.answer-item:global([data-checked="true"]) :global(.mantine-Radio-radio) {
+  background: #4D96FF;
+  border: 2px solid #fff;
+}
+.answer-item:global([data-checked="true"]) :global(.mantine-Radio-radio) svg {
+  color: #4D96FF;
+}
+.answer-item:global(.isAnsweredCorrect) {
+  background: #05972C;
+}
+.answer-item:global(.isAnsweredCorrect) :global(.mantine-Radio-radio) {
+  background: #05972C;
+}
+.answer-item:global(.isAnsweredCorrect) :global(.mantine-Radio-radio) svg {
+  color: #05972C;
+}
+.answer-item:global(.isAnsweredInCorrect) {
+  background: #EF4444;
+}
+.answer-item:global(.isAnsweredInCorrect) :global(.mantine-Radio-radio) {
+  background: #EF4444;
+}
+.answer-item:global(.isAnsweredInCorrect) :global(.mantine-Radio-radio) svg {
+  color: #EF4444;
+}
+.answer-item :global(.mantine-Radio-inner) svg {
+  margin-top: 10px;
+}
+
+.answer-item-checkbox {
+  display: block;
+}
+.answer-item-checkbox label {
+  display: block;
+  padding-left: 0;
+}
+.answer-item-checkbox:global([data-checked="true"]) {
+  background: #4d96ff;
+}
+.answer-item-checkbox:global([data-checked="true"]) :global(.mantine-Checkbox-inner) {
+  background: #4d96ff;
+}
+.answer-item-checkbox:global([data-checked="true"]) :global(.mantine-Checkbox-inner) input {
+  background: #4d96ff;
+}
+.answer-item-checkbox:global([data-checked="true"]) :global(.mantine-Checkbox-inner) svg {
+  color: #fff;
+}
+.answer-item-checkbox:global(.isAnsweredCorrect) {
+  background: #05972C;
+}
+.answer-item-checkbox:global(.isAnsweredCorrect) :global(.mantine-Radio-radio) {
+  background: #05972C;
+}
+.answer-item-checkbox:global(.isAnsweredCorrect) :global(.mantine-Checkbox-inner) {
+  background: #05972C;
+}
+.answer-item-checkbox:global(.isAnsweredCorrect) :global(.mantine-Checkbox-inner) input {
+  background: #05972C;
+}
+.answer-item-checkbox:global(.isAnsweredInCorrect) {
+  background: #EF4444;
+}
+.answer-item-checkbox:global(.isAnsweredInCorrect) :global(.mantine-Radio-radio) {
+  background: #EF4444;
+}
+.answer-item-checkbox:global(.isAnsweredInCorrect) :global(.mantine-Radio-radio) svg {
+  color: #EF4444;
+}
+.answer-item-checkbox:global(.isAnsweredInCorrect) :global(.mantine-Checkbox-inner) {
+  background: #EF4444;
+}
+.answer-item-checkbox:global(.isAnsweredInCorrect) :global(.mantine-Checkbox-inner) input {
+  background: #EF4444;
+}
+.answer-item-checkbox :global(.mantine-Checkbox-inner) svg {
+  margin-top: 26px;
+}
+
+.root :global(p) {
+  padding: 0;
+  margin: 0;
+}
+
+/*# sourceMappingURL=QuizActivity.module.css.map */
