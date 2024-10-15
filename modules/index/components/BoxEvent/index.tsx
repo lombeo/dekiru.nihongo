@@ -36,9 +36,9 @@ export const imageBoxEventVariants: Variants = {
 const BoxEvent: FC = () => {
   const data = {
     mainImage: "/images/landing-page/box-event-main.png",
-    title: "Sự kiện hoành tráng & hấp dẫn",
+    title: "Lời kết",
     description:
-      "<div>Codelearn là đơn vị tổ chức nhiều cuộc thi lập trình quy mô trong nước và quốc tế, nhằm tạo ra sân chơi bổ ích cho những ai có niềm đam mê với công nghệ.</div><div>Đặc biệt, chúng tôi kết hợp với Tập đoàn công nghệ FPT, tổ chức cuộc thi Codewar định kỳ, mong muốn tìm kiếm và vinh danh những lập trình viên trẻ xuất sắc. Cuộc thi được tổ chức với quy mô trên toàn quốc, giải thưởng lớn lên tới 1 tỷ đồng.</div>",
+      "<div>Dekiru không chỉ là một nền tảng học tiếng Nhật, mà còn là một người bạn đồng hành trên hành trình chinh phục ngôn ngữ và văn hóa Nhật Bản của bạn. Dù bạn ở độ tuổi nào, với phương pháp học tập tiên tiến và cộng đồng hỗ trợ tích cực, Dekiru luôn cam kết mang đến trải nghiệm học tập hiệu quả và thú vị. Hãy bắt đầu hành trình của bạn cùng Dekiru và mở ra cánh cửa đến với thế giới đầy cơ hội và khám phá mới mẻ!</div>",
     imageList: [
       "/images/landing-page/box-event-image-item-1.png",
       "/images/landing-page/box-event-image-item-2.png",
@@ -96,7 +96,7 @@ const BoxEvent: FC = () => {
           </div>
         </div>
       </Container>
-      {data?.imageList && (
+      {/* {data?.imageList && (
         <div className="relative -mt-10 sm:-mt-[120px] w-full flex justify-center items-center overflow-x-hidden h-[280px] sm:h-[400px]">
           <div className="absolute flex flex-row items-center justify-center animate-primary-move-to-left">
             {data?.imageList.map((item, index) => (
@@ -113,7 +113,7 @@ const BoxEvent: FC = () => {
             ))}
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

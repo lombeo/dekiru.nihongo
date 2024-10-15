@@ -22,12 +22,7 @@ export const titleBoxFeatureVariants: Variants = {
 
 const BoxFeature: FC = () => {
   const data = [
-    { title: "Học tập", href: "/learning" },
-    { title: "Luyện tập", href: "/training" },
-    { title: "Thi đấu", href: "/fights" },
-    { title: "Đánh giá", href: "/evaluating" },
-    { title: "Thảo luận", href: "/discussion" },
-    { title: "Xếp hạng", href: "/leaderboard" },
+    { title: "Học tập ngay", href: "/learning" }
   ];
 
   const [listItemHovered, setListItemHovered] = useState<{}>({});
@@ -50,7 +45,7 @@ const BoxFeature: FC = () => {
             </div>
             <div className="w-full max-w-[525px]">
               <span className="text-lg leading-[28px] font-normal text-white">
-                Lập trình là ngôn ngữ phức tạp, bởi vậy, Codelearn chú trọng vào việc &quot;học đi đôi với hành&quot;
+                Tiếng Nhật là một ngôn ngữ thú vị nhưng cũng khó để thành thạo, bởi vậy, Dekiru chú trọng vào việc &quot;học đi đôi với hành&quot;
                 giúp học viên phát triển toàn diện về khiến thức và kĩ năng.
               </span>
             </div>

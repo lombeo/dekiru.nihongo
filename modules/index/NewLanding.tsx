@@ -16,7 +16,6 @@ import BoxStatisticsEn from "./components/BoxStatisticsEn";
 import BoxRewardEn from "./components/BoxRewardEn";
 import BoxEventEn from "./components/BoxEventEn";
 import BoxCommentEn from "./components/BoxCommentEn";
-import BoxRunningEvent from "./components/BoxRunningEvent";
 import RunningEventModal from "./components/RunningEventModal";
 import { getIsShowRunningEventModal, setIsShowRunningEventModal } from "@src/store/slices/eventSlice";
 import { useSelector, useDispatch } from "react-redux";
@@ -43,7 +42,6 @@ const IndexView: NextPage = () => {
       {keyLocale === "en" ? (
         <>
           <BoxLoginEn />
-          <BoxRunningEvent />
           <BoxReasonEn />
           <BoxTopReasonEn />
           <BoxFeatureEn />
@@ -55,12 +53,9 @@ const IndexView: NextPage = () => {
       ) : (
         <>
           <BoxLogin />
-          <BoxRunningEvent />
           <BoxReason />
           <BoxTopReason />
           <BoxFeature />
-          <BoxStatistics />
-          <BoxReward />
           <BoxEvent />
           <BoxComment />
         </>

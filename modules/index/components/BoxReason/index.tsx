@@ -22,20 +22,20 @@ const BoxReason: FC = () => {
   const data = [
     {
       mainImage: "/images/landing-page/box-reason-main-1.png",
-      title: "Phát triển tư duy logic & Khả năng giải quyết vấn đề",
+      title: "Phát Triển Tư Duy Sáng Tạo",
       description:
-        "Lập trình giúp học sinh rèn luyện khả năng tư duy logic và kỹ năng giải quyết vấn đề một cách hệ thống và sáng tạo.",
+        "Học tiếng Nhật không chỉ giúp bạn rèn luyện khả năng ngôn ngữ mà còn giúp phát triển tư duy sáng tạo và logic thông qua việc học chữ Kanji và cấu trúc câu phức tạp. Điều này giúp tăng cường trí tuệ và khả năng giải quyết vấn đề.",
     },
     {
       mainImage: "/images/landing-page/box-reason-main-2.png",
-      title: "Tham gia cuộc thi lập trình quy mô lớn",
+      title: "Khám Phá Văn Hóa Độc Đáo",
       description:
-        "Codelearn tổ chức cuộc thi lập trình quy tụ hàng trăm đội thi trong và ngoài nước, học viên có cơ hội cọ sát & tích lũy kinh nghiệm sau mỗi cuộc thi.",
+        "Tiếng Nhật là cánh cửa để bạn khám phá nền văn hóa đặc sắc của Nhật Bản, từ ẩm thực, nghệ thuật đến truyền thống và phong cách sống. Khi hiểu ngôn ngữ, bạn sẽ dễ dàng tiếp cận và hiểu sâu hơn về những giá trị văn hóa này.",
     },
     {
       mainImage: "/images/landing-page/box-reason-main-3.png",
-      title: "Cơ hội việc làm hấp dẫn trong tương lai",
-      description: "Tiếp cận ngôn ngữ thời đại 4.0 giúp học viên mở ra cơ hội việc làm với mức lương hấp dẫn trong tương lai.",
+      title: "Cơ Hội Nghề Nghiệp Rộng Mở",
+      description: "Học tiếng Nhật từ sớm giúp bạn nắm bắt các cơ hội việc làm với các công ty Nhật Bản đang đầu tư mạnh mẽ tại Việt Nam. Điều này giúp bạn có cơ hội thăng tiến trong sự nghiệp và đạt được mức lương cao hơn.",
     },
   ];
 
@@ -45,7 +45,7 @@ const BoxReason: FC = () => {
         <motion.div initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.5 }}>
           <motion.div variants={titleBoxReasonVariants}>
             <div className="text-center w-full max-w-[550px] m-auto text-3xl leading-10 gmd:text-[48px] gmd:leading-[60px] font-semibold text-[#0E2643] mb-8 sm:mb-[32px]">
-              Lý do học sinh nên học lập trình từ sớm?
+              Lý do chúng ta nên học tiếng Nhật từ sớm?
             </div>
           </motion.div>
         </motion.div>

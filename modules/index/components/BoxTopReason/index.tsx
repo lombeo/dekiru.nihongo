@@ -69,28 +69,28 @@ const BoxTopReason: FC = () => {
   const data = [
     {
       image: "/images/landing-page/box-top-reason-main-1.png",
-      title: "Hệ thống bài giảng bám sát chương trình lập trình Quốc tế",
+      title: "Phương Pháp Giảng Dạy Đa Dạng Và Hiệu Quả",
       description:
-        "<div>Đa dạng khóa học lập trình: Python, Java Script, C++, SQL,...</div><div>Học viên được code và chấm điểm trực tiếp trên web, đánh giá chính xác năng lực hiện tại của mình.</div>",
+        "<div>Dekiru áp dụng các phương pháp giảng dạy linh hoạt</div><div>Kết hợp giữa học trực tuyến và thực hành giao tiếp trực tiếp, giúp người học từ mọi lứa tuổi dễ dàng tiếp thu và vận dụng kiến thức vào thực tế.</div>",
       list: [],
     },
     {
       image: "/images/landing-page/box-top-reason-main-2.png",
       maxImageWidth: "542px",
-      title: "Đội ngũ giảng viên trình độ cao",
+      title: "Chương Trình Học Được Cá Nhân Hóa",
       description:
-        "<div>Kỹ sư CNTT hàng đầu tập đoàn FPT & Giảng viên nhiều năm kinh nghiệm biên soạn giáo trình, đảm bảo kiến thức được truyền tải chính xác và hấp dẫn đối với người học.</div>",
+        "<div>Dekiru cung cấp các chương trình học phù hợp với từng độ tuổi và mục tiêu học tập, từ trẻ em, học sinh sinh viên, đến người đi làm và người lớn tuổi, đảm bảo:</div>",
       list: [
-        "Cách truyền đạt kiến thức gần gũi, dễ hiểu.",
-        "Bài tập thực hành nhiều cấp độ từ dễ đến khó.",
-        "Livestream định kỳ giải đáp thắc mắc của học viên.",
+        "Lộ trình rõ ràng: Được thiết kế phù hợp với nhu cầu và trình độ của từng người học.",
+        "Tài liệu chất lượng cao: Nội dung học liệu phong phú và chuẩn hóa, phù hợp với từng cấp độ.",
+        "Giảng viên chuyên nghiệp: Các thầy cô giáo giàu kinh nghiệm và chuyên môn cao, đảm bảo người học tiến bộ nhanh chóng.",
       ],
     },
     {
       image: "/images/landing-page/box-top-reason-main-3.png",
-      title: "Tổ chức nhiều cuộc thi lập trình quy mô lớn",
+      title: "Cộng Đồng Học Tập Sôi Nổi Và Hỗ Trợ Tích Cực",
       description:
-        "<div>Codelearn đứng đầu trong việc kết hợp tổ chức các cuộc thi lập trình, độ tuổi tham gia đa dạng, giúp học viên có cơ hội cọ sát & tích lũy kinh nghiệm, hỗ trợ việc học tập đạt kết quả cao.</div>",
+        "<div>Dekiru xây dựng một cộng đồng học tập sôi nổi, nơi người học có thể giao lưu, trao đổi kinh nghiệm và cùng nhau tiến bộ. Các hoạt động ngoại khóa và sự kiện học tập thường xuyên cũng giúp người học phát triển khả năng giao tiếp và tự tin sử dụng tiếng Nhật trong cuộc sống hàng ngày.</div>",
       list: [],
     },
   ];
@@ -114,10 +114,10 @@ const BoxTopReason: FC = () => {
           >
             <div className="flex flex-col mb-8 md:mb-[62px]">
               <div className="text-3xl leading-10 gmd:text-[48px] gmd:leading-[60px] text-white font-semibold">
-                Vì sao Codelearn là nền tảng học lập trình
+                Vì sao <i>Dekiru</i> là nền tảng học tiếng Nhật
               </div>
               <div className="text-3xl leading-10 gmd:text-[48px] gmd:leading-[60px] text-[#50EDD1] font-bold uppercase">
-                Số 1 dành cho học sinh?
+                Số 1 dành cho mọi lứa tuổi?
               </div>
             </div>
           </motion.div>

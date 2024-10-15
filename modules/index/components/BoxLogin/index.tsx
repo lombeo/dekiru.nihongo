@@ -5,9 +5,9 @@ import LoginForm from "./LoginForm";
 import { motion } from "framer-motion";
 
 const BoxLogin: FC = () => {
-  const normalText = "Nền tảng học lập trình trực tuyến dành riêng";
+  const normalText = "Nền tảng học tiếng Nhật trực tuyến dành";
   const normalTextList = normalText.split(" ");
-  const highLightText = "cho học sinh";
+  const highLightText = "cho mọi lứa tuổi";
   const highlightTextList = highLightText.split(" ");
 
   return (
@@ -81,10 +81,7 @@ const BoxLogin: FC = () => {
           <div className="w-full sm:w-[48%] sm:max-w-[560px] flex flex-col gap-4">
             <span className="font-medium text-sm leading-[22px] text-white">Đối tác của chúng tôi:</span>
             <div className="flex flex-wrap sm:flex-nowrap justify-between sm:justify-start sm:gap-[52px]">
-              <img src="/images/landing-page/fpt.png" alt="FPT logo" className="w-auto h-10 md:h-[50px]" />
-              <img src="/images/landing-page/poly.png" alt="FPT Polytechnic" className="w-auto h-10 md:h-[50px]" />
-              <img src="/images/landing-page/dhspkthungyen.png" alt="University" className="w-auto h-10 md:h-[50px]" />
-              <img src="/images/landing-page/funix.png" alt="Funix" className="w-auto h-10 md:h-[50px]" />
+              <img src="/images/landing-page/FPTU.png" alt="FPT logo" className="w-auto h-10 md:h-[50px]" />
             </div>
           </div>
         </div>
