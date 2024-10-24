@@ -5,8 +5,6 @@ import ModalLogin from "@src/modules/index/components/ModalLogin/ModalLogin";
 import {
   selectOpenModalChangeUsername,
   selectOpenModalLogin,
-  selectOpenModalSignUp,
-  selectOpenModalSignUpEn,
   selectShowHeader,
 } from "@src/store/slices/applicationSlice";
 import { selectProfile } from "@src/store/slices/authSlice";
@@ -25,8 +23,6 @@ import { NotPermission } from "../NotPermission/NotPermission";
 import ModalUpdateUsername from "../widget/ModalUpdateUsername";
 import Footer from "./Footer/Footer";
 import styles from "./Layout.module.css";
-import ModalSignUp from "@src/modules/index/components/BoxLogin/ModalSignup";
-import ModalSignUpEn from "@src/modules/index/components/BoxLoginEn/ModalSignupEn";
 // import Header from "../HeaderV2/HeaderV2";
 
 export interface DefaultLayoutProps extends PropsWithChildren<any> {
@@ -53,8 +49,6 @@ const DefaultLayout = ({
 
   const openModalLogin = useSelector(selectOpenModalLogin);
   const openModalChangeUsername = useSelector(selectOpenModalChangeUsername);
-  const openModalSignUp = useSelector(selectOpenModalSignUp);
-  const openModalSignUpEn = useSelector(selectOpenModalSignUpEn);
   const profile = useSelector(selectProfile);
   const showHeader = useSelector(selectShowHeader);
   const [domLoaded, setDomLoaded] = useState<any>(false);
@@ -170,8 +164,6 @@ const DefaultLayout = ({
       {showHeader && !hiddenHeader && <Header />}
       {!!openModalLogin && <ModalLogin />}
       {!!openModalChangeUsername && <ModalUpdateUsername />}
-      {!!openModalSignUp && <ModalSignUp />}
-      {!!openModalSignUpEn && <ModalSignUpEn />}
       {main}
       {!hiddenFooter && <Footer />}
     </>

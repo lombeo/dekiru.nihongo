@@ -3,11 +3,10 @@ import { TextLineCamp } from "@edn/components/TextLineCamp";
 import { clsx, Progress } from "@mantine/core";
 import { Container } from "@src/components";
 import Avatar from "@src/components/Avatar";
-import Link from "@src/components/Link";
 import { FunctionBase } from "@src/helpers/fuction-base.helpers";
 import { useTranslation } from "next-i18next";
-import BoxEnroll from "./BoxEnroll/BoxEnroll";
 import { Button } from "@edn/components";
+import { useRouter } from "next/router";
 
 interface BoxBannerProps {
   data: any;
@@ -17,6 +16,7 @@ const BoxBanner = (props: BoxBannerProps) => {
   const { data} = props;
   const { t } = useTranslation();
   const progress = 0;
+  const router = useRouter();
 
   return (
     <div className="bg-[#0E2643] text-white">
@@ -58,7 +58,7 @@ const BoxBanner = (props: BoxBannerProps) => {
                 }}
                 color="blue"
                 radius="md"
-                onClick={() => window.location.href=`/payment/1`}
+                onClick={() => router.push(`/payment/1`)}
               >
                 {t("Mua ngay")}
               </Button>

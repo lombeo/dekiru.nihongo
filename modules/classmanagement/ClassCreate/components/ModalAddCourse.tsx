@@ -60,25 +60,6 @@ export default function ModalAddCourse(props: any) {
     setModalAddCourse(false);
   };
 
-  const handleSearchCourses = useCallback(
-    debounce((query: string) => {
-      if (!query || query.trim().length < 2) return;
-      LearnService.getCourseList({
-        keyword: query,
-      }).then((res) => {
-        let data = res?.data?.data;
-        if (data) {
-          data = data.map((course) => ({
-            label: course.title,
-            value: _.toString(course.id),
-          }));
-          setCourseOptions((prev) => uniqBy([...prev, ...data], "value"));
-        }
-      });
-    }, 300),
-    []
-  );
-
   return (
     <Modal
       opened={modalAddCourse}
@@ -93,7 +74,6 @@ export default function ModalAddCourse(props: any) {
           clearable
           searchable
           readOnly={!!courseEdit}
-          onSearchChange={handleSearchCourses}
           onChange={(value: any) => {
             setDataCourse((pre) => ({
               ...pre,
