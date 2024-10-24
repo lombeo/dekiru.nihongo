@@ -6,13 +6,15 @@ const initialState: {
   openModalChangeUsername: boolean;
   openModalLogin: boolean | "login" | "register";
   countries: any;
-  loadedEventListenerMessage: boolean;
+  openModalSignUp: boolean;
+  openModalSignUpEn: boolean;
 } = {
   showHeader: true,
   openModalLogin: false,
   countries: null,
   openModalChangeUsername: false,
-  loadedEventListenerMessage: false,
+  openModalSignUp: false,
+  openModalSignUpEn: false,
 };
 
 export const applicationSlice = createSlice({
@@ -31,8 +33,11 @@ export const applicationSlice = createSlice({
     setOpenModalChangeUsername: (state, action) => {
       state.openModalChangeUsername = action.payload;
     },
-    setLoadedEventListenerMessage: (state, action) => {
-      state.loadedEventListenerMessage = action.payload;
+    setOpenModalSignUp: (state, action) => {
+      state.openModalSignUp = action.payload;
+    },
+    setOpenModalSignUpEn: (state, action) => {
+      state.openModalSignUpEn = action.payload;
     },
   },
   extraReducers: {
@@ -50,7 +55,8 @@ export const {
   setShowHeader,
   setOpenModalLogin,
   setOpenModalChangeUsername,
-  setLoadedEventListenerMessage,
+  setOpenModalSignUp,
+  setOpenModalSignUpEn,
 } = applicationSlice.actions;
 
 export const selectShowHeader = (state) => state.application.showHeader;
@@ -61,6 +67,8 @@ export const selectOpenModalLogin = (state) => state.application.openModalLogin;
 
 export const selectOpenModalChangeUsername = (state) => state.application.openModalChangeUsername;
 
-export const selectLoadedEventListenerMessage = (state) => state.application.loadedEventListenerMessage;
+export const selectOpenModalSignUp = (state) => state.application.openModalSignUp;
+
+export const selectOpenModalSignUpEn = (state) => state.application.openModalSignUpEn;
 
 export default applicationSlice.reducer;
