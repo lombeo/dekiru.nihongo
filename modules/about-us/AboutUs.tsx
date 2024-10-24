@@ -36,20 +36,20 @@ const AboutUs = () => {
     {
       title: t("Introducing"),
       date: t("January 2019"),
-      content: t("The system is now officially named CodeLearn and gradually completed by the project members."),
+      content: t("The system is now officially named Dekiru and gradually completed by the project members."),
       image: "/images/about-us/8.jpg",
     },
     {
       title: t("Implemented in internal FPT Software"),
       date: t("March 2019"),
-      content: t("CodeLearn has been used in some units in FPT Software for the purpose of training and practicing."),
+      content: t("Dekiru has been used in some units in FPT Software for the purpose of training and practicing."),
       image: "/images/about-us/9.jpg",
     },
     {
       title: t("Golive"),
       date: t("May 2019"),
       content: t(
-        "The first completed CodeLearn version is launched nationwide with a lot of benefits and advantageous functions.\n"
+        "The first completed Dekiru version is launched nationwide with a lot of benefits and advantageous functions.\n"
       ),
       image: "/images/about-us/10.jpg",
     },
@@ -153,7 +153,7 @@ const AboutUs = () => {
         />
       </Container>
       <h1 className="hidden">
-        CodeLearn is an online interactive platform that enables users to learn, practice and evaluate their programming
+        Dekiru is an online interactive platform that enables users to learn, practice and evaluate their programming
         skills and connect with each others.
       </h1>
       {/* Banner */}
@@ -175,7 +175,7 @@ const AboutUs = () => {
               </h3>
               <div className="text-[#333] leading-[26px]">
                 {t(
-                  "CodeLearn is a system and an online interactive platform that enables users to learn, practice and evaluate their programming skills through practicing exercises, coding contests with automatically scoring function so that users could improve their skills and increase productivity."
+                  "Dekiru is a system and an online interactive platform that enables users to learn, practice and evaluate their programming skills through practicing exercises, coding contests with automatically scoring function so that users could improve their skills and increase productivity."
                 )}
               </div>
             </div>
@@ -192,7 +192,7 @@ const AboutUs = () => {
               </h3>
               <div className="text-[#333] leading-[26px]">
                 {t(
-                  "Whoever you are, CodeLearn will always help you to discover the limits of your own. We promise to bring a channel to developers to share computer science knowledge not only in Vietnam but also in Southeast Asia and the whole of Asia."
+                  "Whoever you are, Dekiru will always help you to discover the limits of your own. We promise to bring a channel to developers to share computer science knowledge not only in Vietnam but also in Southeast Asia and the whole of Asia."
                 )}
               </div>
             </div>
@@ -216,7 +216,7 @@ const AboutUs = () => {
               </h3>
               <div className="text-[#333] leading-[26px]">
                 {t(
-                  "We focus on developing a comprehensive ecosystem with the basic-to-advanced courses and practicing challenges that are appropriate for everyone. With the rich and diverse courses and challenges which support a variety of coding languages, CodeLearn helps users to learn and practice programming easily and effectively."
+                  "We focus on developing a comprehensive ecosystem with the basic-to-advanced courses and practicing challenges that are appropriate for everyone. With the rich and diverse courses and challenges which support a variety of coding languages, Dekiru helps users to learn and practice programming easily and effectively."
                 )}
                 <br />
                 {t(

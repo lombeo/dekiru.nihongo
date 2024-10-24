@@ -17,7 +17,7 @@ export default function EventPage() {
     {
       image: "/images/event/event-page-item-7.png",
       title: "Codewar Junior - Warm-Up Round For High School Students",
-      description: "The coding contest for high school students on CodeLearn",
+      description: "The coding contest for high school students on Dekiru",
       href: "https://codelearn.io/fights/detail/217",
     },
     {

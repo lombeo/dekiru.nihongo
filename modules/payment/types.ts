@@ -3,7 +3,7 @@ export const PAYMENT_PROVIDERS = [
   { id: 1, type: "FoxPay", icon: `/images/payment/fpt_pay_2.png`, label: "Payment by FPT Pay" },
   {
     id: 3,
-    type: "CodeLearn",
+    type: "Dekiru",
     icon: null,
     label: "Bank transfer payment",
     isHidden: process.env.NODE_ENV === "production",
@@ -13,7 +13,7 @@ export const PAYMENT_PROVIDERS = [
 export enum PAYMENT_PROVIDER {
   VietQR = 2,
   FoxPay = 1,
-  CodeLearn = 3,
+  Dekiru = 3,
 }
 
 export enum BuyType {

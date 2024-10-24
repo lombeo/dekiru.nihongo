@@ -160,7 +160,7 @@ export const ChatSticky = () => {
               size="48px"
               radius="xl"
               data-tooltip-id="global-tooltip"
-              data-tooltip-content={t("Chat with CodeLearn")}
+              data-tooltip-content={t("Chat with Dekiru")}
               data-tooltip-place="top"
               onClick={() => handleChatSupport()}
             >

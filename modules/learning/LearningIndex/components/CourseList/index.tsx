@@ -5,7 +5,7 @@ const CourseList: React.FC<{ courses: CourseItemProps[], refetch: any }> = ({ co
   return (
     <div className="grid w-full grid-cols-12 gap-4">
       {courses && courses.map((item, index) => (
-        <CourseItem key={`course-${item?.courseId}`} data={item} refetch={refetch} />
+        <CourseItem key={`course-${item?.id}`} data={item} refetch={refetch} />
       ))}
     </div>
   );

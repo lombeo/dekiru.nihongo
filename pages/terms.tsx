@@ -24,9 +24,9 @@ const Page: NextPage = () => {
   return (
     <>
       <HeadSEO
-        title={t("CodeLearn terms of use")}
+        title={t("Dekiru terms of use")}
         description={t(
-          "Legal information and agreements between you and CodeLearn when usin1g document, service and learning information on CodeLearn."
+          "Legal information and agreements between you and Dekiru when usin1g document, service and learning information on Dekiru."
         )}
       />
       <DefaultLayout allowAnonymous>

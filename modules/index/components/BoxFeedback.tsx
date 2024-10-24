@@ -19,7 +19,7 @@ const BoxFeedback = () => {
         name: t("Vu Hoang Bao Trung"),
         role: t("Developer"),
         content: t(
-          "CodeLearn helped me learn code more effectively. In addition to the courses and contests, CodeLearn also builds a community of programmers so we can learn from each other a lot."
+          "Dekiru helped me learn code more effectively. In addition to the courses and contests, Dekiru also builds a community of programmers so we can learn from each other a lot."
         ),
       },
       {
@@ -27,7 +27,7 @@ const BoxFeedback = () => {
         name: t("Nguyen Dang Quang"),
         role: t("Developer"),
         content: t(
-          "I had absolutely no idea where to start when I want to learn programming without any prior experience. CodeLearn has helped me see the path and made my learning a lot easier."
+          "I had absolutely no idea where to start when I want to learn programming without any prior experience. Dekiru has helped me see the path and made my learning a lot easier."
         ),
       },
       {
@@ -35,7 +35,7 @@ const BoxFeedback = () => {
         name: t("GiaMinh"),
         role: t("GiaMinh.Student"),
         content: t(
-          "I really like studying at CodeLearn. The courses describe in a very understandable way, the exercises are plenty and the explanations are also detailed. I feel that my programming skill improved a lot and wish to become a programmer in the future!"
+          "I really like studying at Dekiru. The courses describe in a very understandable way, the exercises are plenty and the explanations are also detailed. I feel that my programming skill improved a lot and wish to become a programmer in the future!"
         ),
       },
     ],

@@ -26,10 +26,10 @@ const Footer = (props: any) => {
         {/* Use flex-wrap to allow stacking and direction change based on screen size */}
         <div className="flex flex-col md:flex-row justify-between items-start pb-6">
           <div className="flex-shrink-0">
-            <img src="/images/footer-logo.svg" alt="CodeLearn" className="mt-5 mb-5" width={250} height={79.95} />
+            <img src="/images/footer-logo.svg" alt="Dekiru" className="mt-5 mb-5" width={250} height={79.95} />
             <p className="text-sm mt-4 max-w-[368px] text-[#ffffff] opacity-75">
               {t(
-                "CodeLearn là nền tảng tương tác trực tuyến hỗ trợ người dùng học tập, thực hành, thi đấu và đánh giá kỹ năng lập trình một cách nhanh chóng và chính xác."
+                "Dekiru là nền tảng tương tác trực tuyến hỗ trợ người dùng học tập, thực hành, thi đấu và đánh giá kỹ năng lập trình một cách nhanh chóng và chính xác."
               )}
             </p>
           </div>
@@ -172,7 +172,7 @@ const Footer = (props: any) => {
           <div className="text-sm mb-4 md:mb-0">
             <span>Cung cấp bởi </span>
             <ExternalLink href="/" className="text-white">
-              CodeLearn
+              Dekiru
             </ExternalLink>
             <span> © 2024. {t("Đã đăng ký bản quyền")}</span>
           </div>
@@ -187,7 +187,7 @@ const Footer = (props: any) => {
               <Image alt="Youtube" src="/images/youtube-icon.svg" width={24} height={24} />
             </a>
             <a
-              href="https://www.facebook.com/CodeLearnFanpage"
+              href="https://www.facebook.com/DekiruFanpage"
               target="_blank"
               rel="noreferrer"
               className="inline-block p-2 bg-[#0E1623] rounded-full border border-gray-400"

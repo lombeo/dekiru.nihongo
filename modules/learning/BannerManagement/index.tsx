@@ -244,7 +244,7 @@ const BannerManagement: React.FC<{}> = () => {
                   <div className="relative" onClick={open}>
                     <Image
                       src={watch("thumbnail")}
-                      alt={"CodeLearn"}
+                      alt={"Dekiru"}
                       height={228}
                       classNames={{
                         figure: "h-full",

@@ -54,7 +54,7 @@ export enum GiftType {
   Avatar = 2,
   Gift = 3, // quà hiện vật
   Badge = 4, // Huy hiệu
-  CodeLearn = 5, // mã giảm khóa học 
+  Dekiru = 5, // mã giảm khóa học 
   VioEdu = 6 // mã giảm khóa học
 }
 

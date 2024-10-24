@@ -554,7 +554,7 @@ export const TERM_EN = `<html>
   </head>
   <body class="c11 doc-content">
     <p class="c12">
-      <span class="c3 c6">CodeLearn Terms of Use and Personal Data Privacy Policy</span>
+      <span class="c3 c6">Dekiru Terms of Use and Personal Data Privacy Policy</span>
     </p>
     <h2 class="c13">
       <span class="c3 c6">Legal Information &amp; Notices</span>
@@ -791,7 +791,7 @@ export const TERM_EN = `<html>
       <span class="c10 c0">
         <a class="c8" href="https://codelearn.io">https://codelearn.io </a>
       </span>
-      <span class="c0">, it means that you have carefully read, understood and agreed to the entire content of CodeLearn's personal data privacy policy. <br>You clearly know and agree to this Policy which also means you agree to the provisions here Notice of personal data processing is specified in Article 13 of Decree 13/ND-CP/2023 and may be amended and supplemented from time to time before we process personal data. Accordingly, we do not need to take any additional measures for the purpose of notifying you of the processing of personal data. <br>
+      <span class="c0">, it means that you have carefully read, understood and agreed to the entire content of Dekiru's personal data privacy policy. <br>You clearly know and agree to this Policy which also means you agree to the provisions here Notice of personal data processing is specified in Article 13 of Decree 13/ND-CP/2023 and may be amended and supplemented from time to time before we process personal data. Accordingly, we do not need to take any additional measures for the purpose of notifying you of the processing of personal data. <br>
       </span>
       <span class="c4">1. Explanation of terms </span>
       <span class="c0">
@@ -1531,7 +1531,7 @@ export const TERM_VI = `<html>
   </head>
   <body class="c10 doc-content">
     <p class="c14">
-      <span class="c4 c7">Điều Khoản Sử Dụng và Chính sách bảo mật dữ liệu cá nhân CodeLearn</span>
+      <span class="c4 c7">Điều Khoản Sử Dụng và Chính sách bảo mật dữ liệu cá nhân Dekiru</span>
     </p>
     <p class="c14">
       <span class="c4 c0">Thông tin &amp; Thông báo pháp lý</span>
@@ -1753,7 +1753,7 @@ export const TERM_VI = `<html>
       <span class="c3 c9">
         <a class="c8" href="https://codelearn.io">https://codelearn.io</a>
       </span>
-      <span class="c3">&nbsp;có nghĩa là Bạn đã đọc kỹ, hiểu và đồng ý với toàn bộ nội dung Chính sách bảo mật dữ liệu cá nhân của CodeLearn. <br>Bạn đã biết rõ và đồng ý bản Chính sách này cũng đồng thời Thông báo xử lý dữ liệu cá nhân quy định tại&nbsp;Điều 13 Nghị định 13/NĐ-CP/2023&nbsp;và có thể được sửa đổi, bổ sung trong từng thời kỳ trước khi chúng tôi tiến hành xử lý dữ liệu cá nhân. Theo đó, chúng tôi không cần thực hiện thêm bất kỳ biện pháp nào khác nằm mục đích thông báo việc xử lý dữ liệu cá nhân cho Bạn. <br>
+      <span class="c3">&nbsp;có nghĩa là Bạn đã đọc kỹ, hiểu và đồng ý với toàn bộ nội dung Chính sách bảo mật dữ liệu cá nhân của Dekiru. <br>Bạn đã biết rõ và đồng ý bản Chính sách này cũng đồng thời Thông báo xử lý dữ liệu cá nhân quy định tại&nbsp;Điều 13 Nghị định 13/NĐ-CP/2023&nbsp;và có thể được sửa đổi, bổ sung trong từng thời kỳ trước khi chúng tôi tiến hành xử lý dữ liệu cá nhân. Theo đó, chúng tôi không cần thực hiện thêm bất kỳ biện pháp nào khác nằm mục đích thông báo việc xử lý dữ liệu cá nhân cho Bạn. <br>
       </span>
       <span class="c0">1. Giải thích từ ngữ</span>
       <span class="c3">

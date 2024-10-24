@@ -110,7 +110,7 @@ export default function EventLuckySpin() {
             </>
           );
           break;
-        case GiftType.CodeLearn:
+        case GiftType.Dekiru:
           leftItem = (
             <>
               <img src={item?.imageUrl} className="w-7 lg:w-8" />

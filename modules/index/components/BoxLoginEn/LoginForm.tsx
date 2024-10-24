@@ -150,7 +150,7 @@ const LoginForm: FC = () => {
       className="bg-white rounded-[32px] px-5 py-6 gmd:p-12 flex flex-col items-start gap-8 max-w-[425px] relative z-[2]"
     >
       <span className="text-xl leading-[30px] text-[#111928] font-semibold">
-        Learn to code with millions of people with CodeLearn
+        Learn to code with millions of people with Dekiru
       </span>
 
       <form onSubmit={handleFormSubmit} className="w-full" noValidate>

@@ -36,7 +36,7 @@ const BubbleChatIem = (props: any) => {
   let roomNameEscape = FunctionBase.escapeForTitleAttribute(roomName);
 
   if (data.friend?.id === ADMIN_ID) {
-    roomNameEscape = t("Chat with CodeLearn");
+    roomNameEscape = t("Chat with Dekiru");
   }
 
   return (

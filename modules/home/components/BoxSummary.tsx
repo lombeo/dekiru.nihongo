@@ -85,8 +85,8 @@ const BoxSummary = () => {
             )}
           >
             <div className="flex flex-col justify-center items-center font-[700]">
-              <div className="text-[28px] lg:text-[36px]">{t("Welcome to CodeLearn!")}</div>
-              <div className="text-[22px]">{t("Programming for everyone.")}</div>
+              <div className="text-[28px] lg:text-[36px]">{t("Chào mừng bạn đến với Dekiru")}</div>
+              <div className="text-[22px]">{t("Tiếng Nhật cho tất cả mọi người")}</div>
               <div className="mt-4 flex gap-4 items-center">
                 <Button
                   onClick={() => setOpenTour(false)}
@@ -118,7 +118,7 @@ const BoxSummary = () => {
         <div className="pt-7 pb-8 overflow-hidden max-w-full flex flex-col">
           <h2 className="my-0 font-semibold text-lg">
             <Trans i18nKey="HomePage.HELLO" values={{ name: profile?.userName }} t={t}>
-              Hello <span className="text-[#e8505b]">{profile?.userName}</span>. Welcome you to CodeLearn.
+              Hello <span className="text-[#e8505b]">{profile?.userName}</span>. Welcome you to Dekiru.
               Let&apos;s&nbsp;
               <div
                 onClick={() => {

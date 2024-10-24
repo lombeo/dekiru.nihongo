@@ -47,20 +47,6 @@ const BoxActivity = () => {
     <div className="mt-10">
       <Container size="xl">
         <div className="grid lg:grid-cols-[8fr_4fr] lg:gap-8 gap-5">
-          <div className="flex flex-col h-full" id="t8">
-            <h3 className="my-0 font-bold text-[#2c31cf] text-[26px]">{t("Your skills")}</h3>
-            <div className="flex-auto mt-4 bg-white rounded-md border p-5 relative">
-              <div className="grid lg:grid-cols-3 gap-5 lg:gap-x-8">
-                {userSkill?.map((item) => (
-                  <div key={item.langId} className="grid gap-2 grid-cols-[25px_auto_110px] items-center">
-                    <Image src={item.logoUrl} height={25} width={25} alt={item.name} />
-                    <span>{item.name}</span>
-                    <StarRatings size="md" rating={item.level} />
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
           <div id="t9">
             <h3 className="my-0 font-bold text-[#2c31cf] text-[26px]">{t("Your Activity")}</h3>
             <div className="mt-4 bg-white rounded-md border p-5 relative">

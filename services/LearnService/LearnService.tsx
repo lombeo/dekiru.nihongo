@@ -1,5 +1,6 @@
 import { axiosInstance } from "@src/api/axiosInstance";
 import { LEARN_API } from "@src/config";
+import axios from "axios";
 
 export class LearnService {
   static userRoles() {
@@ -20,11 +21,15 @@ export class LearnService {
   static courseBuyVoucher = async (data: any) => {
     return axiosInstance.post(LEARN_API + `/learn/course/buy-voucher`, data);
   };
-  static getCourseList = (params?: any) => {
-    return axiosInstance.get("/learn/course/get-course-list", {
-      params,
-    });
-  };
+  static getCourseList = async () => {
+    try {
+      const response = await axios.get("https://localhost:7233/authen/course/get-all-course");
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching courses data:", error);
+      throw error;
+    }
+  }
   static getLearningBanner = () => {
     return axiosInstance.get("/learn/systemsetting/get-learning-banner");
   };

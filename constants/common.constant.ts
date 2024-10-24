@@ -1,4 +1,4 @@
-export const APP_TITLE = "CodeLearn";
+export const APP_TITLE = "Dekiru";
 export const APP_DESCRIPTION = "Social Constructive Learning Platform";
 
 export const EMAIL_PATTERN =
@@ -109,7 +109,7 @@ export enum ViewScop {
 export const REGEX_PHONE = /(^[0-9\-\+]{1})+([0-9]{9,12})$/g;
 
 export enum OauthProviderEnum {
-  CodeLearn = 0,
+  Dekiru = 0,
   Google = 1,
   GitHub = 2,
   Microsoft = 3,

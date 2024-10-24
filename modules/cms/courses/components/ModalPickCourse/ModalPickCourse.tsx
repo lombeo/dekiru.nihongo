@@ -102,7 +102,7 @@ const ModalPickCourse = (props: ModalPickCourseProps) => {
             >
               <Card.Section className={styles.wrapThumb}>
                 <div className={styles.thumbnail}>
-                  <Image src={data.thumbnail} height={180} alt="CodeLearn" fit="cover" withPlaceholder />
+                  <Image src={data.thumbnail} height={180} alt="Dekiru" fit="cover" withPlaceholder />
                 </div>
               </Card.Section>
               <div className="absolute top-4 right-4 z-10">

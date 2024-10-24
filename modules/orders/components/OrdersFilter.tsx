@@ -217,7 +217,7 @@ const OrdersFilter = ({ isAdmin }: { isAdmin?: boolean }) => {
             { value: "0", label: t("Order Voucher") },
             { value: "1", label: t("Foxpay") },
             { value: "2", label: t("VietQR") },
-            { value: "3", label: t("CodeLearn") },
+            { value: "3", label: t("Dekiru") },
           ]}
           placeholder={t("All")}
           defaultValue={params?.types}

@@ -11,19 +11,6 @@ const BannerSwiper: React.FC<{}> = () => {
   const router = useRouter();
   const locale = router.locale;
 
-  const { data } = useQuery({
-    queryKey: ["getBannerList", locale],
-    queryFn: () => fetch(),
-  });
-
-  const fetch = async () => {
-    const res = await LearnService.getLearningBanner();
-    if (res?.data?.success) {
-      return res.data.data;
-    }
-    return null;
-  };
-
   return (
     <div className="w-full max-w-[1200px] m-auto overflow-hidden rounded-br-md rounded-bl-md aspect-[1200/280]">
       <Swiper
@@ -40,15 +27,13 @@ const BannerSwiper: React.FC<{}> = () => {
         navigation
         className="w-full"
       >
-        {data &&
-          data.map((item, index) => (
-            <SwiperSlide key={`banner-${index}`}>
-              <a href={`/learning/${item?.permalink}`}>
+            <SwiperSlide key={`banner-1`}>
+              <a href={`/learning/`}>
                 <Image
-                  src={item?.image}
-                  alt={item?.title}
+                  src={"/images/learning/learn-japanese-quickly.png"}
+                  alt={"learning japanese"}
                   width={1200}
-                  height={280}
+                  height={300}
                   objectFit="cover"
                   className="rounded-br-md rounded-bl-md cursor-pointer"
                   quality={100}
@@ -56,7 +41,6 @@ const BannerSwiper: React.FC<{}> = () => {
                 />
               </a>
             </SwiperSlide>
-          ))}
       </Swiper>
 
     </div>

@@ -3,7 +3,7 @@ import Link from "@src/components/Link";
 import { PubsubTopic } from "@src/constants/common.constant";
 import GroupCourseSwiper from "@src/modules/home/components/BoxCourse/components/GroupCourseSwiper";
 import GroupCourseSwiperSkeleton from "@src/modules/home/components/BoxCourse/components/GroupCourseSwiperSkeleton";
-import { LearnCourseService } from "@src/services";
+import { LearnService } from "@src/services/LearnService/LearnService";
 import { selectProfile } from "@src/store/slices/authSlice";
 import clsx from "clsx";
 import { useTranslation } from "next-i18next";
@@ -20,14 +20,11 @@ const BoxCourse = () => {
   const [tabActive, setTabActive] = useState("suggested");
 
   const fetchData = async () => {
-    const res = await LearnCourseService.getHomeCourses({
-      userId: profile?.userId,
-      progress: false,
-    });
+    const res = await LearnService.getCourseList();
     const data = res?.data?.data;
     if (!data) return;
     setCourses(data);
-    if (!data.suggestedCourses || data.suggestedCourses.length <= 0) {
+    if (data.length <= 0) {
       if (data.hasLearningCourses) {
         setTabActive("in-progress");
       } else if (data.hasCompletedCourses) {

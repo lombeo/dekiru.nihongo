@@ -73,7 +73,7 @@ export const CourseInfo = (props: any) => {
               height={210}
               className="bg-gray-lighter"
               fit="cover"
-              alt={"CodeLearn"}
+              alt={"Dekiru"}
               classNames={{
                 figure: "h-full",
               }}

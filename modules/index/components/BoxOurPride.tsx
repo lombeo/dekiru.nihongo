@@ -18,7 +18,7 @@ const BoxOurPride = () => {
               </h2>
               <div className="text-lg mt-4">
                 {t(
-                  "CodeLearn develops a comprehensive ecosystem of courses, practice exercises and coding contests with multilingual support. We connect people who share the same passion for programming to build a strong programming community together."
+                  "Dekiru develops a comprehensive ecosystem of courses, practice exercises and coding contests with multilingual support. We connect people who share the same passion for programming to build a strong programming community together."
                 )}
               </div>
             </div>

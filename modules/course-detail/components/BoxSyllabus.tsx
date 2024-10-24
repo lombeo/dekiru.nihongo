@@ -62,8 +62,7 @@ const BoxSyllabus = (props: BoxSyllabusProps) => {
 
   const activities = sections.flatMap((e) => e.activities || []);
 
-  const totalDuration = _.sumBy(activities, (item: any) => (item.duration >= maxTimeLimit ? 0 : item.duration));
-  const durationObj = FunctionBase.convertMinutesToHoursMinutes(totalDuration);
+  const durationObj = FunctionBase.convertMinutesToHoursMinutes(data?.duration);
 
   const isOnlySchedule = courseScheduleList.length === 1;
 

@@ -68,7 +68,7 @@ const ModalOptionBuy = (props: ModalOptionBuyProps) => {
             >
               <Card radius={16} className="w-full ">
                 <Card.Section>
-                  <Image src={data.thumbnail} alt="CodeLearn" height={172} withPlaceholder />
+                  <Image src={data.thumbnail} alt="Dekiru" height={172} withPlaceholder />
                 </Card.Section>
               </Card>
               <Button

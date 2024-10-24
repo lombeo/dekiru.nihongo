@@ -2,8 +2,7 @@ import { axiosInstance } from "@src/api/axiosInstance";
 
 export class ExternalService {
   static getQr = (params: any) => {
-    return axiosInstance.get("https://img.vietqr.io/image/tpbank-00666868149-qr_only.jpg", {
-      params,
+    return axiosInstance.post(`https://localhost:7233/authen/course/create-and-get-qr-transaction?language=vn&courseId=${params}`, {
       responseType: "blob",
     });
   };

@@ -57,7 +57,7 @@ const WalletManagement = () => {
 
         <div>
           <div>gasRate: {dataSetting?.gasRate}</div>
-          <div>exchangeRateCodeLearnToUsdt: {dataSetting?.exchangeRateCodeLearnToUsdt}</div>
+          <div>exchangeRateDekiruToUsdt: {dataSetting?.exchangeRateDekiruToUsdt}</div>
           <div>maximumAmount: {dataSetting?.maximumAmount}</div>
           <div>minimumAmount: {dataSetting?.minimumAmount}</div>
         </div>

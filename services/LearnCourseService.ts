@@ -1,12 +1,16 @@
 import { axiosInstance } from "@src/api/axiosInstance";
 import { COMMENT_API } from "@src/config";
-import { AxiosResponse } from "axios";
+import axios, { AxiosResponse } from "axios";
 
 export class LearnCourseService {
-  static getCourseDetail(params: any) {
-    return axiosInstance.get("/learn/course/get-personal-courses-detail", {
-      params,
-    });
+  static getCourseDetail = async (params: any) => {
+    try {
+      const response = await axios.get("https://localhost:7233/authen/course/get-course-by-id", { params });
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching course data:", error);
+      throw error;
+    }
   }
   static getOrgCourseDetail(filter: any) {
     return axiosInstance.get("/learn/course/get-organization-courses-detail", {

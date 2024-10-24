@@ -17,9 +17,9 @@ import BoxRewardEn from "./components/BoxRewardEn";
 import BoxEventEn from "./components/BoxEventEn";
 import BoxCommentEn from "./components/BoxCommentEn";
 import RunningEventModal from "./components/RunningEventModal";
-import { getIsShowRunningEventModal, setIsShowRunningEventModal } from "@src/store/slices/eventSlice";
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+// import { getIsShowRunningEventModal, setIsShowRunningEventModal } from "@src/store/slices/eventSlice";
+// import { useSelector, useDispatch } from "react-redux";
+// import { useEffect } from "react";
 
 const IndexView: NextPage = () => {
   const router = useRouter();
@@ -27,15 +27,15 @@ const IndexView: NextPage = () => {
   const keyLocale = locale === "vi" ? "vn" : "en";
   //mt-[100px]
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const isShow = useSelector(getIsShowRunningEventModal);
+  // const isShow = useSelector(getIsShowRunningEventModal);
 
-  useEffect(() => {
-    return () => {
-      dispatch(setIsShowRunningEventModal(false));
-    };
-  }, []);
+  // useEffect(() => {
+  //   return () => {
+  //     dispatch(setIsShowRunningEventModal(false));
+  //   };
+  // }, []);
 
   return (
     <div className="w-full overflow-hidden">
@@ -61,7 +61,7 @@ const IndexView: NextPage = () => {
         </>
       )}
 
-      {isShow && <RunningEventModal onClose={() => dispatch(setIsShowRunningEventModal(false))} />}
+      {/* {isShow && <RunningEventModal onClose={() => dispatch(setIsShowRunningEventModal(false))} />} */}
     </div>
   );
 };

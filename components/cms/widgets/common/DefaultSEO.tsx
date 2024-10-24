@@ -1,7 +1,7 @@
 import nextConfig from "next.config";
 
 const DefaultSEO = ({
-  title = "CodeLearn CMS",
+  title = "Dekiru CMS",
   description = "Social Constructive Learning Platform",
   ogType = "website",
 }) => {
@@ -15,7 +15,7 @@ const DefaultSEO = ({
       <meta name="twitter:description" content={description} />
 
       <meta property="og:locale" content="en_US" />
-      <meta property="og:site_name" content="CodeLearn CMS" />
+      <meta property="og:site_name" content="Dekiru CMS" />
       <meta property="og:type" content={ogType} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
