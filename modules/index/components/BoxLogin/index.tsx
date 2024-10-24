@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { Container } from "@src/components";
 import StrengthList from "./StrengthList";
-import LoginForm from "./LoginForm";
 import { motion } from "framer-motion";
+import LoginForm from "./LoginForm";
 
 const BoxLogin: FC = () => {
   const normalText = "Nền tảng học tiếng Nhật trực tuyến dành";

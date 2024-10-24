@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 
 const StrengthList: FC = () => {
   const data = [
-    { icon: "add", label: "Học tiếng Nhật từ con số 0", styles: { delay: 0.06 } },
-    { icon: "add", label: "Khơi dậy đam mê ngôn ngữ Nhật", styles: { delay: 0.12 } },
-    { icon: "add", label: "Chinh phục ngôn ngữ Nhật, khẳng định bản thân", styles: { delay: 0.18 } },
+    { icon: "add", label: "Học lập trình từ con số 0", styles: { delay: 0.06 } },
+    { icon: "add", label: "Khơi dậy đam mê công nghệ", styles: { delay: 0.12 } },
+    { icon: "add", label: "Chinh phục thế giới số, khẳng định bản thân", styles: { delay: 0.18 } },
     { icon: "add", label: "Mở ra cơ hội việc làm hấp dẫn trong tương lai", styles: { delay: 0.24 } },
   ];
 

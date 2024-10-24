@@ -73,7 +73,6 @@ const LoginForm: FC = () => {
           token: data.code,
           provider: data.provider,
         },
-        
       );
     }
   };

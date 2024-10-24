@@ -1,7 +1,7 @@
 import { useMsal } from "@azure/msal-react";
 import useLogin from "@src/hooks/useLogin";
 import { useTranslation, Trans } from "next-i18next";
-import { FC, useImperativeHandle, useRef, useState } from "react";
+import { FC, useEffect, useImperativeHandle, useRef, useState } from "react";
 import { FormLoginRef } from "../ModalLogin/FormLogin";
 import { GITHUB_AUTH_URL, GOOGLE_AUTH_URL } from "@src/constants/auth.constant";
 import { loginMsRequest } from "@src/config/microsoft.config";
@@ -11,12 +11,11 @@ import { GithubNew, GoogleNew, WindowsNew } from "@src/components/Svgr/component
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
-import recaptcha from "@src/helpers/recaptcha.helper";
 import { PasswordInput, TextInput } from "@mantine/core";
 import { useRouter } from "next/router";
-import { setOpenModalSignUpEn } from "@src/store/slices/applicationSlice";
+import { setLoadedEventListenerMessage, setOpenModalLogin } from "@src/store/slices/applicationSlice";
 import { useDispatch } from "react-redux";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 let windowObjectReference = null;
 let previousUrl = null;
@@ -28,14 +27,13 @@ const LoginForm: FC = () => {
   const dispatch = useDispatch();
 
   const { t } = useTranslation();
+  const { executeRecaptcha } = useGoogleReCaptcha();
 
   const router = useRouter();
 
   const { instance } = useMsal();
 
   const login = useLogin();
-
-  const { executeRecaptcha } = useGoogleReCaptcha();
 
   const refFormLogin = useRef<FormLoginRef>(null);
 
@@ -48,8 +46,14 @@ const LoginForm: FC = () => {
     shouldUnregister: false,
     resolver: yupResolver(
       yup.object().shape({
-        userName: yup.string().required("Username must not be blank").trim("Username must not be blank"),
-        password: yup.string().required("Password must not be blank").trim("Password must not be blank"),
+        userName: yup
+          .string()
+          .required(t("{{name}} must not be blank", { name: t("Username") }))
+          .trim(t("{{name}} must not be blank", { name: t("Username") })),
+        password: yup
+          .string()
+          .required(t("{{name}} must not be blank", { name: t("Password") }))
+          .trim(t("{{name}} must not be blank", { name: t("Password") })),
       })
     ),
   });
@@ -61,13 +65,16 @@ const LoginForm: FC = () => {
     setValue,
   } = methodForm;
 
-  const receiveMessage = (event: any) => {
+  const receiveMessage = async (event: any) => {
     const data = event?.data;
     if (data != null && data.code != null) {
-      login({
-        token: data.code,
-        provider: data.provider,
-      });
+      await login(
+        {
+          token: data.code,
+          provider: data.provider,
+        },
+        executeRecaptcha
+      );
     }
   };
 
@@ -79,32 +86,18 @@ const LoginForm: FC = () => {
 
   const handleFormSubmit = (e: any) => {
     e.preventDefault();
+    if (loading) return;
+    setLoading(true);
     handleSubmit(async (data) => {
-      if (!executeRecaptcha) {
-        console.log("Execute recaptcha not yet available");
-        return;
-      }
-      recaptcha.show();
-      executeRecaptcha("enquiryFormSubmit")
-        .then((gReCaptchaToken) => {
-          recaptcha.hidden();
-          submitEnquiryForm(data, gReCaptchaToken);
-        })
-        .catch(() => {
-          recaptcha.hidden();
-        });
+      await login(data);
+      setLoading(false);
     })();
   };
 
-  const submitEnquiryForm = async (data, gReCaptchaToken) => {
-    setLoading(true);
-    await login(data, gReCaptchaToken);
-    setLoading(false);
-  };
+  let isOpened = false;
 
   const openWindow = (url: string, name: string, features: string) => {
     if (typeof window !== "undefined") {
-      window.removeEventListener("message", receiveMessage);
       if (windowObjectReference === null || windowObjectReference.closed) {
         windowObjectReference = window.open(url, name, features);
       } else if (previousUrl !== url) {
@@ -113,16 +106,28 @@ const LoginForm: FC = () => {
       } else {
         windowObjectReference.focus();
       }
-      window.addEventListener("message", receiveMessage, false);
       previousUrl = url;
+      if (!isOpened) {
+        window.addEventListener("message", receiveMessage, false);
+        isOpened = true;
+      }
     }
   };
 
+  useEffect(() => {
+    return () => {
+      window.removeEventListener("message", receiveMessage);
+      dispatch(setLoadedEventListenerMessage(false));
+    };
+  }, []);
+
   const githubSignIn = () => {
+    dispatch(setLoadedEventListenerMessage(true));
     openWindow(GITHUB_AUTH_URL, "Github", popupFeatures);
   };
 
   const googleSignIn = () => {
+    dispatch(setLoadedEventListenerMessage(true));
     openWindow(GOOGLE_AUTH_URL, "Google", popupFeatures);
   };
 
@@ -141,16 +146,16 @@ const LoginForm: FC = () => {
   };
 
   const handleStartSignUp = () => {
-    dispatch(setOpenModalSignUpEn(true));
+    dispatch(setOpenModalLogin("register"));
   };
 
   return (
     <div
-      id="formSignInEn"
+      id="formSignIn"
       className="bg-white rounded-[32px] px-5 py-6 gmd:p-12 flex flex-col items-start gap-8 max-w-[425px] relative z-[2]"
     >
       <span className="text-xl leading-[30px] text-[#111928] font-semibold">
-        Learn to code with millions of people with Dekiru
+        Học lập trình cùng hàng triệu người với CodeLearn
       </span>
 
       <form onSubmit={handleFormSubmit} className="w-full" noValidate>
@@ -164,7 +169,7 @@ const LoginForm: FC = () => {
                 error={errors[field.name]?.message as string}
                 size="md"
                 classNames={{ input: "text-base" }}
-                placeholder="Username*"
+                placeholder={`${t("Username")}*`}
                 className="w-full"
               />
             )}
@@ -179,7 +184,7 @@ const LoginForm: FC = () => {
                   error={errors[field.name]?.message as string}
                   size="md"
                   classNames={{ innerInput: "text-base" }}
-                  placeholder="Password*"
+                  placeholder={`${t("Password")}*`}
                   className="w-full"
                 />
               )}
@@ -192,7 +197,7 @@ const LoginForm: FC = () => {
                 }}
                 className="cursor-pointer hover:underline text-[#337ab7]"
               >
-                Forgot password?
+                {t("Forgot password")}?
               </div>
             </div>
           </div>
@@ -203,14 +208,14 @@ const LoginForm: FC = () => {
             className="bg-[#506CF0]"
             type="submit"
           >
-            Login
+            {t("Login")}
           </Button>
         </div>
       </form>
 
       <div className="w-full flex flex-col gap-[10px]">
         <div className="w-full flex flex-row items-center gap-2">
-          <span className="text-sm leading-5 font-normal text-[#637381]">Or continue with</span>
+          <span className="text-sm leading-5 font-normal text-[#637381]">Hoặc tiếp tục với</span>
           <div className="flex-1 w-full h-[0.37px] bg-[#E7E7E7]" />
         </div>
         <div className="w-full grid grid-cols-3 gap-4">
@@ -232,12 +237,12 @@ const LoginForm: FC = () => {
         </div>
       </div>
 
-      <div className="w-full flex gap-1 flex-wrap justify-center items-center text-sm leading-5 font-normal text-[#111928]">
-        <span>If you do not already have an account.</span>
+      <div className="w-full flex flex-wrap gap-1 justify-center items-center text-sm leading-5 font-normal text-[#111928]">
+        <span>Nếu bạn chưa có tài khoản.</span>
         <span>
-          Please{" "}
+          Vui lòng{" "}
           <span className="text-[#506CF0] font-medium cursor-pointer" onClick={handleStartSignUp}>
-            Sign up
+            Đăng ký
           </span>
         </span>
       </div>
