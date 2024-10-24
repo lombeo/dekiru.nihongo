@@ -23,7 +23,7 @@ export class LearnService {
   };
   static getCourseList = async () => {
     try {
-      const response = await axios.get("https://localhost:7233/authen/course/get-all-course");
+      const response = await axios.get("https://lombeo-api-authorize.azurewebsites.net/authen/course/get-all-course");
       return response.data;
     } catch (error) {
       console.error("Error fetching courses data:", error);

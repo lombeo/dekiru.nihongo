@@ -5,7 +5,7 @@ import axios, { AxiosResponse } from "axios";
 export class LearnCourseService {
   static getCourseDetail = async (params: any) => {
     try {
-      const response = await axios.get("https://localhost:7233/authen/course/get-course-by-id", { params });
+      const response = await axios.get("https://lombeo-api-authorize.azurewebsites.net/authen/course/get-course-by-id", { params });
       return response.data;
     } catch (error) {
       console.error("Error fetching course data:", error);
