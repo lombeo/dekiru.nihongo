@@ -418,7 +418,7 @@ export const CourseForm = ({ isCreate, data, onDiscard, onSave, onDelete, type }
                   <div className="relative" onClick={open}>
                     <Image
                       src={watch("thumbnail")}
-                      alt={"Dekiru"}
+                      alt={"CodeLearn"}
                       height={228}
                       classNames={{
                         figure: "h-full",
@@ -643,7 +643,7 @@ export const CourseForm = ({ isCreate, data, onDiscard, onSave, onDelete, type }
                                 src={field.thumbnail}
                                 height={50}
                                 width={50}
-                                alt="Dekiru"
+                                alt="CodeLearn"
                                 fit="cover"
                                 withPlaceholder
                               />

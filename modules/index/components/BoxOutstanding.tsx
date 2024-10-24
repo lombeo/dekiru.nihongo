@@ -64,7 +64,7 @@ const BoxOutstanding = () => {
     <div className="py-[70px] transition-all duration-300" style={{ backgroundColor: activeItem.color }}>
       <Container size="xl">
         <h2 className="text-[30px] lg:text-[42px] font-[700] leading-[1.26] text-center my-0">
-          {t("Dekiru")} <br /> {t("Outstanding advantages")}
+          {t("CodeLearn")} <br /> {t("Outstanding advantages")}
         </h2>
         <div className="mt-[40px] grid gap-7 lg:grid-cols-[8fr_4fr] md:grid-cols-[7fr_5fr]">
           <div>

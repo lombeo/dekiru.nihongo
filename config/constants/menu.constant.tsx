@@ -22,9 +22,24 @@ export const useMenuList = () => {
   const { locale } = router;
 
   let menuItems: MenuItem[] = [
-    { label: t("Học tập"), href: "/learning" },
-    { label: t("Thi thử JLPT"), href: "/coming-soon" },
-    { label: t("Thảo luận"), href: "/discussion" }
+    { label: t("Learning"), href: "/learning" },
+    { label: t("Training"), href: "/training" },
+    { label: t("FIGHT_MENU"), href: "/fights" },
+    { label: t("Challenge"), href: "/challenge" },
+    {
+      label: t("Event"),
+      href: "/event",
+      // hidden: typeof window !== "undefined" && window.location.origin.includes("https://codelearn.io"),
+    },
+    // { label: t("Evaluating"), href: "/evaluating" },
+    // { label: t("Discussion"), href: "/discussion" },
+    { label: t("Leaders"), href: "/leaderboard" },
+    {
+      label: t("Contributors"),
+      href: "/contributor",
+    },
+    // { label: t("Recruitment"), href: "/job" },
+    { label: t("Sharing"), href: "/sharing", hidden: locale !== "vi" },
   ];
 
   menuItems = menuItems

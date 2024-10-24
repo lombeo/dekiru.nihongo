@@ -30,79 +30,79 @@ const BoxComment: FC = () => {
   const data = [
     {
       comment:
-        "Khóa học giúp em phát âm chuẩn hơn và tự tin trò chuyện với người Nhật. Em cảm thấy tiếng Nhật không còn khó như trước nữa.",
-      name: "Thanh An",
-      role: "Học sinh cấp 3",
+        "Sau khi hoàn thành khóa học, điều khiến em thích thú nhất là việc tự mình có thể viết nên những đoạn mã hoạt động như mong muốn.",
+      name: "Dương Nguyễn",
+      role: "Học sinh",
       avatar: "/images/landing-page/box-comment-avatar-1.png",
     },
     {
       comment:
-        "Mình muốn con tiếp cận sớm với ngôn ngữ Nhật để chuẩn bị cho tương lai. Khóa học rất bổ ích, con mình rất hào hứng khi học.",
-      name: "Minh Hà",
+        "Thời buổi này ngoài tiếng anh thì bắt buộc phải biết lập trình. Mấy chị công ty cũng cho con mua khóa học ở đây để con tiếp xúc dần, mình cũng mua thử, con mới học, hi vọng sẽ thích.",
+      name: "Dung Trần",
       role: "Phụ huynh",
       avatar: "/images/landing-page/box-comment-avatar-2.png",
     },
     {
       comment:
-        "Trước đây em chỉ học tiếng Anh, nhưng khi thử học tiếng Nhật ở đây, em đã khám phá ra nhiều điều thú vị về văn hóa và ngôn ngữ mới.",
-      name: "Hoàng Tùng",
-      role: "Sinh viên",
+        "Nhờ Codelearn mà từ biết đến lập trình chuyển thành đam mê. Kiến thức nền của em đã khá ổn, sẽ mua khóa học nâng cao, hi vọng sau sẽ tìm được việc làm như mong muốn.",
+      name: "Đăng Quang",
+      role: "Học sinh",
       avatar: "/images/landing-page/box-comment-avatar-3.png",
     },
     {
       comment:
-        "Từ khi học tiếng Nhật ở Dekiru, em đã cải thiện khả năng đọc hiểu và tự tin khi làm bài tập. Giảng viên hướng dẫn rất tận tâm và chi tiết.",
-      name: "Lan Anh",
-      role: "Học sinh trung học",
+        "Sau khi hoàn thành khóa học, điều khiến em thích thú nhất là việc tự mình có thể viết nên những đoạn mã hoạt động như mong muốn.",
+      name: "Dương Nguyễn",
+      role: "Học sinh",
       avatar: "/images/landing-page/box-comment-avatar-1.png",
     },
     {
       comment:
-        "Tôi đã từng lo lắng về việc con mình có thể hứng thú với tiếng Nhật hay không, nhưng nhờ khóa học thú vị ở đây, bé đã rất yêu thích và chăm chỉ học.",
-      name: "Kim Liên",
+        "Thời buổi này ngoài tiếng anh thì bắt buộc phải biết lập trình. Mấy chị công ty cũng cho con mua khóa học ở đây để con tiếp xúc dần, mình cũng mua thử, con mới học, hi vọng sẽ thích.",
+      name: "Dung Trần",
       role: "Phụ huynh",
       avatar: "/images/landing-page/box-comment-avatar-2.png",
     },
     {
       comment:
-        "Dekiru đã giúp em nắm vững ngữ pháp tiếng Nhật cơ bản một cách nhanh chóng. Em sẽ tiếp tục học để có thể giao tiếp lưu loát hơn.",
-      name: "Bảo Minh",
-      role: "Sinh viên đại học",
+        "Nhờ Codelearn mà từ biết đến lập trình chuyển thành đam mê. Kiến thức nền của em đã khá ổn, sẽ mua khóa học nâng cao, hi vọng sau sẽ tìm được việc làm như mong muốn.",
+      name: "Đăng Quang",
+      role: "Học sinh",
       avatar: "/images/landing-page/box-comment-avatar-3.png",
     },
     {
       comment:
-        "Học tiếng Nhật ở đây rất vui và thú vị. Em không chỉ học ngôn ngữ mà còn học nhiều về văn hóa và cách sống của người Nhật.",
-      name: "Tuấn Kiệt",
-      role: "Học sinh tiểu học",
+        "Sau khi hoàn thành khóa học, điều khiến em thích thú nhất là việc tự mình có thể viết nên những đoạn mã hoạt động như mong muốn.",
+      name: "Dương Nguyễn",
+      role: "Học sinh",
       avatar: "/images/landing-page/box-comment-avatar-1.png",
     },
     {
       comment:
-        "Con tôi rất thích khóa học này, bé đã bắt đầu sử dụng các từ tiếng Nhật đơn giản trong giao tiếp hàng ngày, tôi rất hài lòng.",
-      name: "Mỹ Dung",
+        "Thời buổi này ngoài tiếng anh thì bắt buộc phải biết lập trình. Mấy chị công ty cũng cho con mua khóa học ở đây để con tiếp xúc dần, mình cũng mua thử, con mới học, hi vọng sẽ thích.",
+      name: "Dung Trần",
       role: "Phụ huynh",
       avatar: "/images/landing-page/box-comment-avatar-2.png",
     },
     {
       comment:
-        "Khóa học đã giúp em chuẩn bị tốt cho kỳ thi tiếng Nhật sắp tới. Nội dung bài học rõ ràng và dễ hiểu, rất phù hợp cho người mới bắt đầu.",
-      name: "Phương Nam",
-      role: "Sinh viên cao đẳng",
+        "Nhờ Codelearn mà từ biết đến lập trình chuyển thành đam mê. Kiến thức nền của em đã khá ổn, sẽ mua khóa học nâng cao, hi vọng sau sẽ tìm được việc làm như mong muốn.",
+      name: "Đăng Quang",
+      role: "Học sinh",
       avatar: "/images/landing-page/box-comment-avatar-3.png",
     },
     {
       comment:
-        "Mình đã tìm được nhiều bạn bè cùng sở thích học tiếng Nhật qua cộng đồng học tập ở đây. Khóa học rất thú vị và bổ ích.",
-      name: "Hải Yến",
-      role: "Nhân viên văn phòng",
+        "Sau khi hoàn thành khóa học, điều khiến em thích thú nhất là việc tự mình có thể viết nên những đoạn mã hoạt động như mong muốn.",
+      name: "Dương Nguyễn",
+      role: "Học sinh",
       avatar: "/images/landing-page/box-comment-avatar-1.png",
     },
     {
       comment:
-        "Em đã chọn khóa học này vì muốn có thêm kỹ năng để làm việc tại công ty Nhật. Các bài học được thiết kế rất chi tiết và thực tiễn.",
-      name: "Ngọc Bích",
-      role: "Người đi làm",
+        "Thời buổi này ngoài tiếng anh thì bắt buộc phải biết lập trình. Mấy chị công ty cũng cho con mua khóa học ở đây để con tiếp xúc dần, mình cũng mua thử, con mới học, hi vọng sẽ thích.",
+      name: "Dung Trần",
+      role: "Phụ huynh",
       avatar: "/images/landing-page/box-comment-avatar-2.png",
     },
   ];
@@ -111,13 +111,10 @@ const BoxComment: FC = () => {
     <div className="bg-[#EDF0FD] w-full -mt-1 py-[40px] sm:py-[60px] md:py-[80px] relative">
       <Container size="xl">
         <div className="w-full max-w-[1200px] m-auto flex flex-col gap-[42px] md:gap-[62px]">
-          <motion.div
-            initial="offscreen"
-            whileInView="onscreen"
-            viewport={{ once: true }}
-            variants={titleBoxCommentVariants}
-            className="w-full text-center text-[#304090] text-3xl leading-10 gmd:text-[48px] gmd:leading-[60px] font-semibold"
-          >
+          <motion.div initial="offscreen"
+              whileInView="onscreen"
+              viewport={{ once: true }}
+              variants={titleBoxCommentVariants} className="w-full text-center text-[#304090] text-3xl leading-10 gmd:text-[48px] gmd:leading-[60px] font-semibold">
             Học viên nói gì về chúng tôi
           </motion.div>
           <Swiper

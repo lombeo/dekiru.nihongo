@@ -2,13 +2,13 @@ import Head from "next/head";
 
 const HeadSEO = ({
   title = "",
-  description = "Dekiru is an online platform developed by FPT Software company that helps users to learn, practice coding skills and join the developer community",
+  description = "CodeLearn is an online platform developed by FPT Software company that helps users to learn, practice coding skills and join the developer community",
   ogImage = "https://scale.codelearn.io/images/codelearn-banner.jpeg",
   children = <></>,
 }) => {
   return (
     <Head>
-      <title>{title ? title + " | Dekiru" : "Dekiru"}</title>
+      <title>{title ? title + " | CodeLearn" : "CodeLearn"}</title>
       <link rel="icon" href="/favicon.png" sizes="any" />
       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=0" />
       <meta

@@ -6,7 +6,7 @@ export default {
     type: "website",
     locale: "en_IE",
     url: nextConfig.domain,
-    title: "Dekiru",
+    title: "CodeLearn",
     description: "Social Constructive Learning Platform",
     images: [
       {
@@ -17,11 +17,11 @@ export default {
         type: "image/jpeg",
       },
     ],
-    site_name: "Dekiru",
+    site_name: "CodeLearn",
   },
   twitter: {
     handle: "@fpt",
-    site: "@Dekiru.io",
+    site: "@CodeLearn.io",
     cardType: "summary_large_image",
   },
   additionalLinkTags: [

@@ -14,7 +14,7 @@ const BoxSlogan = () => {
               <br />
               {t("From zero to hero")}
             </h1>
-            <div className="mt-[10px] text-[22px]">{t("Easier to get started with coding on Dekiru")}</div>
+            <div className="mt-[10px] text-[22px]">{t("Easier to get started with coding on CodeLearn")}</div>
           </div>
           <div className="hidden sm:block absolute bg-contain md:bottom-[-200px] xl:bottom-[-110px] lg:left-[-40%] xl:left-[-60%] w-[45vw] h-[45vw] xl:h-[35vw] bg-[url('/images/head-left-bg.png')] bg-no-repeat bg-right-top" />
         </div>

@@ -33,7 +33,7 @@ export const NotFound = ({ size = "default", className = "", children }: PropsWi
       <div className={`flex flex-col items-center text-center ${className}`}>
         {children || (
           <>
-            <Image src={src} alt="Dekiru" width="auto" />
+            <Image src={src} alt="CodeLearn" width="auto" />
             <div className={`mt-0 mx-auto text-gray ${sizeOnType[size].text}`}>
               {t("Page not found. Please try again")}
               <div className="flex mt-4 gap-x-8 justify-center">

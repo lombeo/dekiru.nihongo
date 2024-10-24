@@ -13,12 +13,11 @@ const BoxIntroduce = (props: BoxIntroduceProps) => {
 
   return (
     <div className="pt-6" id="introduce">
-      <h1>Giới thiệu</h1>
       <div className="w-full max-w-[calc(100vw_-_32px)]">
         <div className="flex flex-col gap-8">
-          <RawText className="min-h-[260px] leading-[1.8]">{data?.description}</RawText>
-          <Objectives data={data?.whatYouWillLearn} />
-          <Skill data={data?.skills} />
+          <RawText className="min-h-[260px] leading-[1.8]">{data?.about}</RawText>
+          <Objectives data={data?.objectives} />
+          <Skill data={data?.skill} />
         </div>
       </div>
     </div>
@@ -43,7 +42,7 @@ const Objectives = (props: ObjectivesProps) => {
 
   return (
     <div className="bg-navy-light5 p-6 rounded-[12px] flex flex-col gap-4">
-      <h3 className="font-semibold my-0 text-[24px] leading-[30px]">{t("Bạn sẽ học được những gì?")}</h3>
+      <h3 className="font-semibold my-0 text-[24px] leading-[30px]">{t("What you will learn")}</h3>
       <div className="flex flex-col gap-4">
         {data?.map((item: string, index: number) => {
           return (
@@ -78,7 +77,7 @@ const Skill = (props: SkillProps) => {
 
   return (
     <div className="flex flex-col gap-6">
-      <h3 className="font-semibold my-0 text-[24px] leading-[30px]">{t("Bạn sẽ đạt được những kĩ năng nào?")}</h3>
+      <h3 className="font-semibold my-0 text-[24px] leading-[30px]">{t("Skills you'll gain")}</h3>
       <div className="flex flex-wrap gap-3">
         {data?.map((item: string, index: number) => (
           <div

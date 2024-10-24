@@ -91,7 +91,7 @@ export const CourseListItem = ({ data }: any) => {
       <Card withBorder className={styles.item}>
         <Card.Section className={styles.wrapThumb}>
           <div className={styles.thumbnail}>
-            <Image src={data.thumbnail} height={210} alt="Dekiru" fit="cover" withPlaceholder />
+            <Image src={data.thumbnail} height={210} alt="CodeLearn" fit="cover" withPlaceholder />
             <CoursePublishTag published={data.published} />
             {data.isCombo && <CourseComboTag />}
           </div>

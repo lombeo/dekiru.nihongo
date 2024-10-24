@@ -122,7 +122,7 @@ const HomeIndex = () => {
         <BoxSummary />
 
         {/* {typeof window !== "undefined" && !window.location.origin.includes("https://codelearn.io") && ( */}
-        {/* <Container size="xl">
+        <Container size="xl">
           <Link href={`/event/duong-dua-lap-trinh-2024`}>
             <div className="relative w-full mt-4">
               <div>
@@ -142,13 +142,15 @@ const HomeIndex = () => {
               </div>
             </div>
           </Link>
-        </Container> */}
+        </Container>
         {/* )} */}
 
         <BoxCourse />
+        <BoxContest />
         <div className="mt-10">
           <Container size="xl">
-            <div className="grid lg:grid-cols-[5fr_5fr] lg:gap-8 gap-5">
+            <div className="grid lg:grid-cols-[7fr_5fr] lg:gap-8 gap-5">
+              <BoxTraining />
               <BoxSharing />
             </div>
           </Container>

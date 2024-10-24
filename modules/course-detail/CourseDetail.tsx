@@ -54,14 +54,14 @@ const CourseDetail = (props: CourseDetailProps) => {
     queryKey: courseQueryKey,
     queryFn: async () => {
       const res = await LearnCourseService.getCourseDetail({
-        courseId: permalink,
+        permalink: permalink,
       });
-      let data = res?.data;
-      if (res?.code === 403) {
+      let data = res?.data?.data;
+      if (res?.data?.code === 403) {
         router.push("/403");
         return null;
-      } else if (res?.message) {
-        Notify.error(t(res.message));
+      } else if (res?.data?.message) {
+        Notify.error(t(res.data.message));
       }
       return data;
     },
@@ -72,21 +72,21 @@ const CourseDetail = (props: CourseDetailProps) => {
   const courseId = data?.courseId;
   const isEnroll = data?.isEnroll;
 
-  // const ratingQuery = useQuery({
-  //   queryKey: ["rating", courseId],
-  //   queryFn: async () => {
-  //     if (!courseId) return null;
-  //     const res = await LearnCourseService.getCourseRatings({
-  //       pageIndex: 1,
-  //       pageSize: 20,
-  //       contextId: courseId,
-  //       contextType: CommentContextType.Course,
-  //       getDetails: true,
-  //       progress: false,
-  //     });
-  //     return res?.data?.data;
-  //   },
-  // });
+  const ratingQuery = useQuery({
+    queryKey: ["rating", courseId],
+    queryFn: async () => {
+      if (!courseId) return null;
+      const res = await LearnCourseService.getCourseRatings({
+        pageIndex: 1,
+        pageSize: 20,
+        contextId: courseId,
+        contextType: CommentContextType.Course,
+        getDetails: true,
+        progress: false,
+      });
+      return res?.data?.data;
+    },
+  });
 
   const refreshData = () => {
     refetch();
@@ -118,7 +118,7 @@ const CourseDetail = (props: CourseDetailProps) => {
   return (
     <div className="border-b pb-20">
       <CourseDetailContextProvider>
-        <BoxBanner data={data} />
+        <BoxBanner refreshData={refreshData} isCourseManager={isCourseManager} data={data} rating={ratingQuery.data} />
         <BoxTab data={data} refreshData={refreshData} handleChangeTab={handleChangeTab} currentTab={currentTab} />
         <div id="course-content">
           <Container size="xl">
@@ -142,7 +142,7 @@ const CourseDetail = (props: CourseDetailProps) => {
                         <BoxSyllabus isEnrolled={data?.isEnroll} data={data?.courseSchedule?.courseScheduleList} />
                       </BoxInView>
                     )}
-                    {/* <BoxInView onView={(tab) => setCurrentTab(tab)} tab="reviews" permalink={permalink}>
+                    <BoxInView onView={(tab) => setCurrentTab(tab)} tab="reviews" permalink={permalink}>
                       <BoxReviews
                         isEnroll={isEnroll}
                         courseId={courseId}
@@ -152,7 +152,7 @@ const CourseDetail = (props: CourseDetailProps) => {
                     </BoxInView>
                     <BoxInView onView={(tab) => setCurrentTab(tab)} tab="certificate" permalink={permalink}>
                       <BoxCertificate data={data} />
-                    </BoxInView> */}
+                    </BoxInView>
                   </div>
                   <BoxSticky data={data} refreshData={refreshData} isCourseManager={isCourseManager} />
                 </div>
@@ -190,12 +190,12 @@ const CourseDetail = (props: CourseDetailProps) => {
                     courseId={data?.id}
                   />
                 )}
-                {/* {activeTab === "voucher-management" && !!data && isCanCreateVoucher && (
+                {activeTab === "voucher-management" && !!data && isCanCreateVoucher && (
                   <BoxVoucher contextId={data?.id} contextType={CommentContextType.Course} course={data} />
                 )}
                 {activeTab === "my-vouchers" && !!data && !isCanCreateVoucher && (
                   <BoxMyVoucher course={data} contextId={data?.id} />
-                )} */}
+                )}
               </div>
             </div>
           </Container>

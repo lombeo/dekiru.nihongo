@@ -4,13 +4,13 @@ import { FunctionBase } from "@src/helpers/fuction-base.helpers";
 import _ from "lodash";
 import { useTranslation } from "next-i18next";
 
-interface BoxQrDekiruProps {
+interface BoxQrCodeLearnProps {
   qr: string;
   content: string;
   amount: number;
 }
 
-const BoxQrDekiru = (props: BoxQrDekiruProps) => {
+const BoxQrCodeLearn = (props: BoxQrCodeLearnProps) => {
   const { qr, amount, content } = props;
 
   const { t } = useTranslation();
@@ -108,4 +108,4 @@ const BoxQrDekiru = (props: BoxQrDekiruProps) => {
   );
 };
 
-export default BoxQrDekiru;
+export default BoxQrCodeLearn;

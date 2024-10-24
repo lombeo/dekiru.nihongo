@@ -2,7 +2,7 @@ const getHomeWebTourStep = (t, locale) => {
   return [
     {
       selector: "#t1",
-      content: t("Here is your level on Dekiru"),
+      content: t("Here is your level on CodeLearn"),
       position: "right",
     },
     {
@@ -48,7 +48,7 @@ const getHomeWebTourStep = (t, locale) => {
     },
     {
       selector: "#t9",
-      content: t("Check your daily activities on Dekiru"),
+      content: t("Check your daily activities on CodeLearn"),
       position: "left",
     },
   ].filter((item) => {

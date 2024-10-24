@@ -111,7 +111,7 @@ const ForgotPasswordIndex = () => {
                   <div>{t("Follow these simple steps to reset your account:")}</div>
                   <ol>
                     <li>{t("Enter your username or email.")}</li>
-                    <li>{t("Visit your email account, open the email sent by Dekiru.")}</li>
+                    <li>{t("Visit your email account, open the email sent by CodeLearn.")}</li>
                     <li>{t("Follow the instruction in the mail to change password.")}</li>
                   </ol>
                 </div>

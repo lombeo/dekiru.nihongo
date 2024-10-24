@@ -39,7 +39,7 @@ export const NotPermission = (props: NotPermissionProps) => {
   return (
     <>
       <div className={`flex flex-col items-center text-center ${className}`}>
-        <Image src={src} alt="Dekiru" width="auto" />
+        <Image src={src} alt="CodeLearn" width="auto" />
         <div className={`mt-4 mx-auto text-gray ${sizeOnType[size].text}`}>
           {children}
           <div className="flex mt-4 gap-x-8 justify-center">

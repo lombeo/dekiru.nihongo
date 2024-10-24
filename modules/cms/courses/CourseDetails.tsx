@@ -534,7 +534,7 @@ export const CourseDetails = () => {
                                         <Image
                                           src={data.thumbnail}
                                           height={180}
-                                          alt="Dekiru"
+                                          alt="CodeLearn"
                                           fit="cover"
                                           withPlaceholder
                                         />

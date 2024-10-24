@@ -71,12 +71,12 @@ const SettingWalletModal = (props: SettingWalletModalProps) => {
           )}
         />
         <Controller
-          name="exchangeRateDekiruToUsdt"
+          name="exchangeRateCodeLearnToUsdt"
           control={control}
           render={({ field }) => (
             <NumberInput
               precision={2}
-              label={t("exchangeRateDekiruToUsdt")}
+              label={t("exchangeRateCodeLearnToUsdt")}
               hideControls
               error={errors[field.name]?.message as any}
               required

@@ -62,7 +62,7 @@ const SupportChat = (props: any) => {
           x={26}
           y={48}
         >
-          {t("Chat with Dekiru")}
+          {t("Chat with CodeLearn")}
         </text>
         <text
           fill="#fff"
