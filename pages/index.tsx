@@ -1,4 +1,3 @@
-import Header from "@/components/header";
 import LandingPageSection from "@/components/home/landing-page";
 import OurMembers from "@/components/home/our-members";
 import ReasonsToLearnJapanese from "@/components/home/reason";
