@@ -1,42 +1,40 @@
-## Naming convention
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
 
-1. Variable: All variables must follow camel Standard. ex: let productId.
-2. Constrant: All contrants must follow all Uppercase, split by underline character. ex: const PRODUCT_TYPE.
-3. Function: function name must follow camel standard. ex: const getProduct = ()=>{}.
-4. Enum: Follow: NotifyTypeEnum, Pascal format and end with Enum.
-5. Component, custom hook.
-   _Using sonarlint for keep format and rules_
+## Getting Started
 
-## Rules of Code
+First, run the development server:
 
-### Must
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-1. All functions, components must have description at top of function/component.
-2. All passing variables to function/component must have specific type, interface.
-3. Name of function, component, variable must meaning and clear.
-4. All datetime for display must have same format and timezone. Using formatDateGMT function for keep same format display.
-5. All format datetime send to server must format is UTC (GMT +0).
-6. All console return variable, checking must remove before merge. Except case need for check bug on pro or help for notify action and message must meaning (need comment before console). Don't not allow using obscene language.
-7. All debugger must remove before merge for all case.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### Should
+You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
-1. Need comment for each special function/component inside function/component. And must comment with English.
+[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
 
-## Special Functions/Components
+The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
 
-### Helper Components
+This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-1. RawText: Using for display HTML follow default style of system. _All text render as HTML_ must using this
+## Learn More
 
-### Helper Functions
+To learn more about Next.js, take a look at the following resources:
 
-Base at: FunctionBase class
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
 
-1. formatDateGMT: All date display must using this function for keep same format in system. _Must using_
-2. escape, htmlEncode: Convert Html to string - Using for display html as text. Must use for display all title types (Course title, activity title...).
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-Axios helper functions:
+## Deploy on Vercel
 
-1. axiosPost: Using for post data with manual handle error. -> Pass: errorHandle= false
-2. axiosGet: Using for get data with manual hanle error. -> Pass: errorHandle= false
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.

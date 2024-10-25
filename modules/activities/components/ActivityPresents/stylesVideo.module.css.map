@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,OAAO,CAAC;EACJ,KAAK,EAAE,IAAI;CAKd;;AAND,AAGI,OAHG,CAGH,MAAM,CAAC;EACH,KAAK,EAAE,GACX;CAAC;;AAGL,AAAA,MAAM,CAAC;EACH,MAAM,CAAN,qDAAM;EACN,YAAY,EAAE,MAAM;CACvB",
-    "sources": [
-        "stylesVideo.module.scss"
-    ],
-    "names": [],
-    "file": "stylesVideo.module.css"
-}

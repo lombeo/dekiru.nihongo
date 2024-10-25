@@ -1,1 +1,0 @@
-.wrap-tab-content{max-height:calc(100% - 40px);height:100%;@apply overflow-hidden}.tab-content{max-height:calc(100% - 40px);height: 100%;@apply overflow-y-auto overflow-x-hidden}

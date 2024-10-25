@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,WAAW,CAAC;EACV,OAAO,EAAE,WAAW;EACpB,kBAAkB,EAAE,QAAQ;EAC5B,QAAQ,EAAE,MAAM;CACjB;;AAED,AAAA,SAAS,CAAC;EACR,WAAW,EAAE,MAAM;EACnB,QAAQ,EAAE,MAAM;EAChB,aAAa,EAAE,QAAQ;EACvB,OAAO,EAAE,YAAY;EACrB,KAAK,EAAE,IAAI;CACZ",
-    "sources": [
-        "TextOverflow.module.scss"
-    ],
-    "names": [],
-    "file": "TextOverflow.module.css"
-}

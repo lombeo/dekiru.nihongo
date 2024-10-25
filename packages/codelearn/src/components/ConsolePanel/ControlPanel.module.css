@@ -1,9 +1,0 @@
-.tab button[data-active] {
-  border-bottom-color: #fff;
-}
-.tab button:hover {
-  opacity: 0.8;
-  border-bottom-color: #fff !important;
-}
-
-/*# sourceMappingURL=ControlPanel.module.css.map */

@@ -1,9 +1,0 @@
-.card {
-  width: 280px;
-  height: 260px;
-  &:hover {
-    transform: scale(1.02);
-  }
-
-  @apply relative cursor-pointer p-0 transition-all duration-300 rounded-md shadow-lg
-}
