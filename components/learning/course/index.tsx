@@ -339,7 +339,7 @@ export default function CourseDetails() {
               <p className="mb-6">{courseData.introduction}</p>
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="bg-pink-100 rounded-lg p-4">
-                  <h3 className="text-xl font-semibold mb-4">
+                  <h3 className="text-xl font-semibold mb-4 text-pink-500">
                     Những gì bạn sẽ học trong khóa học này
                   </h3>
                   <ul className="space-y-2">
@@ -352,7 +352,7 @@ export default function CourseDetails() {
                   </ul>
                 </div>
                 <div className="bg-pink-100 rounded-lg p-4">
-                  <h3 className="text-xl font-semibold mb-4">
+                  <h3 className="text-xl font-semibold mb-4 text-pink-500">
                     Kỹ năng bạn sẽ đạt được
                   </h3>
                   <ul className="space-y-2">
@@ -379,8 +379,8 @@ export default function CourseDetails() {
                   <div
                     className={`flex items-center justify-between p-4 rounded-lg cursor-pointer ${
                       expandedWeeks.includes(`week-${weekIndex}`)
-                        ? "bg-pink-600 text-white"
-                        : "bg-gray-100"
+                        ? "bg-pink-400 text-white"
+                        : "bg-pink-100 text-pink-500"
                     }`}
                     onClick={() => toggleWeek(`week-${weekIndex}`)}
                   >
@@ -413,8 +413,8 @@ export default function CourseDetails() {
                               expandedChapters.includes(
                                 `chapter-${weekIndex}-${chapterIndex}`
                               )
-                                ? "bg-pink-400 text-white"
-                                : "bg-white"
+                                ? "bg-pink-300 text-white"
+                                : "bg-pink-100 text-pink-500"
                             }`}
                             onClick={() =>
                               toggleChapter(`chapter-${weekIndex}-${chapterIndex}`)
@@ -495,32 +495,30 @@ export default function CourseDetails() {
 
         {/* Phần Đánh giá */}
         <section ref={reviewsRef} id="reviews" className="mb-12">
-          <h2 className="text-3xl font-bold mb-6">Đánh giá</h2>
+          <h2 className="text-3xl font-bold mb-6 text-pink-500">Đánh giá</h2>
           <Card>
             <CardContent className="pt-6">
               <div className="grid md:grid-cols-2 gap-8 mb-8">
                 <div>
-                  <h3 className="text-xl font-semibold mb-4">Tóm tắt Đánh giá</h3>
+                  <h3 className="text-xl font-semibold mb-4 text-pink-500">Tóm tắt Đánh giá</h3>
                   <div className="space-y-2">
                     {[5, 4, 3, 2, 1].map((rating) => (
                       <div key={rating} className="flex items-center">
-                        <span className="w-16">{rating} sao</span>
+                        <span className="w-16 text-pink-500">{rating} sao</span>
                         <Progress
                           value={
-                            ((reviewSummary[rating] || 0) /
-                              courseData.reviews.length) *
-                            100
+                            ((reviewSummary[rating] || 0) / courseData.reviews.length) * 100
                           }
-                          className="w-64 mx-4"
+                          className="w-64 mx-4 bg-pink-100"
                         />
-                        <span>{reviewSummary[rating] || 0}</span>
+                        <span className="text-pink-500">{reviewSummary[rating] || 0}</span>
                       </div>
                     ))}
                   </div>
                 </div>
                 <div className="flex flex-col items-center justify-center">
-                  <h3 className="text-xl font-semibold mb-4">Đánh giá Trung bình</h3>
-                  <div className="text-5xl font-bold mb-2">
+                  <h3 className="text-xl font-semibold mb-4 text-pink-500">Đánh giá Trung bình</h3>
+                  <div className="text-5xl font-bold mb-2 text-pink-500">
                     {courseData.rating.toFixed(1)}
                   </div>
                   <div className="flex mb-2">
@@ -530,38 +528,38 @@ export default function CourseDetails() {
                         className={cn(
                           "w-6 h-6",
                           star <= Math.round(courseData.rating)
-                            ? "text-yellow-400 fill-current"
-                            : "text-gray-300"
+                            ? "text-pink-400 fill-current"
+                            : "text-pink-200"
                         )}
                       />
                     ))}
                   </div>
-                  <div className="text-sm text-gray-500">
+                  <div className="text-sm text-pink-500">
                     ({courseData.reviews.length} đánh giá)
                   </div>
                 </div>
               </div>
               <div className="mb-8">
-                <h3 className="text-xl font-semibold mb-4">Viết Đánh giá</h3>
+                <h3 className="text-xl font-semibold mb-4 text-pink-500">Viết Đánh giá</h3>
                 <div className="space-y-4">
                   <div className="flex items-center">
-                    <span className="mr-2">Đánh giá của bạn:</span>
+                    <span className="mr-2 text-pink-500">Đánh giá của bạn:</span>
                     {[1, 2, 3, 4, 5].map((rating) => (
                       <Star
                         key={rating}
-                        className="w-6 h-6 text-gray-300 hover:text-yellow-400 cursor-pointer"
+                        className="w-6 h-6 text-pink-200 hover:text-pink-400 cursor-pointer"
                       />
                     ))}
                   </div>
-                  <Textarea placeholder="Viết đánh giá của bạn ở đây..." />
-                  <Button>Gửi Đánh giá</Button>
+                  <Textarea placeholder="Viết đánh giá của bạn ở đây..." className="text-pink-500" />
+                  <Button className="bg-pink-500 text-white">Gửi Đánh giá</Button>
                 </div>
               </div>
               <div>
-                <h3 className="text-xl font-semibold mb-4">Đánh giá của Học viên</h3>
+                <h3 className="text-xl font-semibold mb-4 text-pink-500">Đánh giá của Học viên</h3>
                 <ul className="space-y-6">
                   {courseData.reviews.map((review, index) => (
-                    <li key={index} className="border-b pb-4 last:border-b-0">
+                    <li key={index} className="border-b border-pink-200 pb-4 last:border-b-0">
                       <div className="flex items-center mb-2">
                         <Image
                           src={review.avatar || "/image/default-avatar.png"}
@@ -570,7 +568,7 @@ export default function CourseDetails() {
                           height={40}
                           className="rounded-full mr-4"
                         />
-                        <span className="font-semibold mr-2">
+                        <span className="font-semibold mr-2 text-pink-500">
                           {review.user}
                         </span>
                         <div className="flex">
@@ -579,14 +577,14 @@ export default function CourseDetails() {
                               key={i}
                               className={`w-4 h-4 ${
                                 i < review.rating
-                                  ? "text-yellow-400 fill-current"
-                                  : "text-gray-300"
+                                  ? "text-pink-400 fill-current"
+                                  : "text-pink-200"
                               }`}
                             />
                           ))}
                         </div>
                       </div>
-                      <p className="text-gray-600">{review.comment}</p>
+                      <p className="text-pink-600">{review.comment}</p>
                     </li>
                   ))}
                 </ul>
