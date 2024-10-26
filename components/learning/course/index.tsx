@@ -272,7 +272,7 @@ export default function CourseDetails() {
                 </span>
               </div>
             </div>
-            <div className="relative h-64 md:h-auto">
+            <div className="relative h-64 md:h-96">
               <Image
                 src={courseData.image}
                 alt={courseData.title}
