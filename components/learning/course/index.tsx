@@ -282,7 +282,7 @@ export default function CourseDetails() {
               />
             </div>
           </div>
-          <Button size="lg" className="mt-8">
+          <Button size="lg" className="mt-8" onClick={() => window.location.href = `/payment/${courseData.id}`}>
             Đăng ký ngay
           </Button>
         </div>
