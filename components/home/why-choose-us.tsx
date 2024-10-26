@@ -1,5 +1,7 @@
 import { CheckCircle, Users, Zap, Book, Headphones, Award } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useState } from "react";
+import RegisterDialog from "./components/RegisterDialog";
 
 export default function WhyChooseUs() {
   const features = [
@@ -41,11 +43,13 @@ export default function WhyChooseUs() {
     },
   ];
 
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
   return (
     <section className="py-16 bg-gradient-to-br from-red-50 to-pink-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-bold text-center mb-4 text-pink-800">
-          Tại Sao Nên Chọn Nihongo Master?
+          Tại Sao Nên Chọn Dekiru Nihongo?
         </h2>
         <p className="text-xl text-center text-gray-600 mb-12">
           Khám phá những tính năng giúp chúng tôi nổi bật trong giáo dục ngôn
@@ -78,14 +82,18 @@ export default function WhyChooseUs() {
             Tham Gia Cùng Hàng Nghìn Học Viên Hài Lòng
           </h3>
           <p className="text-lg text-gray-600 mb-8">
-            Trải nghiệm sự khác biệt của Nihongo Master và tăng tốc hành trình
+            Trải nghiệm sự khác biệt của Dekiru Nihongo và tăng tốc hành trình
             học tiếng Nhật của bạn ngay hôm nay!
           </p>
           <a
-            href="#sign-up"
+            href="#"
+            onClick={(e) => {
+              e.preventDefault(); 
+              setIsDialogOpen(true); 
+            }}
             className="inline-block bg-pink-600 text-white font-bold py-3 px-8 rounded-full hover:bg-pink-700 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110"
           >
-            Bắt Đầu Dùng Thử Miễn Phí
+            Bắt Đầu Hành Trình Trinh Phục Tiếng Nhật
           </a>
         </div>
       </div>
@@ -94,7 +102,7 @@ export default function WhyChooseUs() {
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <blockquote className="text-center">
             <p className="text-2xl font-semibold text-gray-800 mb-4">
-              &quot;Nihongo Master đã biến đổi trải nghiệm học tiếng Nhật của
+              &quot;Dekiru Nihongo đã biến đổi trải nghiệm học tiếng Nhật của
               tôi. Tôi đã tiến bộ nhiều hơn trong vài tháng so với nhiều năm với
               các phương pháp khác!&quot;
             </p>
@@ -103,6 +111,10 @@ export default function WhyChooseUs() {
             </footer>
           </blockquote>
         </div>
+        <RegisterDialog
+          isDialogOpen={isDialogOpen}
+          setIsDialogOpen={setIsDialogOpen}
+        />
       </div>
     </section>
   );

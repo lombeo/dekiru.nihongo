@@ -58,7 +58,7 @@ export default function Footer() {
               <Input
                 type="email"
                 placeholder="Nhập email của bạn"
-                className="bg-red-700 border-red-600 text-white placeholder-gray-400"
+                className="bg-red-700 border-red-600 text-white placeholder-white"
               />
               <Button type="submit" className="w-full bg-white text-red-800 hover:bg-gray-200">
                 Đăng ký

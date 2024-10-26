@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { Facebook, Twitter, Linkedin } from "lucide-react";
+import { useState } from "react";
+import RegisterDialog from "./components/RegisterDialog";
 
 export default function OurMembers() {
   const members = [
@@ -67,6 +69,8 @@ export default function OurMembers() {
     },
   ];
 
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
   return (
     <section className="py-16 bg-gradient-to-br from-red-50 to-pink-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -74,7 +78,7 @@ export default function OurMembers() {
           Gặp Gỡ Đội Ngũ Của Chúng Tôi
         </h2>
         <p className="text-xl text-center text-gray-600 mb-12">
-          Những chuyên gia đứng sau thành công của Nihongo Master
+          Những chuyên gia đứng sau thành công của Dekiru Nihongo
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
@@ -147,12 +151,21 @@ export default function OurMembers() {
             thích ngôn ngữ Nhật Bản!
           </p>
           <a
-            href="#join-community"
+            href="#"
+            onClick={(e) => {
+              e.preventDefault(); // Prevent default anchor behavior
+              setIsDialogOpen(true); // Open the dialog
+            }}
             className="inline-block bg-pink-600 text-white font-bold py-3 px-8 rounded-full hover:bg-pink-700 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110"
           >
             Tham Gia Cộng Đồng Của Chúng Tôi
           </a>
         </div>
+
+        <RegisterDialog
+          isDialogOpen={isDialogOpen}
+          setIsDialogOpen={setIsDialogOpen}
+        />
       </div>
     </section>
   );

@@ -32,7 +32,7 @@ export default function Header() {
           </div>
           <nav className="hidden md:block">
             <ul className="flex space-x-4">
-              <li><Link href="/lessons" className="hover:text-red-200 transition-colors">Bài học</Link></li>
+              <li><Link href="/learning" className="hover:text-red-200 transition-colors">Bài học</Link></li>
               <li><Link href="/practice" className="hover:text-red-200 transition-colors">Thực hành</Link></li>
               <li><Link href="/community" className="hover:text-red-200 transition-colors">Cộng đồng</Link></li>
               <li><Link href="/resources" className="hover:text-red-200 transition-colors">Tài nguyên</Link></li>
