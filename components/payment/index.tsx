@@ -27,7 +27,7 @@ export default function PaymentUI() {
 
   const fetchCourseData = async (courseId: string) => {
     const response = await fetch(
-      `https://localhost:7233/authen/course/get-course-by-id?courseId=${courseId}`
+      `https://lombeo-api-authorize.azurewebsites.net/authen/course/get-course-by-id?courseId=${courseId}`
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");
@@ -49,7 +49,7 @@ export default function PaymentUI() {
   const fetchQrCode = async () => {
     if (!user || !courseData) return;
     const response = await fetch(
-      `https://localhost:7233/authen/course/create-and-get-qr-transaction?courseId=${courseData.id}`,
+      `https://lombeo-api-authorize.azurewebsites.net/authen/course/create-and-get-qr-transaction?courseId=${courseData.id}`,
       {
         method: "POST",
         headers: {

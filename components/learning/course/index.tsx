@@ -60,7 +60,7 @@ export default function CourseDetails() {
   };
 
   const fetchCourseData = async (courseId: string) => {
-    const response = await fetch(`https://localhost:7233/authen/course/get-course-by-id?courseId=${courseId}`);
+    const response = await fetch(`https://lombeo-api-authorize.azurewebsites.net/authen/course/get-course-by-id?courseId=${courseId}`);
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }

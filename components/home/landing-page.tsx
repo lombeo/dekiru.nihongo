@@ -20,7 +20,7 @@ export default function LandingPageSection() {
 
     try {
       const response = await fetch(
-        "https://localhost:7233/authen/authen/sign-in",
+        "https://lombeo-api-authorize.azurewebsites.net/authen/authen/sign-in",
         {
           method: "POST",
           headers: {

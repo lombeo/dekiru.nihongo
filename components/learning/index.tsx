@@ -48,7 +48,7 @@ export default function LearningPage() {
 
   const fetchCourses = async () => {
     const response = await axios.get(
-      "https://localhost:7233/authen/course/get-all-course"
+      "https://lombeo-api-authorize.azurewebsites.net/authen/course/get-all-course"
     );
     return response.data.data; // Return the data array from the response
   };
