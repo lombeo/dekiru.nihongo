@@ -13,78 +13,32 @@ import {
 import { User, Book, Clock } from "lucide-react";
 import { Search } from "lucide-react"; // Import the Search icon
 import { useRouter } from "next/router"; // Import useRouter
+import { useQuery } from "@tanstack/react-query"; // Import useQuery
+import axios from "axios"; // Import axios for making API requests
 
-const courses = [
-  {
-    id: 1,
-    title: "Tiếng Nhật cho người mới bắt đầu",
-    author: "Tanaka Yuki",
-    rating: 4.5,
-    students: 1500,
-    lectures: 30,
-    hours: 20,
-    description:
-      "Bắt đầu hành trình học tiếng Nhật của bạn với khóa học toàn diện cho người mới bắt đầu.",
-    isHot: true,
-    image: "/image/home/members/emiu.jpg",
-    regularPrice: 99.99,
-    discountedPrice: 79.99,
-  },
-  {
-    id: 2,
-    title: "Ngữ pháp tiếng Nhật trung cấp",
-    author: "Sato Kenji",
-    rating: 4.7,
-    students: 1200,
-    lectures: 40,
-    hours: 25,
-    description:
-      "Nâng cao hiểu biết của bạn về ngữ pháp tiếng Nhật với khóa học trung cấp này.",
-    isHot: false,
-    image: "/image/home/members/emiu.jpg",
-    regularPrice: 129.99,
-    discountedPrice: 99.99,
-  },
-  {
-    id: 3,
-    title: "Tiếng Nhật thương mại",
-    author: "Yamamoto Hana",
-    rating: 4.8,
-    students: 800,
-    lectures: 35,
-    hours: 22,
-    description:
-      "Học tiếng Nhật cần thiết cho các bối cảnh kinh doanh và môi trường chuyên nghiệp.",
-    isHot: true,
-    image: "/image/home/members/emiu.jpg",
-    regularPrice: 149.99,
-    discountedPrice: 119.99,
-  },
-  {
-    id: 4,
-    title: "Chuẩn bị JLPT N3",
-    author: "Nakamura Akira",
-    rating: 4.6,
-    students: 2000,
-    lectures: 50,
-    hours: 30,
-    description:
-      "Chuẩn bị toàn diện cho kỳ thi JLPT N3 với các bài kiểm tra thực hành và chiến lược.",
-    isHot: false,
-    image: "/image/home/members/emiu.jpg",
-    regularPrice: 179.99,
-    discountedPrice: 139.99,
-  },
-];
+interface Course {
+  id: string;
+  title: string;
+  image: string;
+  isHot: boolean;
+  author: string;
+  rating: number;
+  discountedPrice: number;
+  regularPrice: number;
+  description: string;
+  students: number;
+  lectures: number;
+  hours: number;
+}
 
 const categories = [
   "Tất cả",
-  "Người mới bắt đầu",
+  "Sơ cấp",
   "Trung cấp",
-  "Nâng cao",
+  "Cao cấp",
   "Thương mại",
   "Văn hóa",
-  "Chuẩn bị JLPT",
+  "JLPT",
 ];
 
 export default function LearningPage() {
@@ -92,8 +46,27 @@ export default function LearningPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("Tất cả");
 
+  const fetchCourses = async () => {
+    const response = await axios.get(
+      "https://localhost:7233/authen/course/get-all-course"
+    );
+    return response.data.data; // Return the data array from the response
+  };
+
+  // Use useQuery to fetch courses
+  const {
+    data: courses = [],
+    isLoading,
+    error,
+  } = useQuery<Course[], Error>({
+    queryKey: ["courses"], // Provide the queryKey as part of an object
+    queryFn: fetchCourses, // Provide the query function
+  });
+
   const filteredCourses = courses.filter(
-    (course) =>
+    (
+      course: Course // Specify the type of 'course'
+    ) =>
       course.title.toLowerCase().includes(searchTerm.trim().toLowerCase()) &&
       (selectedCategory === "Tất cả" ||
         course.title
@@ -101,6 +74,9 @@ export default function LearningPage() {
           .toLowerCase()
           .includes(selectedCategory.trim().toLowerCase()))
   );
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading courses</div>;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-50 to-pink-50">
@@ -168,8 +144,8 @@ export default function LearningPage() {
                     className="overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer"
                     onClick={() => router.push(`/course/${course.id}`)} // Add onClick handler
                   >
-                    <CardContent className="p-0">
-                      <div className="relative">
+                    <CardContent className="p-0 flex flex-col h-full">
+                      <div className="relative flex-shrink-0">
                         <Image
                           src={course.image}
                           alt={course.title}
@@ -183,13 +159,12 @@ export default function LearningPage() {
                           </div>
                         )}
                       </div>
-                      <div className="p-6">
+                      {/* Ensure the course information is at the bottom */}
+                      <div className="p-6 mt-auto">
                         <h3 className="text-xl font-bold mb-2 text-pink-600">
                           {course.title}
                         </h3>
-                        <p className="text-gray-600 mb-2">
-                          bởi {course.author}
-                        </p>
+                        <p className="text-gray-600 mb-2">bởi Dekiru</p>
                         <div className="flex items-center mb-4">
                           {[...Array(5)].map((_, i) => (
                             <Star
@@ -208,10 +183,16 @@ export default function LearningPage() {
                         <div className="flex items-center justify-between">
                           <div>
                             <span className="text-3xl font-bold text-pink-600">
-                              ${course.discountedPrice}
+                              {new Intl.NumberFormat("vi-VN", {
+                                style: "currency",
+                                currency: "VND",
+                              }).format(course.discountedPrice)}
                             </span>
                             <span className="ml-2 text-sm text-gray-500 line-through">
-                              ${course.regularPrice}
+                              {new Intl.NumberFormat("vi-VN", {
+                                style: "currency",
+                                currency: "VND",
+                              }).format(course.regularPrice)}
                             </span>
                           </div>
                           <span className="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">

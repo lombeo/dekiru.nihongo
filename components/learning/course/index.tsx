@@ -16,7 +16,6 @@ import {
   FileQuestion,
   ChevronDown,
   FileText,
-  MessageSquare,
   PenTool,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -27,150 +26,76 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
-
-const courseData = {
-  id: 1,
-  title: "Khóa học Tiếng Nhật Toàn Diện cho Người Mới Bắt Đầu",
-  image: "/image/home/members/emiu.jpg",
-  author: {
-    name: "Tanaka Yuki",
-    avatar: "/image/home/members/emiu.jpg",
-  },
-  description:
-    "Bắt đầu hành trình học tiếng Nhật của bạn với khóa học toàn diện này được thiết kế cho người mới bắt đầu. Làm chủ ngữ pháp cơ bản, từ vựng thiết yếu và kỹ năng giao tiếp cơ bản.",
-  regularPrice: 99.99,
-  discountedPrice: 79.99,
-  discountPercentage: 20,
-  duration: 30,
-  lectures: 50,
-  students: 1500,
-  rating: 4.7,
-  introduction:
-    "Chào mừng bạn đến với 'Khóa học Tiếng Nhật Toàn Diện cho Người Mới Bắt Đầu'! Khóa học này được thiết kế để đưa bạn từ một người hoàn toàn mới đến một người nói tiếng Nhật tự tin cơ bản. Chúng tôi sẽ đề cập đến mọi thứ từ các hệ thống viết (Hiragana, Katakana và Kanji cơ bản) đến các mẫu ngữ pháp thiết yếu và kỹ năng giao tiếp hàng ngày. Cách tiếp cận của chúng tôi kết hợp kiến thức lý thuyết với các bài tập thực hành, đảm bảo bạn không chỉ hiểu ngôn ngữ mà còn có thể sử dụng nó trong các tình huống thực tế. Trong suốt khóa học, bạn cũng sẽ có cái nhìn sâu sắc về văn hóa Nhật Bản, điều này rất quan trọng để thực sự làm chủ ngôn ngữ. Dù bạn đang lên kế hoạch cho một chuyến đi đến Nhật Bản, quan tâm đến anime và manga, hay chỉ đơn giản là bị cuốn hút bởi ngôn ngữ, khóa học này sẽ cung cấp cho bạn một nền tảng vững chắc để tiếp tục hành trình học tiếng Nhật của bạn.",
-  learningObjectives: [
-    "Làm chủ hệ thống viết Hiragana và Katakana",
-    "Hiểu các cấu trúc ngữ pháp tiếng Nhật cơ bản",
-    "Phát triển từ vựng thiết yếu cho các cuộc hội thoại hàng ngày",
-    "Học cách phát âm và ngữ điệu đúng",
-    "Có cái nhìn sâu sắc về xã hội Nhật Bản",
-  ],
-  skills: [
-    "Cuộc hội thoại tiếng Nhật cơ bản",
-    "Đọc và viết Hiragana và Katakana",
-    "Hiểu các văn bản viết đơn giản",
-    "Giới thiệu bản thân và người khác bằng tiếng Nhật",
-    "Đặt món ăn và thực hiện các giao dịch đơn giản",
-  ],
-  curriculum: [
-    {
-      week: 1,
-      title: "Giới thiệu về Ngôn ngữ Nhật Bản",
-      chapters: [
-        {
-          title: "Bắt đầu với tiếng Nhật",
-          lectures: [
-            { type: "video", title: "Chào mừng đến với Khóa học", duration: 15 },
-            { type: "reading", title: "Tổng quan về Ngôn ngữ Nhật Bản", duration: 15 },
-            { type: "quiz", title: "Kiểm tra Cơ bản về Ngôn ngữ Nhật Bản", duration: 15 },
-          ],
-        },
-        {
-          title: "Hệ thống viết Hiragana",
-          lectures: [
-            { type: "video", title: "Giới thiệu về Hiragana", duration: 15 },
-            { type: "reading", title: "Bảng chữ cái Hiragana và Thứ tự Viết", duration: 15 },
-            { type: "listening", title: "Thực hành Phát âm Hiragana", duration: 15 },
-            { type: "speaking", title: "Thực hành Nói Hiragana", duration: 15 },
-            { type: "quiz", title: "Kiểm tra Nhận diện Hiragana", duration: 15 },
-          ],
-        },
-      ],
-    },
-    {
-      week: 2,
-      title: "Chào hỏi Cơ bản và Giới thiệu Bản thân",
-      chapters: [
-        {
-          title: "Chào hỏi Thông dụng",
-          lectures: [
-            { type: "video", title: "Chào hỏi Tiếng Nhật Cần Thiết", duration: 15 },
-            { type: "listening", title: "Thực hành Đối thoại Chào hỏi", duration: 15 },
-            { type: "speaking", title: "Bài tập Đóng vai Chào hỏi", duration: 15 },
-          ],
-        },
-        {
-          title: "Giới thiệu Bản thân",
-          lectures: [
-            { type: "reading", title: "Từ vựng Giới thiệu Bản thân", duration: 15 },
-            { type: "video", title: "Cách Giới thiệu Bản thân", duration: 15 },
-            { type: "speaking", title: "Thực hành Giới thiệu Bản thân", duration: 15 },
-            { type: "quiz", title: "Kiểm tra Chào hỏi và Giới thiệu Bản thân", duration: 15 },
-          ],
-        },
-      ],
-    },
-  ],
-  reviews: [
-    {
-      user: "Emily S.",
-      avatar: "/image/home/members/emiu.jpg",
-      rating: 5,
-      comment:
-        "Khóa học tuyệt vời cho người mới bắt đầu! Tốc độ học rất hợp lý và các giải thích rất rõ ràng.",
-    },
-    {
-      user: "Michael L.",
-      rating: 4,
-      comment: "Nội dung tuyệt vời, nhưng tôi ước có nhiều bài tập nói hơn.",
-    },
-    {
-      user: "Sarah K.",
-      avatar: "/image/home/members/emiu.jpg",
-      rating: 5,
-      comment:
-        "Tôi thích cách khóa học kết hợp cái nhìn văn hóa với việc học ngôn ngữ.",
-    },
-    {
-      user: "David R.",
-      rating: 3,
-      comment: "Giới thiệu tốt, nhưng một số chủ đề cảm thấy bị vội vàng.",
-    },
-    {
-      user: "Lisa M.",
-      avatar: "/image/home/members/emiu.jpg",
-      rating: 5,
-      comment: "Các bài kiểm tra tương tác thực sự giúp củng cố tài liệu.",
-    },
-  ],
-};
-
-const lectureTypeIcons = {
-  video: <Video className="w-5 h-5" />,
-  reading: <FileText className="w-5 h-5" />,
-  listening: <Headphones className="w-5 h-5" />,
-  speaking: <Mic className="w-5 h-5" />,
-  quiz: <FileQuestion className="w-5 h-5" />,
-  exercise: <PenTool className="w-5 h-5" />,
-  discussion: <MessageSquare className="w-5 h-5" />,
-};
-
-const lectureTypeColors = {
-  video: "bg-blue-100 text-blue-800",
-  reading: "bg-green-100 text-green-800",
-  listening: "bg-yellow-100 text-yellow-800",
-  speaking: "bg-purple-100 text-purple-800",
-  quiz: "bg-red-100 text-red-800",
-  exercise: "bg-indigo-100 text-indigo-800",
-  discussion: "bg-pink-100 text-pink-800",
-};
+import { useQuery } from '@tanstack/react-query';
+import { useRouter } from 'next/router';
 
 export default function CourseDetails() {
+  const router = useRouter();
+  const { courseId } = router.query;
+
   const introRef = useRef<HTMLDivElement>(null);
   const curriculumRef = useRef<HTMLDivElement>(null);
   const reviewsRef = useRef<HTMLDivElement>(null);
 
   const [expandedWeeks, setExpandedWeeks] = useState<string[]>([]);
   const [expandedChapters, setExpandedChapters] = useState<string[]>([]);
+  const [activeTab, setActiveTab] = useState<string>('introduction');
+
+  const lectureTypeIcons = {
+    2: <Video className="w-5 h-5" />,
+    0: <FileText className="w-5 h-5" />,
+    3: <Headphones className="w-5 h-5" />,
+    4: <Mic className="w-5 h-5" />,
+    1: <FileQuestion className="w-5 h-5" />,
+    5: <PenTool className="w-5 h-5" />,
+  };
+
+  const lectureTypeColors = {
+    2: "bg-blue-100 text-blue-800",
+    0: "bg-green-100 text-green-800",
+    3: "bg-yellow-100 text-yellow-800",
+    4: "bg-purple-100 text-purple-800",
+    1: "bg-red-100 text-red-800",
+    5: "bg-indigo-100 text-indigo-800",
+  };
+
+  const fetchCourseData = async (courseId: string) => {
+    const response = await fetch(`https://localhost:7233/authen/course/get-course-by-id?courseId=${courseId}`);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const result = await response.json();
+    return result.data;
+  };
+
+  const { data: courseData, error, isLoading } = useQuery({
+    queryKey: ['courseData', courseId],
+    queryFn: () => fetchCourseData(courseId as string),
+    enabled: !!courseId,
+  });
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const introTop = introRef.current?.getBoundingClientRect().top || 0;
+      const curriculumTop = curriculumRef.current?.getBoundingClientRect().top || 0;
+      const reviewsTop = reviewsRef.current?.getBoundingClientRect().top || 0;
+
+      if (introTop < window.innerHeight / 2 && introTop >= 0) {
+        setActiveTab('introduction');
+      } else if (curriculumTop < window.innerHeight / 2 && curriculumTop >= 0) {
+        setActiveTab('curriculum');
+      } else if (reviewsTop < window.innerHeight / 2 && reviewsTop >= 0) {
+        setActiveTab('reviews');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading course data</div>;
+  if (!courseData) return <div>No course data available</div>;
 
   const toggleWeek = (weekId: string) => {
     setExpandedWeeks((prev) =>
@@ -188,8 +113,6 @@ export default function CourseDetails() {
     );
   };
 
-  const [activeTab, setActiveTab] = useState<string>("introduction");
-
   const scrollToSection = (
     ref: React.RefObject<HTMLDivElement>,
     section: string
@@ -198,31 +121,12 @@ export default function CourseDetails() {
     setActiveTab(section);
   };
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const introTop = introRef.current?.getBoundingClientRect().top || 0;
-      const curriculumTop =
-        curriculumRef.current?.getBoundingClientRect().top || 0;
-      const reviewsTop = reviewsRef.current?.getBoundingClientRect().top || 0;
-
-      if (introTop < window.innerHeight / 2 && introTop >= 0) {
-        setActiveTab("introduction");
-      } else if (curriculumTop < window.innerHeight / 2 && curriculumTop >= 0) {
-        setActiveTab("curriculum");
-      } else if (reviewsTop < window.innerHeight / 2 && reviewsTop >= 0) {
-        setActiveTab("reviews");
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const reviewSummary = courseData.reviews.reduce((acc, review) => {
+  const reviewSummary = courseData?.reviews?.reduce((acc: Record<number, number>, review: { rating: number }) => {
     acc[review.rating] = (acc[review.rating] || 0) + 1;
     return acc;
-  }, {} as Record<number, number>);
+  }, {} as Record<number, number>) || {};
 
+  console.log(courseData);
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-50 to-pink-50">
       {/* Biểu ngữ Khóa học */}
@@ -233,13 +137,13 @@ export default function CourseDetails() {
               <h1 className="text-4xl font-bold mb-4">{courseData.title}</h1>
               <div className="flex items-center mb-4">
                 <Image
-                  src={courseData.author.avatar}
-                  alt={courseData.author.name}
+                  src="https://scontent.fhan15-1.fna.fbcdn.net/v/t39.30808-6/461173096_122105718044530112_5131179025624293145_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=_zDABXH_EmcQ7kNvgHI3Nz6&_nc_zt=23&_nc_ht=scontent.fhan15-1.fna&_nc_gid=A2Q5BLMiNBxZCEVCpkFe9j_&oh=00_AYCUrI-PL85tomg5ahtoAalfaQRKbx0gHvVS_wWGtHDgzQ&oe=6723EC6F"
+                  alt="Dekiru"
                   width={50}
                   height={50}
                   className="rounded-full mr-4"
                 />
-                <span className="text-xl">{courseData.author.name}</span>
+                <span className="text-xl">Dekiru</span>
               </div>
               <p className="mb-6">{courseData.description}</p>
               <div className="flex items-center space-x-4 mb-6">
@@ -253,19 +157,19 @@ export default function CourseDetails() {
                 </div>
                 <div className="flex items-center">
                   <Clock className="w-5 h-5 mr-1" />
-                  <span>{courseData.duration} giờ</span>
+                  <span>{(courseData.duration/60 * 27).toFixed(2)} giờ</span>
                 </div>
                 <div className="flex items-center">
                   <BookOpen className="w-5 h-5 mr-1" />
-                  <span>{courseData.lectures} bài giảng</span>
+                  <span>{courseData.lectures * 16} bài giảng</span>
                 </div>
               </div>
               <div className="flex items-center space-x-4">
                 <span className="text-3xl font-bold">
-                  ${courseData.discountedPrice.toFixed(2)}
+                  {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(courseData.discountedPrice)}
                 </span>
                 <span className="text-xl line-through">
-                  ${courseData.regularPrice.toFixed(2)}
+                  {courseData.regularPrice ? new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(courseData.regularPrice) : 'N/A'}
                 </span>
                 <span className="bg-yellow-400 text-yellow-800 text-sm font-semibold px-2.5 py-0.5 rounded">
                   {courseData.discountPercentage}% GIẢM
@@ -336,14 +240,14 @@ export default function CourseDetails() {
           <h2 className="text-3xl font-bold mb-6">Giới thiệu</h2>
           <Card>
             <CardContent className="pt-6">
-              <p className="mb-6">{courseData.introduction}</p>
+              <div className="mb-6" dangerouslySetInnerHTML={{ __html: courseData.introduction }} />
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="bg-pink-100 rounded-lg p-4">
                   <h3 className="text-xl font-semibold mb-4 text-pink-500">
                     Những gì bạn sẽ học trong khóa học này
                   </h3>
                   <ul className="space-y-2">
-                    {courseData.learningObjectives.map((objective, index) => (
+                    {courseData.learningObjectives.map((objective: string, index: number) => (
                       <li key={index} className="flex items-start">
                         <Check className="w-5 h-5 text-pink-500 mr-2 flex-shrink-0 mt-1" />
                         <span>{objective}</span>
@@ -355,14 +259,21 @@ export default function CourseDetails() {
                   <h3 className="text-xl font-semibold mb-4 text-pink-500">
                     Kỹ năng bạn sẽ đạt được
                   </h3>
-                  <ul className="space-y-2">
-                    {courseData.skills.map((skill, index) => (
-                      <li key={index} className="flex items-start">
-                        <Check className="w-5 h-5 text-pink-500 mr-2 flex-shrink-0 mt-1" />
-                        <span>{skill}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <div>
+                    {/* Ensure skills is defined before mapping */}
+                    {courseData.skill && courseData.skill.length > 0 ? (
+                      <ul>
+                        {courseData.skill.map((skill: string, index: number) => (
+                          <li key={index} className="flex items-start">
+                            <Check className="w-5 h-5 text-pink-500 mr-2 flex-shrink-0 mt-1" />
+                            <span>{skill}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p>No skills available</p>
+                    )}
+                  </div>
                 </div>
               </div>
             </CardContent>
@@ -374,7 +285,7 @@ export default function CourseDetails() {
           <h2 className="text-3xl font-bold mb-6">Chương trình học</h2>
           <Card>
             <CardContent className="pt-6">
-              {courseData.curriculum.map((week, weekIndex) => (
+              {courseData.curriculum.map((week: any, weekIndex: number) => (
                 <div key={weekIndex} className="mb-6 last:mb-0">
                   <div
                     className={`flex items-center justify-between p-4 rounded-lg cursor-pointer ${
@@ -406,7 +317,7 @@ export default function CourseDetails() {
                     }}
                   >
                     <div className="mt-4 ml-4">
-                      {week.chapters.map((chapter, chapterIndex) => (
+                      {week.chapters.map((chapter: any, chapterIndex: number) => (
                         <div key={chapterIndex} className="mb-4 last:mb-0">
                           <div
                             className={`flex items-center justify-between p-3 border border-gray-200 rounded-lg cursor-pointer ${
@@ -448,7 +359,7 @@ export default function CourseDetails() {
                             }}
                           >
                             <ul className="mt-2 space-y-2">
-                              {chapter.lectures.map((lecture, lectureIndex) => (
+                              {chapter.lectures.map((lecture: any, lectureIndex: number) => (
                                 <li
                                   key={lectureIndex}
                                   className="flex items-center p-2 bg-gray-50 rounded"
@@ -558,7 +469,7 @@ export default function CourseDetails() {
               <div>
                 <h3 className="text-xl font-semibold mb-4 text-pink-500">Đánh giá của Học viên</h3>
                 <ul className="space-y-6">
-                  {courseData.reviews.map((review, index) => (
+                  {courseData.reviews.map((review: any, index: number) => (
                     <li key={index} className="border-b border-pink-200 pb-4 last:border-b-0">
                       <div className="flex items-center mb-2">
                         <Image

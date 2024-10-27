@@ -20,7 +20,7 @@ export default function LandingPageSection() {
 
     try {
       const response = await fetch(
-        "https://lombeo-api-authorize.azurewebsites.net/authen/authen/sign-in",
+        "https://localhost:7233/authen/authen/sign-in",
         {
           method: "POST",
           headers: {
@@ -40,7 +40,8 @@ export default function LandingPageSection() {
         if (setUser) {
           setUser(data.data);
         }
-        saveUserData(data.data.token);
+        saveUserData(data.data);
+        window.location.reload(); // Reload the page
       } else {
         console.error("Login failed:", data.message || "Unknown error");
       }
@@ -53,7 +54,7 @@ export default function LandingPageSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center justify-between h-[780px]">
           {/* Login Form */}
-          <div className="w-full max-w-md p-8 bg-pink-500 bg-opacity-80 rounded-lg shadow-lg">
+          <div className="w-full max-w-md p-8 bg-gradient-to-r from-red-500 to-pink-500 bg-opacity-50 rounded-lg shadow-lg">
             <h2 className="text-2xl font-bold text-white mb-6">
               ログイン • Đăng nhập
             </h2>

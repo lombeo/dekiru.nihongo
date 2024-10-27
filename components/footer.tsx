@@ -7,7 +7,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="bg-gradient-to-r from-red-900 to-red-800 text-white">
+    <footer className="bg-gradient-to-r from-red-600 to-red-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
@@ -58,7 +58,7 @@ export default function Footer() {
               <Input
                 type="email"
                 placeholder="Nhập email của bạn"
-                className="bg-red-700 border-red-600 text-white placeholder-white"
+                className="bg-white border-red-600 text-white"
               />
               <Button type="submit" className="w-full bg-white text-red-800 hover:bg-gray-200">
                 Đăng ký
