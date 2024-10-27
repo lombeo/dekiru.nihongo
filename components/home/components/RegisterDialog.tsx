@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -23,25 +23,47 @@ export default function RegisterDialog({
   const [formData, setFormData] = useState({
     username: "",
     email: "",
-    password: "",
+    passwordHash: "",
     fullName: "",
     phone: "",
-    gender: "",
+    gender: false,
     address: "",
     birthDate: "",
     school: "",
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    const { name, value, type, checked } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === 'checkbox'  ? checked : value
+    }));
   };
 
-  const handleSignup = (e: React.FormEvent) => {
+  const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle signup logic here
-    console.log("Signup attempted with:", formData);
-    setIsDialogOpen(false);
+    const url = 'https://lombeo-api-authorize.azurewebsites.net/authen/authen/sign-up';
+
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Accept': 'text/plain',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const responseBody = await response.json();
+      console.log(responseBody);
+      setIsDialogOpen(false);
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   return (
@@ -127,7 +149,7 @@ export default function RegisterDialog({
             >
               <div className="flex items-center space-x-2">
                 <RadioGroupItem
-                  value="male"
+                  value="true"
                   id="male"
                   className="border-pink-300"
                 />
@@ -135,19 +157,11 @@ export default function RegisterDialog({
               </div>
               <div className="flex items-center space-x-2">
                 <RadioGroupItem
-                  value="female"
+                  value="false"
                   id="female"
-                  className="border-pink-300"
+                  className="border-pink-300" 
                 />
                 <Label htmlFor="female">Nữ</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem
-                  value="other"
-                  id="other"
-                  className="border-pink-300"
-                />
-                <Label htmlFor="other">Khác</Label>
               </div>
             </RadioGroup>
           </div>

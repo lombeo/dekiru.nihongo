@@ -11,6 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useUser } from "@/context/UserContext";
+import Router from "next/router";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -107,13 +108,13 @@ export default function Header() {
                   variant="ghost"
                   className="text-white hover:text-red-200"
                 >
-                  <Link href="/login">Đăng nhập</Link>
+                  <Link href="/">Đăng nhập</Link>
                 </Button>
                 <Button
                   variant="secondary"
                   className="bg-white text-red-500 hover:bg-red-100"
                 >
-                  <Link href="/register">Đăng ký</Link>
+                  <Link href="/">Đăng ký</Link>
                 </Button>
               </>
             )}
