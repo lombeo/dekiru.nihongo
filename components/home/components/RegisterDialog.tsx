@@ -23,7 +23,7 @@ export default function RegisterDialog({
   const [formData, setFormData] = useState({
     username: "",
     email: "",
-    passwordHash: "",
+    password: "",
     fullName: "",
     phone: "",
     gender: false,
