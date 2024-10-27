@@ -1,10 +1,9 @@
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { Bell, BookOpen, Users, Award, ChevronRight } from "lucide-react";
+import { BookOpen, Users, Award, ChevronRight } from "lucide-react";
 import {
   LineChart,
   Line,
@@ -27,7 +26,7 @@ const progressData = [
 ];
 
 export default function HomePage() {
-  const [progress, setProgress] = useState(65);
+  const [progress] = useState(65);
   const userContext = useUser();
   const user = userContext?.user || null;
   console.log(user);
@@ -49,7 +48,7 @@ export default function HomePage() {
                 <div className="space-y-2">
                   <Progress value={progress} className="w-full" />
                   <p className="text-sm text-gray-500">
-                    You've completed {progress}% of your courses
+                    You&apos;ve completed {progress}% of your courses
                   </p>
                 </div>
               </CardContent>
