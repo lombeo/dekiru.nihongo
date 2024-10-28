@@ -212,7 +212,7 @@ export default function PaymentManagement() {
 
     try {
       const response = await fetch(
-        "https://localhost:7233/authen/course/export-enroll-requests",
+        "https://lombeo-api-authorize.azurewebsites.net/authen/course/export-enroll-requests",
         {
           method: "GET",
           headers: {
