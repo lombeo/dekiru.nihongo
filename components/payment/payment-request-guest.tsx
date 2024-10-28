@@ -122,7 +122,10 @@ export default function UserEnrollmentRequests() {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="flex-grow"
               />
-              <Tabs value={activeTab.toString()} onValueChange={(value) => setActiveTab(Number(value) as 0 | 1 | 2)}>
+              <Tabs value={activeTab.toString()} onValueChange={(value) => {
+                setActiveTab(Number(value) as 0 | 1 | 2);
+                setCurrentPage(1);  // Reset to the first page when the tab changes
+              }}>
                 <TabsList>
                   <TabsTrigger value="0">Đã Chấp Nhận</TabsTrigger>
                   <TabsTrigger value="1">Đã Từ Chối</TabsTrigger>
