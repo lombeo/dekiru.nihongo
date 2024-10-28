@@ -77,6 +77,43 @@ const liveSessions = [
     image: "/image/home/members/emiu.jpg",
     link: "https://meet.google.com/adz-xjvz-eio",
   },
+  {
+    id: 4,
+    title: "Kỹ năng nghe hiểu tiếng Nhật hiệu quả",
+    instructor: "Trương Thị Thảo Vân",
+    date: "2024-10-29",
+    time: "18:00",
+    duration: "75 phút",
+    level: "Trung cấp",
+    participants: "Mọi",
+    image: "/image/home/members/thaovan.jpg",
+    link: "https://meet.google.com/jhf-xyzi-btu"
+  },
+  {
+    id: 5,
+    title: "Cách ghi nhớ Kanji nhanh chóng",
+    instructor: "Nguyễn Thị Thanh",
+    date: "2024-10-31",
+    time: "18:00",
+    duration: "60 phút",
+    level: "Nâng cao",
+    participants: "Mọi",
+    image: "/image/home/members/thithanh.jpg",
+    link: "https://meet.google.com/wxq-ncyd-hge"
+  },
+  {
+    id: 6,
+    title: "Tiếng Nhật trong các tình huống giao tiếp hàng ngày",
+    instructor: "Nguyễn Nhật Linh",
+    date: "2024-11-02",
+    time: "18:00",
+    duration: "50 phút",
+    level: "Sơ cấp",
+    participants: "Mọi",
+    image: "/image/home/members/emiu.jpg",
+    link: "https://meet.google.com/qrs-znbf-skh"
+  }
+  
 ];
 
 export default function LiveSessionSchedule() {

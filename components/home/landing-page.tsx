@@ -8,6 +8,7 @@ import { saveUserData } from "@/utils/storage";
 import RegisterDialog from "./components/RegisterDialog";
 import Router from "next/router";
 import { PopupNotify } from "../popup-notify";
+import { Loader } from "../loader";
 
 export default function LandingPageSection() {
   const [username, setUsername] = useState("");
@@ -20,9 +21,11 @@ export default function LandingPageSection() {
   const [notificationType, setNotificationType] = useState<"success" | "error">(
     "success"
   );
+  const [isLoading, setIsLoading] = useState(false); // New state for loading
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true); // Set loading to true when login starts
 
     try {
       const response = await fetch(
@@ -57,6 +60,8 @@ export default function LandingPageSection() {
       }
     } catch (error) {
       console.error("Error during login:", error);
+    } finally {
+      setIsLoading(false); // Set loading to false when login ends
     }
   };
   return (
@@ -109,8 +114,9 @@ export default function LandingPageSection() {
               <Button
                 type="submit"
                 className="w-full bg-white text-pink-600 hover:bg-pink-200"
+                disabled={isLoading} // Disable button when loading
               >
-                Đăng nhập
+                {isLoading ? <Loader /> : "Đăng nhập"}
               </Button>
             </form>
             <p className="mt-4 text-center text-sm text-white">
