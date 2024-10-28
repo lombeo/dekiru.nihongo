@@ -127,6 +127,48 @@ export default function CourseDetails() {
     return acc;
   }, {} as Record<number, number>) || {};
 
+  const submitReview = async (reviewData: any, token: string) => {
+    try {
+      const response = await fetch('https://lombeo-api-authorize.azurewebsites.net/authen/course/review-course', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'text/plain',
+        },
+        body: JSON.stringify(reviewData),
+      });
+
+      const result = await response.json();
+      if (!response.ok) {
+        throw new Error(result.message || 'Failed to submit review');
+      }
+
+      console.log('Review submitted successfully:', result);
+      // Handle success (e.g., show a success message or update UI)
+    } catch (error) {
+      console.error('Error submitting review:', error);
+      // Handle error (e.g., show an error message)
+    }
+  };
+
+  // Example usage
+  const handleReviewSubmit = () => {
+    const reviewData = {
+      updatedAt: new Date().toISOString(),
+      createdAt: new Date().toISOString(),
+      deleted: false,
+      id: 0, // Replace with actual ID if needed
+      courseId: courseData.id,
+      reviewerId: 0, // Replace with actual reviewer ID
+      description: "Your review description",
+      rating: 5, // Replace with actual rating
+    };
+
+    const token = 'your_bearer_token_here'; // Replace with actual token
+    submitReview(reviewData, token);
+  };
+
   console.log(courseData);
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-50 to-pink-50">
