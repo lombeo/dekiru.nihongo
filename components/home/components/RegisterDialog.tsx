@@ -32,13 +32,13 @@ export default function RegisterDialog({
     birthDate: "",
     school: "",
   });
-  const [showNotification, setShowNotification] = useState(false)
-  const [notificationMessage, setNotificationMessage] = useState('')
-  const [notificationType, setNotificationType] = useState<'success' | 'error'>('success')
+  const [showNotification, setShowNotification] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState("");
+  const [notificationType, setNotificationType] = useState<'success' | 'error'>('success');
 
   const handleShowNotification = () => {
-    setShowNotification(true)
-  }
+    setShowNotification(true);
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
@@ -50,8 +50,7 @@ export default function RegisterDialog({
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
-    const url =
-      "https://lombeo-api-authorize.azurewebsites.net/authen/authen/sign-up";
+    const url = "https://lombeo-api-authorize.azurewebsites.net/authen/authen/sign-up";
 
     try {
       const response = await fetch(url, {
@@ -65,27 +64,13 @@ export default function RegisterDialog({
 
       const responseBody = await response.json();
 
-      setNotificationMessage(responseBody?.message || "Đăng ký thành công")
-      setNotificationType(responseBody?.success ? "success" : "error")
-      setShowNotification(true)
+      setNotificationMessage(responseBody?.message || "Đăng ký thành công");
+      setNotificationType(responseBody?.success ? "success" : "error");
+      setShowNotification(true);
 
-      {showNotification && (
-        <PopupNotify
-          message={responseBody?.message || "Đăng ký thành công"}
-          type={responseBody?.success ? "success" : "error"}
-          onClose={() => setShowNotification(false)}
-        />
-      )}
-      handleShowNotification();
-      
-      if (!response.ok) {
-        return;
-      }
+      if (!response.ok) return;
 
-      
-      // Handle successful response
       setIsDialogOpen(false);
-
     } catch (error) {
       console.error("Error:", error);
     }
@@ -93,14 +78,13 @@ export default function RegisterDialog({
 
   useEffect(() => {
     if (showNotification) {
-      // Automatically hide the notification after 5 seconds
       const timer = setTimeout(() => {
-        setShowNotification(false)
-      }, 5000)
+        setShowNotification(false);
+      }, 5000);
 
-      return () => clearTimeout(timer)
+      return () => clearTimeout(timer);
     }
-  }, [showNotification])
+  }, [showNotification]);
 
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
@@ -112,68 +96,30 @@ export default function RegisterDialog({
           Đăng ký
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] bg-pink-500 bg-opacity-30 backdrop-blur-md rounded-lg p-6">
+      <DialogContent className="w-full max-w-md md:max-w-lg lg:max-w-xl mx-auto bg-pink-500 bg-opacity-30 backdrop-blur-md rounded-lg p-4 sm:p-6 max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-white">Đăng Ký</DialogTitle>
+          <DialogTitle className="text-white text-lg md:text-xl">Đăng Ký</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSignup} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="signup-username" className="text-white">
-              Tên người dùng
-            </Label>
-            <Input
-              id="signup-username"
-              name="username"
-              onChange={handleInputChange}
-              required
-            />
+            <Label htmlFor="signup-username" className="text-white">Tên người dùng</Label>
+            <Input id="signup-username" name="username" onChange={handleInputChange} required />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="signup-email" className="text-white">
-              Email
-            </Label>
-            <Input
-              id="signup-email"
-              name="email"
-              type="email"
-              onChange={handleInputChange}
-              required
-            />
+            <Label htmlFor="signup-email" className="text-white">Email</Label>
+            <Input id="signup-email" name="email" type="email" onChange={handleInputChange} required />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="signup-password" className="text-white">
-              Mật khẩu
-            </Label>
-            <Input
-              id="signup-password"
-              name="password"
-              type="password"
-              onChange={handleInputChange}
-              required
-            />
+            <Label htmlFor="signup-password" className="text-white">Mật khẩu</Label>
+            <Input id="signup-password" name="password" type="password" onChange={handleInputChange} required />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="signup-fullname" className="text-white">
-              Họ và tên
-            </Label>
-            <Input
-              id="signup-fullname"
-              name="fullName"
-              onChange={handleInputChange}
-              required
-            />
+            <Label htmlFor="signup-fullname" className="text-white">Họ và tên</Label>
+            <Input id="signup-fullname" name="fullName" onChange={handleInputChange} required />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="signup-phone" className="text-white">
-              Số điện thoại
-            </Label>
-            <Input
-              id="signup-phone"
-              name="phone"
-              type="tel"
-              onChange={handleInputChange}
-              required
-            />
+            <Label htmlFor="signup-phone" className="text-white">Số điện thoại</Label>
+            <Input id="signup-phone" name="phone" type="tel" onChange={handleInputChange} required />
           </div>
           <div className="space-y-2">
             <Label>Giới tính</Label>
@@ -186,57 +132,35 @@ export default function RegisterDialog({
               }
             >
               <div className="flex items-center space-x-2">
-                <RadioGroupItem
-                  value="true"
-                  id="male"
-                  className="border-pink-300"
-                />
+                <RadioGroupItem value="true" id="male" className="border-pink-300" />
                 <Label htmlFor="male">Nam</Label>
               </div>
               <div className="flex items-center space-x-2">
-                <RadioGroupItem
-                  value="false"
-                  id="female"
-                  className="border-pink-300"
-                />
+                <RadioGroupItem value="false" id="female" className="border-pink-300" />
                 <Label htmlFor="female">Nữ</Label>
               </div>
             </RadioGroup>
           </div>
           <div className="space-y-2">
             <Label htmlFor="signup-address">Địa chỉ</Label>
-            <Input
-              id="signup-address"
-              name="address"
-              onChange={handleInputChange}
-              required
-            />
+            <Input id="signup-address" name="address" onChange={handleInputChange} required />
           </div>
           <div className="space-y-2">
             <Label htmlFor="signup-birthdate">Ngày sinh</Label>
-            <Input
-              id="signup-birthdate"
-              name="birthDate"
-              type="date"
-              onChange={handleInputChange}
-              required
-            />
+            <Input id="signup-birthdate" name="birthDate" type="date" onChange={handleInputChange} required />
           </div>
           <div className="space-y-2">
             <Label htmlFor="signup-school">Trường học</Label>
-            <Input
-              id="signup-school"
-              name="school"
-              onChange={handleInputChange}
-              required
-            />
+            <Input id="signup-school" name="school" onChange={handleInputChange} required />
           </div>
-          <Button
-            type="submit"
-            className="w-full bg-white text-pink-600 hover:bg-pink-200"
-          >
-            Đăng Ký
-          </Button>
+          <div className="pt-4">
+            <Button
+              type="submit"
+              className="sticky bottom-0 w-full bg-white text-pink-600 hover:bg-pink-200"
+            >
+              Đăng Ký
+            </Button>
+          </div>
         </form>
       </DialogContent>
       {showNotification && (
