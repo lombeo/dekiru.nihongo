@@ -51,7 +51,7 @@ export default function OurMembers() {
       name: "Nguyễn Hoài Nam",
       role: "Huấn luyện viên phát âm",
       bio: "Diễn viên lồng ghép và chuyên gia ngữ âm.",
-      image: "/placeholder.svg?height=400&width=400",
+      image: "/image/home/members/nambeo.jpg",
       social: {
         twitter: "https://twitter.com/takeshiyamamoto",
         facebook: "https://facebook.com/takeshiyamamoto",

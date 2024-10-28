@@ -43,33 +43,17 @@ export default function Header() {
               <li>
                 <Link
                   href="/learning"
-                  className="hover:text-red-200 transition-colors"
+                  className="px-4 py-2 text-lg font-semibold text-white rounded-md hover:text-red-200 hover:bg-red-600 transition-colors duration-300"
                 >
                   Bài học
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/practice"
-                  className="hover:text-red-200 transition-colors"
+                  href="/live"
+                  className="px-4 py-2 text-lg font-semibold text-white rounded-md hover:text-red-200 hover:bg-red-600 transition-colors duration-300"
                 >
-                  Thực hành
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/community"
-                  className="hover:text-red-200 transition-colors"
-                >
-                  Cộng đồng
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/resources"
-                  className="hover:text-red-200 transition-colors"
-                >
-                  Tài nguyên
+                  Trò chuyện cùng giảng viên
                 </Link>
               </li>
             </ul>
