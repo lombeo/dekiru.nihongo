@@ -16,6 +16,8 @@ import { useRouter } from "next/router"; // Import useRouter
 import { useQuery } from "@tanstack/react-query"; // Import useQuery
 import axios from "axios"; // Import axios for making API requests
 import { Loader } from "../loader";
+import { useUser } from "@/context/UserContext";
+import { CheckCircle } from "lucide-react";
 
 interface Course {
   id: string;
@@ -30,6 +32,7 @@ interface Course {
   students: number;
   lectures: number;
   hours: number;
+  isEnroll: boolean; // Add isEnroll property
 }
 
 const categories = [
@@ -47,10 +50,23 @@ export default function LearningPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("Tất cả");
 
+  const userContext = useUser();
+  const user = userContext?.user || null;
+
   const fetchCourses = async () => {
+    const headers: Record<string, string> = {
+      "Content-Type": "application/json",
+    };
+
+    if (user) {
+      headers.Authorization = `Bearer ${user.token}`;
+    }
+
     const response = await axios.get(
-      "https://lombeo-api-authorize.azurewebsites.net/authen/course/get-all-course"
+      "https://lombeo-api-authorize.azurewebsites.net/authen/course/get-all-course",
+      { headers }
     );
+
     return response.data.data; // Return the data array from the response
   };
 
@@ -94,7 +110,7 @@ export default function LearningPage() {
         </div>
         <div className="container mx-auto relative z-10">
           <h1 className="text-5xl font-bold mb-4 animate-fade-in-up">
-            Khám phá các khóa học tiếng Nhật
+            Khám phá các khóa học ting Nhật
           </h1>
           <p className="text-2xl animate-fade-in-up animation-delay-300">
             Bắt đầu hành trình đến sự thông thạo tiếng Nhật với các khóa học do
@@ -143,7 +159,7 @@ export default function LearningPage() {
                 <TooltipTrigger asChild>
                   <Card
                     className="overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer"
-                    onClick={() => router.push(`/course/${course.id}`)} // Add onClick handler
+                    onClick={() => router.push(`/course/${course.id}`)}
                   >
                     <CardContent className="p-0 flex flex-col h-full">
                       <div className="relative flex-shrink-0">
@@ -159,8 +175,12 @@ export default function LearningPage() {
                             <Flame className="h-5 w-5" />
                           </div>
                         )}
+                        {course.isEnroll && (
+                          <div className="absolute top-2 left-2 bg-green-500 text-white p-2 rounded-full">
+                            <CheckCircle className="h-5 w-5" />
+                          </div>
+                        )}
                       </div>
-                      {/* Ensure the course information is at the bottom */}
                       <div className="p-6 mt-auto">
                         <h3 className="text-xl font-bold mb-2 text-pink-600">
                           {course.title}
@@ -182,28 +202,42 @@ export default function LearningPage() {
                           </span>
                         </div>
                         <div className="flex items-center justify-between">
-                          <div>
-                            <span className="text-3xl font-bold text-pink-600">
-                              {new Intl.NumberFormat("vi-VN", {
-                                style: "currency",
-                                currency: "VND",
-                              }).format(course.discountedPrice)}
+                          {course.isEnroll ? (
+                            <Button
+                              className="bg-blue-500 text-white font-bold py-2 px-4 rounded-full hover:bg-blue-700 transition duration-300"
+                              onClick={(e) => {
+                                e.stopPropagation(); // Prevent card click event
+                                router.push(`/course/${course.id}`);
+                              }}
+                            >
+                              Vào học ngay
+                            </Button>
+                          ) : (
+                            <div>
+                              <span className="text-3xl font-bold text-pink-600">
+                                {new Intl.NumberFormat("vi-VN", {
+                                  style: "currency",
+                                  currency: "VND",
+                                }).format(course.discountedPrice)}
+                              </span>
+                              <span className="ml-2 text-sm text-gray-500 line-through">
+                                {new Intl.NumberFormat("vi-VN", {
+                                  style: "currency",
+                                  currency: "VND",
+                                }).format(course.regularPrice)}
+                              </span>
+                            </div>
+                          )}
+                          {!course.isEnroll && (
+                            <span className="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">
+                              {Math.round(
+                                (1 -
+                                  course.discountedPrice / course.regularPrice) *
+                                  100
+                              )}
+                              % GIẢM
                             </span>
-                            <span className="ml-2 text-sm text-gray-500 line-through">
-                              {new Intl.NumberFormat("vi-VN", {
-                                style: "currency",
-                                currency: "VND",
-                              }).format(course.regularPrice)}
-                            </span>
-                          </div>
-                          <span className="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">
-                            {Math.round(
-                              (1 -
-                                course.discountedPrice / course.regularPrice) *
-                                100
-                            )}
-                            % GIẢM
-                          </span>
+                          )}
                         </div>
                       </div>
                     </CardContent>
@@ -242,7 +276,16 @@ export default function LearningPage() {
                       </div>
                     </div>
                     <div className="bg-gray-50 px-4 py-3">
-                      <Button className="w-full">Mua ngay</Button>
+                      {course.isEnroll ? (
+                        <Button
+                          className="bg-blue-500 text-white font-bold py-2 px-4 rounded-full hover:bg-blue-700 transition duration-300 w-full"
+                          onClick={() => router.push(`/course/${course.id}`)}
+                        >
+                          Vào học ngay
+                        </Button>
+                      ) : (
+                        <Button className="w-full">Mua ngay</Button>
+                      )}
                     </div>
                   </div>
                 </TooltipContent>
