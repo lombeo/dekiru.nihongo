@@ -33,7 +33,7 @@ export default function UserEnrollmentRequests() {
   const user = userContext?.user || null
 
   const fetchRequests = async () => {
-    const response = await fetch("https://localhost:7233/authen/course/get-enroll-request")
+    const response = await fetch("https://lombeo-api-authorize.azurewebsites.net/authen/course/get-enroll-request")
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`)
