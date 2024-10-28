@@ -11,6 +11,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { PopupNotify } from "@/components/popup-notify";
+import { Loader } from "@/components/loader";
 
 interface RegisterDialogProps {
   isDialogOpen: boolean;
@@ -35,10 +36,7 @@ export default function RegisterDialog({
   const [showNotification, setShowNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
   const [notificationType, setNotificationType] = useState<'success' | 'error'>('success');
-
-  const handleShowNotification = () => {
-    setShowNotification(true);
-  };
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
@@ -50,6 +48,7 @@ export default function RegisterDialog({
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true); // Start loading
     const url = "https://lombeo-api-authorize.azurewebsites.net/authen/authen/sign-up";
 
     try {
@@ -73,6 +72,8 @@ export default function RegisterDialog({
       setIsDialogOpen(false);
     } catch (error) {
       console.error("Error:", error);
+    } finally {
+      setIsLoading(false); // End loading
     }
   };
 
@@ -103,23 +104,23 @@ export default function RegisterDialog({
         <form onSubmit={handleSignup} className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="signup-username" className="text-white">Tên người dùng</Label>
-            <Input id="signup-username" name="username" onChange={handleInputChange} required />
+            <Input id="signup-username" name="username" onChange={handleInputChange} required disabled={isLoading} />
           </div>
           <div className="space-y-2">
             <Label htmlFor="signup-email" className="text-white">Email</Label>
-            <Input id="signup-email" name="email" type="email" onChange={handleInputChange} required />
+            <Input id="signup-email" name="email" type="email" onChange={handleInputChange} required disabled={isLoading} />
           </div>
           <div className="space-y-2">
             <Label htmlFor="signup-password" className="text-white">Mật khẩu</Label>
-            <Input id="signup-password" name="password" type="password" onChange={handleInputChange} required />
+            <Input id="signup-password" name="password" type="password" onChange={handleInputChange} required disabled={isLoading} />
           </div>
           <div className="space-y-2">
             <Label htmlFor="signup-fullname" className="text-white">Họ và tên</Label>
-            <Input id="signup-fullname" name="fullName" onChange={handleInputChange} required />
+            <Input id="signup-fullname" name="fullName" onChange={handleInputChange} required disabled={isLoading} />
           </div>
           <div className="space-y-2">
             <Label htmlFor="signup-phone" className="text-white">Số điện thoại</Label>
-            <Input id="signup-phone" name="phone" type="tel" onChange={handleInputChange} required />
+            <Input id="signup-phone" name="phone" type="tel" onChange={handleInputChange} required disabled={isLoading} />
           </div>
           <div className="space-y-2">
             <Label>Giới tính</Label>
@@ -143,22 +144,23 @@ export default function RegisterDialog({
           </div>
           <div className="space-y-2">
             <Label htmlFor="signup-address">Địa chỉ</Label>
-            <Input id="signup-address" name="address" onChange={handleInputChange} required />
+            <Input id="signup-address" name="address" onChange={handleInputChange} required disabled={isLoading} />
           </div>
           <div className="space-y-2">
             <Label htmlFor="signup-birthdate">Ngày sinh</Label>
-            <Input id="signup-birthdate" name="birthDate" type="date" onChange={handleInputChange} required />
+            <Input id="signup-birthdate" name="birthDate" type="date" onChange={handleInputChange} required disabled={isLoading} />
           </div>
           <div className="space-y-2">
             <Label htmlFor="signup-school">Trường học</Label>
-            <Input id="signup-school" name="school" onChange={handleInputChange} required />
+            <Input id="signup-school" name="school" onChange={handleInputChange} required disabled={isLoading} />
           </div>
           <div className="pt-4">
             <Button
               type="submit"
               className="sticky bottom-0 w-full bg-white text-pink-600 hover:bg-pink-200"
+              disabled={isLoading} // Disable button when loading
             >
-              Đăng Ký
+              {isLoading ? <Loader /> : "Đăng Ký"}
             </Button>
           </div>
         </form>
