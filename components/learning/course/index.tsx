@@ -26,9 +26,11 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
-import { useQuery } from '@tanstack/react-query';
-import { useRouter } from 'next/router';
+import { useQuery } from "@tanstack/react-query";
+import { useRouter } from "next/router";
 import { Loader } from "@/components/loader";
+import { useUser } from "@/context/UserContext";
+import { PopupNotify } from "@/components/popup-notify";
 
 export default function CourseDetails() {
   const router = useRouter();
@@ -40,7 +42,14 @@ export default function CourseDetails() {
 
   const [expandedWeeks, setExpandedWeeks] = useState<string[]>([]);
   const [expandedChapters, setExpandedChapters] = useState<string[]>([]);
-  const [activeTab, setActiveTab] = useState<string>('introduction');
+  const [activeTab, setActiveTab] = useState<string>("introduction");
+
+  const userContext = useUser();
+  const user = userContext?.user || null;
+
+  const [reviewText, setReviewText] = useState<string>("");
+  const [reviewRating, setReviewRating] = useState<number>(0);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false); // New state for loading
 
   const lectureTypeIcons = {
     2: <Video className="w-5 h-5" />,
@@ -60,17 +69,43 @@ export default function CourseDetails() {
     5: "bg-indigo-100 text-indigo-800",
   };
 
+  const [showNotification, setShowNotification] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState("");
+  const [notificationType, setNotificationType] = useState<"success" | "error">(
+    "success"
+  );
+
   const fetchCourseData = async (courseId: string) => {
-    const response = await fetch(`https://lombeo-api-authorize.azurewebsites.net/authen/course/get-course-by-id?courseId=${courseId}`);
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
+    const headers: HeadersInit = {
+      "Content-Type": "application/json",
+    };
+
+    if (user) {
+      headers["Authorization"] = `Bearer ${user.token}`;
     }
+
+    const response = await fetch(
+      `https://lombeo-api-authorize.azurewebsites.net/authen/course/get-course-by-id?courseId=${courseId}`,
+      {
+        headers,
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
     const result = await response.json();
     return result.data;
   };
 
-  const { data: courseData, error, isLoading } = useQuery({
-    queryKey: ['courseData', courseId],
+  const {
+    data: courseData,
+    error,
+    isLoading,
+    refetch, // Add refetch here
+  } = useQuery({
+    queryKey: ["courseData", courseId],
     queryFn: () => fetchCourseData(courseId as string),
     enabled: !!courseId,
   });
@@ -78,20 +113,21 @@ export default function CourseDetails() {
   useEffect(() => {
     const handleScroll = () => {
       const introTop = introRef.current?.getBoundingClientRect().top || 0;
-      const curriculumTop = curriculumRef.current?.getBoundingClientRect().top || 0;
+      const curriculumTop =
+        curriculumRef.current?.getBoundingClientRect().top || 0;
       const reviewsTop = reviewsRef.current?.getBoundingClientRect().top || 0;
 
       if (introTop < window.innerHeight / 2 && introTop >= 0) {
-        setActiveTab('introduction');
+        setActiveTab("introduction");
       } else if (curriculumTop < window.innerHeight / 2 && curriculumTop >= 0) {
-        setActiveTab('curriculum');
+        setActiveTab("curriculum");
       } else if (reviewsTop < window.innerHeight / 2 && reviewsTop >= 0) {
-        setActiveTab('reviews');
+        setActiveTab("reviews");
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   if (isLoading) return <Loader />;
@@ -122,54 +158,78 @@ export default function CourseDetails() {
     setActiveTab(section);
   };
 
-  const reviewSummary = courseData?.reviews?.reduce((acc: Record<number, number>, review: { rating: number }) => {
-    acc[review.rating] = (acc[review.rating] || 0) + 1;
-    return acc;
-  }, {} as Record<number, number>) || {};
+  const reviewSummary =
+    courseData?.reviews?.reduce(
+      (acc: Record<number, number>, review: { rating: number }) => {
+        acc[review.rating] = (acc[review.rating] || 0) + 1;
+        return acc;
+      },
+      {} as Record<number, number>
+    ) || {};
 
-  const submitReview = async (reviewData: any, token: string) => {
+  const submitReview = async (reviewData: any) => {
     try {
-      const response = await fetch('https://lombeo-api-authorize.azurewebsites.net/authen/course/review-course', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-          'Accept': 'text/plain',
-        },
-        body: JSON.stringify(reviewData),
-      });
+      const response = await fetch(
+        "https://lombeo-api-authorize.azurewebsites.net/authen/course/review-course",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user?.token}`,
+            Accept: "text/plain",
+          },
+          body: JSON.stringify(reviewData),
+        }
+      );
 
       const result = await response.json();
       if (!response.ok) {
-        throw new Error(result.message || 'Failed to submit review');
+        setNotificationMessage("Đã xảy ra lỗi, bạn không thể review ngay lúc này!");
+        setNotificationType("error");
+        setShowNotification(true);
+        return; // Exit early if there's an error
       }
 
-      console.log('Review submitted successfully:', result);
-      // Handle success (e.g., show a success message or update UI)
+      if (result?.success === true) {
+        setNotificationMessage("Đánh giá thành công!");
+        setNotificationType("success");
+        setShowNotification(true);
+        refetch(); // Refetch course data after successful review
+      } else {
+        setNotificationMessage(result?.message || "Đã xảy ra lỗi, bạn không thể review ngay lúc này!");
+        setNotificationType("error");
+        setShowNotification(true);
+      }
     } catch (error) {
-      console.error('Error submitting review:', error);
-      // Handle error (e.g., show an error message)
+      console.error("Error submitting review:", error);
+      setNotificationMessage("Đã xảy ra lỗi, bạn không thể review ngay lúc này!");
+      setNotificationType("error");
+      setShowNotification(true);
+    } finally {
+      setIsSubmitting(false); // Reset loading state
     }
   };
 
-  // Example usage
-  const handleReviewSubmit = () => {
+  const handleReviewSubmit = async () => {
+    if (!reviewText || reviewRating === 0) {
+      alert("Please provide a rating and a review text.");
+      return;
+    }
+
+    setIsSubmitting(true); // Set loading state
+
     const reviewData = {
-      updatedAt: new Date().toISOString(),
-      createdAt: new Date().toISOString(),
-      deleted: false,
-      id: 0, // Replace with actual ID if needed
-      courseId: courseData.id,
-      reviewerId: 0, // Replace with actual reviewer ID
-      description: "Your review description",
-      rating: 5, // Replace with actual rating
+      rating: reviewRating,
+      description: reviewText,
+      courseId: courseId,
+      userId: user?.id, // Assuming you have user ID in the user context
     };
 
-    const token = 'your_bearer_token_here'; // Replace with actual token
-    submitReview(reviewData, token);
+    await submitReview(reviewData);
   };
 
-  console.log(courseData);
+  if (isSubmitting) <Loader />;
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-50 to-pink-50">
       {/* Biểu ngữ Khóa học */}
@@ -200,7 +260,9 @@ export default function CourseDetails() {
                 </div>
                 <div className="flex items-center">
                   <Clock className="w-5 h-5 mr-1" />
-                  <span>{(courseData.duration/60 * 27).toFixed(2)} giờ</span>
+                  <span>
+                    {((courseData.duration / 60) * 27).toFixed(2)} giờ
+                  </span>
                 </div>
                 <div className="flex items-center">
                   <BookOpen className="w-5 h-5 mr-1" />
@@ -209,10 +271,18 @@ export default function CourseDetails() {
               </div>
               <div className="flex items-center space-x-4">
                 <span className="text-3xl font-bold">
-                  {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(courseData.discountedPrice)}
+                  {new Intl.NumberFormat("vi-VN", {
+                    style: "currency",
+                    currency: "VND",
+                  }).format(courseData.discountedPrice)}
                 </span>
                 <span className="text-xl line-through">
-                  {courseData.regularPrice ? new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(courseData.regularPrice) : 'N/A'}
+                  {courseData.regularPrice
+                    ? new Intl.NumberFormat("vi-VN", {
+                        style: "currency",
+                        currency: "VND",
+                      }).format(courseData.regularPrice)
+                    : "N/A"}
                 </span>
                 <span className="bg-yellow-400 text-yellow-800 text-sm font-semibold px-2.5 py-0.5 rounded">
                   {courseData.discountPercentage}% GIẢM
@@ -295,19 +365,24 @@ export default function CourseDetails() {
           <h2 className="text-3xl font-bold mb-6">Giới thiệu</h2>
           <Card>
             <CardContent className="pt-6">
-              <div className="mb-6" dangerouslySetInnerHTML={{ __html: courseData.introduction }} />
+              <div
+                className="mb-6"
+                dangerouslySetInnerHTML={{ __html: courseData.introduction }}
+              />
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="bg-pink-100 rounded-lg p-4">
                   <h3 className="text-xl font-semibold mb-4 text-pink-500">
                     Những gì bạn sẽ học trong khóa học này
                   </h3>
                   <ul className="space-y-2">
-                    {courseData.learningObjectives.map((objective: string, index: number) => (
-                      <li key={index} className="flex items-start">
-                        <Check className="w-5 h-5 text-pink-500 mr-2 flex-shrink-0 mt-1" />
-                        <span>{objective}</span>
-                      </li>
-                    ))}
+                    {courseData.learningObjectives.map(
+                      (objective: string, index: number) => (
+                        <li key={index} className="flex items-start">
+                          <Check className="w-5 h-5 text-pink-500 mr-2 flex-shrink-0 mt-1" />
+                          <span>{objective}</span>
+                        </li>
+                      )
+                    )}
                   </ul>
                 </div>
                 <div className="bg-pink-100 rounded-lg p-4">
@@ -318,12 +393,14 @@ export default function CourseDetails() {
                     {/* Ensure skills is defined before mapping */}
                     {courseData.skill && courseData.skill.length > 0 ? (
                       <ul>
-                        {courseData.skill.map((skill: string, index: number) => (
-                          <li key={index} className="flex items-start">
-                            <Check className="w-5 h-5 text-pink-500 mr-2 flex-shrink-0 mt-1" />
-                            <span>{skill}</span>
-                          </li>
-                        ))}
+                        {courseData.skill.map(
+                          (skill: string, index: number) => (
+                            <li key={index} className="flex items-start">
+                              <Check className="w-5 h-5 text-pink-500 mr-2 flex-shrink-0 mt-1" />
+                              <span>{skill}</span>
+                            </li>
+                          )
+                        )}
                       </ul>
                     ) : (
                       <p>No skills available</p>
@@ -363,94 +440,108 @@ export default function CourseDetails() {
                   </div>
                   <div
                     className={`collapsible-content ${
-                      expandedWeeks.includes(`week-${weekIndex}`) ? "expanded" : ""
+                      expandedWeeks.includes(`week-${weekIndex}`)
+                        ? "expanded"
+                        : ""
                     }`}
                     style={{
                       maxHeight: expandedWeeks.includes(`week-${weekIndex}`)
-                        ? '1000px' // or calculate based on content
-                        : '0',
+                        ? "1000px" // or calculate based on content
+                        : "0",
                     }}
                   >
                     <div className="mt-4 ml-4">
-                      {week.chapters.map((chapter: any, chapterIndex: number) => (
-                        <div key={chapterIndex} className="mb-4 last:mb-0">
-                          <div
-                            className={`flex items-center justify-between p-3 border border-gray-200 rounded-lg cursor-pointer ${
-                              expandedChapters.includes(
-                                `chapter-${weekIndex}-${chapterIndex}`
-                              )
-                                ? "bg-pink-300 text-white"
-                                : "bg-pink-100 text-pink-500"
-                            }`}
-                            onClick={() =>
-                              toggleChapter(`chapter-${weekIndex}-${chapterIndex}`)
-                            }
-                          >
-                            <h4 className="text-lg font-medium">{chapter.title}</h4>
-                            <ChevronDown
-                              className={`w-4 h-4 transition-transform ${
+                      {week.chapters.map(
+                        (chapter: any, chapterIndex: number) => (
+                          <div key={chapterIndex} className="mb-4 last:mb-0">
+                            <div
+                              className={`flex items-center justify-between p-3 border border-gray-200 rounded-lg cursor-pointer ${
                                 expandedChapters.includes(
                                   `chapter-${weekIndex}-${chapterIndex}`
                                 )
-                                  ? "transform rotate-180"
+                                  ? "bg-pink-300 text-white"
+                                  : "bg-pink-100 text-pink-500"
+                              }`}
+                              onClick={() =>
+                                toggleChapter(
+                                  `chapter-${weekIndex}-${chapterIndex}`
+                                )
+                              }
+                            >
+                              <h4 className="text-lg font-medium">
+                                {chapter.title}
+                              </h4>
+                              <ChevronDown
+                                className={`w-4 h-4 transition-transform ${
+                                  expandedChapters.includes(
+                                    `chapter-${weekIndex}-${chapterIndex}`
+                                  )
+                                    ? "transform rotate-180"
+                                    : ""
+                                }`}
+                              />
+                            </div>
+                            <div
+                              className={`collapsible-content ${
+                                expandedChapters.includes(
+                                  `chapter-${weekIndex}-${chapterIndex}`
+                                )
+                                  ? "expanded"
                                   : ""
                               }`}
-                            />
+                              style={{
+                                maxHeight: expandedChapters.includes(
+                                  `chapter-${weekIndex}-${chapterIndex}`
+                                )
+                                  ? "1000px" // or calculate based on content
+                                  : "0",
+                              }}
+                            >
+                              <ul className="mt-2 space-y-2">
+                                {chapter.lectures.map(
+                                  (lecture: any, lectureIndex: number) => (
+                                    <li
+                                      key={lectureIndex}
+                                      className="flex items-center p-2 bg-gray-50 rounded"
+                                    >
+                                      <TooltipProvider>
+                                        <Tooltip>
+                                          <TooltipTrigger asChild>
+                                            <div
+                                              className={`p-2 rounded-full mr-3 ${
+                                                lectureTypeColors[
+                                                  lecture.type as keyof typeof lectureTypeColors
+                                                ]
+                                              }`}
+                                            >
+                                              {
+                                                lectureTypeIcons[
+                                                  lecture.type as keyof typeof lectureTypeIcons
+                                                ]
+                                              }
+                                            </div>
+                                          </TooltipTrigger>
+                                          <TooltipContent>
+                                            <p className="capitalize">
+                                              {lecture.type}
+                                            </p>
+                                          </TooltipContent>
+                                        </Tooltip>
+                                      </TooltipProvider>
+                                      <span className="flex-grow">
+                                        {lecture.title}
+                                      </span>
+                                      <Badge variant="outline" className="ml-2">
+                                        {lecture.duration || "15"} phút
+                                      </Badge>
+                                    </li>
+                                  )
+                                )}
+                              </ul>
+                            </div>
                           </div>
-                          <div
-                            className={`collapsible-content ${
-                              expandedChapters.includes(
-                                `chapter-${weekIndex}-${chapterIndex}`
-                              )
-                                ? "expanded"
-                                : ""
-                            }`}
-                            style={{
-                              maxHeight: expandedChapters.includes(
-                                `chapter-${weekIndex}-${chapterIndex}`
-                              )
-                                ? '1000px' // or calculate based on content
-                                : '0',
-                            }}
-                          >
-                            <ul className="mt-2 space-y-2">
-                              {chapter.lectures.map((lecture: any, lectureIndex: number) => (
-                                <li
-                                  key={lectureIndex}
-                                  className="flex items-center p-2 bg-gray-50 rounded"
-                                >
-                                  <TooltipProvider>
-                                    <Tooltip>
-                                      <TooltipTrigger asChild>
-                                        <div
-                                          className={`p-2 rounded-full mr-3 ${
-                                            lectureTypeColors[
-                                              lecture.type as keyof typeof lectureTypeColors
-                                            ]
-                                          }`}
-                                        >
-                                          {
-                                            lectureTypeIcons[
-                                              lecture.type as keyof typeof lectureTypeIcons
-                                            ]
-                                          }
-                                        </div>
-                                      </TooltipTrigger>
-                                      <TooltipContent>
-                                        <p className="capitalize">{lecture.type}</p>
-                                      </TooltipContent>
-                                    </Tooltip>
-                                  </TooltipProvider>
-                                  <span className="flex-grow">{lecture.title}</span>
-                                  <Badge variant="outline" className="ml-2">
-                                    {lecture.duration || "15"} phút
-                                  </Badge>
-                                </li>
-                              ))} 
-                            </ul>
-                          </div>
-                        </div>
-                      ))}
+                        )
+                      )}
                     </div>
                   </div>
                 </div>
@@ -466,24 +557,32 @@ export default function CourseDetails() {
             <CardContent className="pt-6">
               <div className="grid md:grid-cols-2 gap-8 mb-8">
                 <div>
-                  <h3 className="text-xl font-semibold mb-4 text-pink-500">Tóm tắt Đánh giá</h3>
+                  <h3 className="text-xl font-semibold mb-4 text-pink-500">
+                    Tóm tắt Đánh giá
+                  </h3>
                   <div className="space-y-2">
                     {[5, 4, 3, 2, 1].map((rating) => (
                       <div key={rating} className="flex items-center">
                         <span className="w-16 text-pink-500">{rating} sao</span>
                         <Progress
                           value={
-                            ((reviewSummary[rating] || 0) / courseData.reviews.length) * 100
+                            ((reviewSummary[rating] || 0) /
+                              courseData.reviews.length) *
+                            100
                           }
                           className="w-64 mx-4 bg-pink-100"
                         />
-                        <span className="text-pink-500">{reviewSummary[rating] || 0}</span>
+                        <span className="text-pink-500">
+                          {reviewSummary[rating] || 0}
+                        </span>
                       </div>
                     ))}
                   </div>
                 </div>
                 <div className="flex flex-col items-center justify-center">
-                  <h3 className="text-xl font-semibold mb-4 text-pink-500">Đánh giá Trung bình</h3>
+                  <h3 className="text-xl font-semibold mb-4 text-pink-500">
+                    Đánh giá Trung bình
+                  </h3>
                   <div className="text-5xl font-bold mb-2 text-pink-500">
                     {courseData.rating.toFixed(1)}
                   </div>
@@ -506,26 +605,51 @@ export default function CourseDetails() {
                 </div>
               </div>
               <div className="mb-8">
-                <h3 className="text-xl font-semibold mb-4 text-pink-500">Viết Đánh giá</h3>
+                <h3 className="text-xl font-semibold mb-4 text-pink-500">
+                  Viết Đánh giá
+                </h3>
                 <div className="space-y-4">
                   <div className="flex items-center">
-                    <span className="mr-2 text-pink-500">Đánh giá của bạn:</span>
+                    <span className="mr-2 text-pink-500">
+                      Đánh giá của bạn:
+                    </span>
                     {[1, 2, 3, 4, 5].map((rating) => (
                       <Star
                         key={rating}
-                        className="w-6 h-6 text-pink-200 hover:text-pink-400 cursor-pointer"
+                        className={`w-6 h-6 cursor-pointer ${
+                          reviewRating >= rating
+                            ? "text-pink-400"
+                            : "text-pink-200"
+                        }`}
+                        onClick={() => setReviewRating(rating)}
                       />
                     ))}
                   </div>
-                  <Textarea placeholder="Viết đánh giá của bạn ở đây..." className="text-pink-500" />
-                  <Button className="bg-pink-500 text-white">Gửi Đánh giá</Button>
+                  <Textarea
+                    placeholder="Viết đánh giá của bạn ở đây..."
+                    className="text-pink-500"
+                    value={reviewText}
+                    onChange={(e) => setReviewText(e.target.value)}
+                  />
+                  <Button
+                    className="bg-pink-500 text-white"
+                    onClick={handleReviewSubmit}
+                    disabled={isSubmitting} // Disable button while submitting
+                  >
+                    Gửi Đánh giá
+                  </Button>
                 </div>
               </div>
               <div>
-                <h3 className="text-xl font-semibold mb-4 text-pink-500">Đánh giá của Học viên</h3>
+                <h3 className="text-xl font-semibold mb-4 text-pink-500">
+                  Đánh giá của Học viên
+                </h3>
                 <ul className="space-y-6">
                   {courseData.reviews.map((review: any, index: number) => (
-                    <li key={index} className="border-b border-pink-200 pb-4 last:border-b-0">
+                    <li
+                      key={index}
+                      className="border-b border-pink-200 pb-4 last:border-b-0"
+                    >
                       <div className="flex items-center mb-2">
                         <Image
                           src={review.avatar || "/image/default-avatar.png"}
@@ -571,6 +695,13 @@ export default function CourseDetails() {
           max-height: 1000px; /* Điều chỉnh giá trị này nếu cần */
         }
       `}</style>
+      {showNotification && (
+        <PopupNotify
+          message={notificationMessage}
+          type={notificationType}
+          onClose={() => setShowNotification(false)}
+        />
+      )}
     </div>
   );
 }
