@@ -58,18 +58,18 @@ export default function Header() {
               </li>
             </ul>
           </nav>
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="flex items-center space-x-4">
             {isLoggedIn ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <div className="relative h-8 w-8">
-                      <Image
-                        src={user?.user?.picProfile || "/image/default-avatar.png"}
-                        alt="User avatar"
-                        className="rounded-full"
-                        width={32}
-                        height={32}
-                      />
+                  <div className="relative h-8 w-8 cursor-pointer">
+                    <Image
+                      src={user?.user?.picProfile || "/image/default-avatar.png"}
+                      alt="User avatar"
+                      className="rounded-full"
+                      width={32}
+                      height={32}
+                    />
                     <ChevronDown className="h-4 w-4 text-white absolute bottom-0 left-8" />
                   </div>
                 </DropdownMenuTrigger>
