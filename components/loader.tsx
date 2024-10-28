@@ -2,9 +2,15 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 
-export const Loader: React.FC = () => {
+interface LoaderProps {
+  opacity?: number; // Optional prop to control background opacity
+}
+
+export const Loader: React.FC<LoaderProps> = ({ opacity }) => {
+  const backgroundOpacityClass = opacity !== undefined ? `bg-opacity-${opacity * 100}` : '';
+
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-gradient-to-br from-red-50 to-pink-50 z-50">
+    <div className={`absolute inset-0 flex items-center justify-center bg-gradient-to-br from-red-50 to-pink-50 z-50 ${backgroundOpacityClass} z-50`}>
       <div className="relative">
         <motion.div
           className="w-32 h-32 border-4 border-pink-500 rounded-full"
