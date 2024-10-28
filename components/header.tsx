@@ -1,35 +1,47 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { useUser } from "@/context/UserContext";
-import Router from "next/router";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const userContext = useUser();
   const isLoggedIn = userContext?.isLoggedIn || false;
   const user = userContext?.user || null;
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
+
   const handleLogout = () => {
-    // Clear user data and update context
     userContext?.setUser(null);
     userContext?.setIsLoggedIn(false);
-    // Optionally, clear user data from local storage
     localStorage.removeItem("user");
+    setIsDropdownOpen(false);
+  };
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
   };
 
   return (
     <header className="bg-gradient-to-r from-red-500 to-pink-500 text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
+          {/* Logo and navigation links */}
           <div className="flex items-center">
             <Link href="/" className="flex items-center">
               <span className="text-2xl font-bold">日本語</span>
@@ -60,37 +72,53 @@ export default function Header() {
           </nav>
           <div className="flex items-center space-x-4">
             {isLoggedIn ? (
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <div className="relative h-8 w-8 cursor-pointer">
-                    <Image
-                      src={user?.user?.picProfile || "/image/default-avatar.png"}
-                      alt="User avatar"
-                      className="rounded-full"
-                      width={32}
-                      height={32}
-                    />
-                    <ChevronDown className="h-4 w-4 text-white absolute bottom-0 left-8" />
+              <div className="relative" ref={dropdownRef}>
+                <button
+                  onClick={toggleDropdown}
+                  className="flex items-center space-x-2 focus:outline-none"
+                >
+                  <Image
+                    src={user?.user?.picProfile || "/image/default-avatar.png"}
+                    alt="User avatar"
+                    className="rounded-full"
+                    width={32}
+                    height={32}
+                  />
+                  <ChevronDown className="h-4 w-4 text-white" />
+                </button>
+                {isDropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-50">
+                    <div className="py-1">
+                      {user?.role === "Adminstrator" && (
+                        <Link
+                          href="/payment/payment-management"
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        >
+                          Quản lý thanh toán
+                        </Link>
+                      )}
+                      <Link
+                        href="/profile"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        Hồ sơ
+                      </Link>
+                      <Link
+                        href="/settings"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        Cài đặt
+                      </Link>
+                      <button
+                        onClick={handleLogout}
+                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        Logout
+                      </button>
+                    </div>
                   </div>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  {user?.role === 'Adminstrator' && (
-                    <DropdownMenuItem>
-                      <Link href="/payment/payment-management">Quản lý thanh toán</Link>
-                    </DropdownMenuItem>
-                  )}
-                  <DropdownMenuItem>
-                    <Link href="/profile">Hồ sơ</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <Link href="/settings">Cài đặt</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={handleLogout}>
-                    Logout
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+                )}
+              </div>
             ) : (
               <>
                 <Button
@@ -108,6 +136,7 @@ export default function Header() {
               </>
             )}
           </div>
+          {/* Mobile menu button */}
           <div className="md:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -123,6 +152,7 @@ export default function Header() {
           </div>
         </div>
       </div>
+      {/* Mobile menu */}
       {isMenuOpen && (
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
@@ -194,8 +224,6 @@ export default function Header() {
           </div>
         </div>
       )}
-      <div className="absolute top-0 right-0 -mt-8 -mr-8 w-64 h-64 bg-red-400 rounded-full mix-blend-multiply filter blur-2xl opacity-20 animate-blob"></div>
-      <div className="absolute top-0 left-0 -mt-4 -ml-4 w-36 h-36 bg-pink-400 rounded-full mix-blend-multiply filter blur-2xl opacity-20 animate-blob animation-delay-2000"></div>
     </header>
   );
 }
