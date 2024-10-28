@@ -28,6 +28,7 @@ import {
 import { cn } from "@/lib/utils";
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
+import { Loader } from "@/components/loader";
 
 export default function CourseDetails() {
   const router = useRouter();
@@ -93,7 +94,7 @@ export default function CourseDetails() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loader />;
   if (error) return <div>Error loading course data</div>;
   if (!courseData) return <div>No course data available</div>;
 
@@ -137,11 +138,11 @@ export default function CourseDetails() {
               <h1 className="text-4xl font-bold mb-4">{courseData.title}</h1>
               <div className="flex items-center mb-4">
                 <Image
-                  src="https://scontent.fhan15-1.fna.fbcdn.net/v/t39.30808-6/461173096_122105718044530112_5131179025624293145_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=_zDABXH_EmcQ7kNvgHI3Nz6&_nc_zt=23&_nc_ht=scontent.fhan15-1.fna&_nc_gid=A2Q5BLMiNBxZCEVCpkFe9j_&oh=00_AYCUrI-PL85tomg5ahtoAalfaQRKbx0gHvVS_wWGtHDgzQ&oe=6723EC6F"
+                  src="/image/logo.png"
                   alt="Dekiru"
-                  width={50}
-                  height={50}
-                  className="rounded-full mr-4"
+                  width={80}
+                  height={80}
+                  className="rounded-full mr-4 bg-white"
                 />
                 <span className="text-xl">Dekiru</span>
               </div>
@@ -186,8 +187,20 @@ export default function CourseDetails() {
               />
             </div>
           </div>
-          <Button size="lg" className="mt-8" onClick={() => window.location.href = `/payment/${courseData.id}`}>
-            Đăng ký ngay
+          <Button
+            size="lg"
+            className={`mt-8 ${
+              courseData.isEnroll ? "bg-green-700" : "bg-blue-700"
+            }`}
+            onClick={() => {
+              if (courseData.isEnroll) {
+                window.location.href = `/course/${courseData.id}`;
+              } else {
+                window.location.href = `/payment/${courseData.id}`;
+              }
+            }}
+          >
+            {courseData.isEnroll ? "Vào học ngay" : "Đăng ký ngay"}
           </Button>
         </div>
       </div>

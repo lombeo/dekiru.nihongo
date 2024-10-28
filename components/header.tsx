@@ -90,6 +90,11 @@ export default function Header() {
                   </div>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
+                  {user?.role === 'Adminstrator' && (
+                    <DropdownMenuItem>
+                      <Link href="/payment/payment-management">Quản lý thanh toán</Link>
+                    </DropdownMenuItem>
+                  )}
                   <DropdownMenuItem>
                     <Link href="/profile">Hồ sơ</Link>
                   </DropdownMenuItem>

@@ -16,13 +16,13 @@ import {
 import { useUser } from "@/context/UserContext";
 
 const progressData = [
-  { name: "Mon", progress: 20 },
-  { name: "Tue", progress: 40 },
-  { name: "Wed", progress: 30 },
-  { name: "Thu", progress: 70 },
-  { name: "Fri", progress: 50 },
-  { name: "Sat", progress: 80 },
-  { name: "Sun", progress: 60 },
+  { name: "Thứ Hai", progress: 20 },
+  { name: "Thứ Ba", progress: 40 },
+  { name: "Thứ Tư", progress: 30 },
+  { name: "Thứ Năm", progress: 70 },
+  { name: "Thứ Sáu", progress: 50 },
+  { name: "Thứ Bảy", progress: 80 },
+  { name: "Chủ Nhật", progress: 60 },
 ];
 
 export default function HomePage() {
@@ -35,29 +35,29 @@ export default function HomePage() {
 
       <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <h1 className="text-3xl font-bold text-gray-900">
-          Welcome back, {user?.userName}-様!
+          Chào mừng trở lại, {user?.userName}-様!
         </h1>
         <div className="px-4 py-6 sm:px-0">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {/* Overall Progress */}
+            {/* Tiến Độ Tổng Thể */}
             <Card>
               <CardHeader>
-                <CardTitle>Overall Progress</CardTitle>
+                <CardTitle>Tiến Độ Tổng Thể</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-2">
                   <Progress value={progress} className="w-full" />
                   <p className="text-sm text-gray-500">
-                    You&apos;ve completed {progress}% of your courses
+                    Bạn đã hoàn thành {progress}% khóa học của mình
                   </p>
                 </div>
               </CardContent>
             </Card>
 
-            {/* Weekly Progress Chart */}
+            {/* Biểu Đồ Tiến Độ Hàng Tuần */}
             <Card className="col-span-2">
               <CardHeader>
-                <CardTitle>Weekly Progress</CardTitle>
+                <CardTitle>Tiến Độ Hàng Tuần</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="h-[200px]">
@@ -78,10 +78,10 @@ export default function HomePage() {
               </CardContent>
             </Card>
 
-            {/* Recommended Lessons */}
+            {/* Bài Học Đề Xuất */}
             <Card>
               <CardHeader>
-                <CardTitle>Recommended Lessons</CardTitle>
+                <CardTitle>Bài Học Đề Xuất</CardTitle>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2">
@@ -91,7 +91,7 @@ export default function HomePage() {
                       className="flex items-center text-blue-600 hover:underline"
                     >
                       <BookOpen className="h-4 w-4 mr-2" />
-                      Basic Greetings
+                      Chào Hỏi Cơ Bản
                       <ChevronRight className="h-4 w-4 ml-auto" />
                     </Link>
                   </li>
@@ -101,7 +101,7 @@ export default function HomePage() {
                       className="flex items-center text-blue-600 hover:underline"
                     >
                       <BookOpen className="h-4 w-4 mr-2" />
-                      Hiragana Mastery
+                      Thành Thạo Hiragana
                       <ChevronRight className="h-4 w-4 ml-auto" />
                     </Link>
                   </li>
@@ -111,7 +111,7 @@ export default function HomePage() {
                       className="flex items-center text-blue-600 hover:underline"
                     >
                       <BookOpen className="h-4 w-4 mr-2" />
-                      Basic Sentence Structure
+                      Cấu Trúc Câu Cơ Bản
                       <ChevronRight className="h-4 w-4 ml-auto" />
                     </Link>
                   </li>
@@ -119,10 +119,10 @@ export default function HomePage() {
               </CardContent>
             </Card>
 
-            {/* Practice Exercises */}
+            {/* Bài Tập Thực Hành */}
             <Card>
               <CardHeader>
-                <CardTitle>Daily Practice</CardTitle>
+                <CardTitle>Thực Hành Hàng Ngày</CardTitle>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2">
@@ -132,7 +132,7 @@ export default function HomePage() {
                       className="flex items-center text-blue-600 hover:underline"
                     >
                       <Award className="h-4 w-4 mr-2" />
-                      Vocabulary Quiz
+                      Bài Kiểm Tra Từ Vựng
                       <ChevronRight className="h-4 w-4 ml-auto" />
                     </Link>
                   </li>
@@ -142,7 +142,7 @@ export default function HomePage() {
                       className="flex items-center text-blue-600 hover:underline"
                     >
                       <Award className="h-4 w-4 mr-2" />
-                      Listening Exercise
+                      Bài Tập Nghe
                       <ChevronRight className="h-4 w-4 ml-auto" />
                     </Link>
                   </li>
@@ -152,7 +152,7 @@ export default function HomePage() {
                       className="flex items-center text-blue-600 hover:underline"
                     >
                       <Award className="h-4 w-4 mr-2" />
-                      Kanji Writing Practice
+                      Thực Hành Viết Kanji
                       <ChevronRight className="h-4 w-4 ml-auto" />
                     </Link>
                   </li>
@@ -160,10 +160,10 @@ export default function HomePage() {
               </CardContent>
             </Card>
 
-            {/* Community Section */}
+            {/* Phần Cộng Đồng */}
             <Card>
               <CardHeader>
-                <CardTitle>Community</CardTitle>
+                <CardTitle>Cộng Đồng</CardTitle>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2">
@@ -173,7 +173,7 @@ export default function HomePage() {
                       className="flex items-center text-blue-600 hover:underline"
                     >
                       <Users className="h-4 w-4 mr-2" />
-                      Language Exchange Partners
+                      Đối Tác Trao Đổi Ngôn Ngữ
                       <ChevronRight className="h-4 w-4 ml-auto" />
                     </Link>
                   </li>
@@ -183,7 +183,7 @@ export default function HomePage() {
                       className="flex items-center text-blue-600 hover:underline"
                     >
                       <Users className="h-4 w-4 mr-2" />
-                      Discussion Forum
+                      Diễn Đàn Thảo Luận
                       <ChevronRight className="h-4 w-4 ml-auto" />
                     </Link>
                   </li>
@@ -193,7 +193,7 @@ export default function HomePage() {
                       className="flex items-center text-blue-600 hover:underline"
                     >
                       <Users className="h-4 w-4 mr-2" />
-                      Study Groups
+                      Nhóm Học Tập
                       <ChevronRight className="h-4 w-4 ml-auto" />
                     </Link>
                   </li>
@@ -202,21 +202,21 @@ export default function HomePage() {
             </Card>
           </div>
 
-          {/* Quick Actions */}
+          {/* Hành Động Nhanh */}
           <div className="mt-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">
-              Quick Actions
+              Hành Động Nhanh
             </h2>
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-              <Button className="w-full">Start a Lesson</Button>
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 text-gray-900">
+              <Button className="w-full">Bắt Đầu Bài Học</Button>
               <Button className="w-full" variant="outline">
-                Practice Speaking
+                Thực Hành Nói
               </Button>
               <Button className="w-full" variant="outline">
-                Take a Quiz
+                Làm Bài Kiểm Tra
               </Button>
               <Button className="w-full" variant="outline">
-                Set Goals
+                Đặt Mục Tiêu
               </Button>
             </div>
           </div>

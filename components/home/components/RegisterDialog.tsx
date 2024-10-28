@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -10,6 +10,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { PopupNotify } from "@/components/popup-notify";
 
 interface RegisterDialogProps {
   isDialogOpen: boolean;
@@ -31,40 +32,75 @@ export default function RegisterDialog({
     birthDate: "",
     school: "",
   });
+  const [showNotification, setShowNotification] = useState(false)
+  const [notificationMessage, setNotificationMessage] = useState('')
+  const [notificationType, setNotificationType] = useState<'success' | 'error'>('success')
+
+  const handleShowNotification = () => {
+    setShowNotification(true)
+  }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: type === 'checkbox'  ? checked : value
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
-    const url = 'https://lombeo-api-authorize.azurewebsites.net/authen/authen/sign-up';
+    const url =
+      "https://lombeo-api-authorize.azurewebsites.net/authen/authen/sign-up";
 
     try {
       const response = await fetch(url, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Accept': 'text/plain',
-          'Content-Type': 'application/json'
+          Accept: "text/plain",
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(formData),
       });
 
+      const responseBody = await response.json();
+
+      setNotificationMessage(responseBody?.message || "An error occurred")
+      setNotificationType(responseBody?.success ? "success" : "error")
+      setShowNotification(true)
+
+      {showNotification && (
+        <PopupNotify
+          message={responseBody?.message || "Đăng ký thành công"}
+          type={responseBody?.success ? "success" : "error"}
+          onClose={() => setShowNotification(false)}
+        />
+      )}
+      handleShowNotification();
+      
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        return;
       }
 
-      const responseBody = await response.json();
-      console.log(responseBody);
+      
+      // Handle successful response
       setIsDialogOpen(false);
+
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
   };
+
+  useEffect(() => {
+    if (showNotification) {
+      // Automatically hide the notification after 5 seconds
+      const timer = setTimeout(() => {
+        setShowNotification(false)
+      }, 5000)
+
+      return () => clearTimeout(timer)
+    }
+  }, [showNotification])
 
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
@@ -144,7 +180,9 @@ export default function RegisterDialog({
             <RadioGroup
               name="gender"
               onValueChange={(value) =>
-                handleInputChange({ target: { name: "gender", value } } as React.ChangeEvent<HTMLInputElement>)
+                handleInputChange({
+                  target: { name: "gender", value },
+                } as React.ChangeEvent<HTMLInputElement>)
               }
             >
               <div className="flex items-center space-x-2">
@@ -159,7 +197,7 @@ export default function RegisterDialog({
                 <RadioGroupItem
                   value="false"
                   id="female"
-                  className="border-pink-300" 
+                  className="border-pink-300"
                 />
                 <Label htmlFor="female">Nữ</Label>
               </div>
@@ -201,6 +239,13 @@ export default function RegisterDialog({
           </Button>
         </form>
       </DialogContent>
+      {showNotification && (
+        <PopupNotify
+          message={notificationMessage}
+          type={notificationType}
+          onClose={() => setShowNotification(false)}
+        />
+      )}
     </Dialog>
   );
 }

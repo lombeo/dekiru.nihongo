@@ -15,6 +15,7 @@ import { Search } from "lucide-react"; // Import the Search icon
 import { useRouter } from "next/router"; // Import useRouter
 import { useQuery } from "@tanstack/react-query"; // Import useQuery
 import axios from "axios"; // Import axios for making API requests
+import { Loader } from "../loader";
 
 interface Course {
   id: string;
@@ -75,7 +76,7 @@ export default function LearningPage() {
           .includes(selectedCategory.trim().toLowerCase()))
   );
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loader />;
   if (error) return <div>Error loading courses</div>;
 
   return (

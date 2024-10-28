@@ -7,6 +7,7 @@ import { useUser } from "@/context/UserContext";
 import { saveUserData } from "@/utils/storage";
 import RegisterDialog from "./components/RegisterDialog";
 import Router from "next/router";
+import { PopupNotify } from "../popup-notify";
 
 export default function LandingPageSection() {
   const [username, setUsername] = useState("");
@@ -14,6 +15,11 @@ export default function LandingPageSection() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const userContext = useUser();
   const setUser = userContext?.setUser;
+  const [showNotification, setShowNotification] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState("");
+  const [notificationType, setNotificationType] = useState<"success" | "error">(
+    "success"
+  );
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,14 +42,18 @@ export default function LandingPageSection() {
       const data = await response.json();
 
       if (data.success) {
-        console.log("Login successful:", data);
+        setNotificationMessage("Đăng nhập thành công");
+        setNotificationType(data?.success ? "success" : "error");
+        setShowNotification(true);
         if (setUser) {
           setUser(data.data);
         }
         saveUserData(data.data);
         window.location.reload(); // Reload the page
       } else {
-        console.error("Login failed:", data.message || "Unknown error");
+        setNotificationMessage(data?.message || "An error occurred");
+        setNotificationType(data?.success ? "success" : "error");
+        setShowNotification(true);
       }
     } catch (error) {
       console.error("Error during login:", error);
@@ -205,6 +215,13 @@ export default function LandingPageSection() {
           </div>
         </div>
       </div>
+      {showNotification && (
+        <PopupNotify
+          message={notificationMessage}
+          type={notificationType}
+          onClose={() => setShowNotification(false)}
+        />
+      )}
     </section>
   );
 }

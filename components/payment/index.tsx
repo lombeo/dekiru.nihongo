@@ -10,20 +10,37 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Star, Clock, BookOpen } from "lucide-react";
+import { Star, Clock, BookOpen, Upload } from "lucide-react";
 import { useUser } from "@/context/UserContext";
 import LandingPageSection from "../home/landing-page";
 import { useRouter } from "next/router";
 import { useQuery } from "@tanstack/react-query";
+import { PopupNotify } from "../popup-notify";
+import { Loader } from "../loader";
 
 export default function PaymentUI() {
   const router = useRouter();
   const { courseId } = router.query;
 
+  const [file, setFile] = useState<File | null>(null);
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      setFile(event.target.files[0]);
+    }
+  };
+
+  const [showNotification, setShowNotification] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState("");
+  const [notificationType, setNotificationType] = useState<"success" | "error">(
+    "success"
+  );
+
   const userContext = useUser();
   const user = userContext?.user || null;
 
   const [qrCode, setQrCode] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchCourseData = async (courseId: string) => {
     const response = await fetch(
@@ -39,7 +56,7 @@ export default function PaymentUI() {
   const {
     data: courseData,
     error,
-    isLoading,
+    isLoading: courseLoading,
   } = useQuery({
     queryKey: ["courseData", courseId],
     queryFn: () => fetchCourseData(courseId as string),
@@ -70,9 +87,52 @@ export default function PaymentUI() {
   }, [user, courseData]);
 
   if (user === null) return <LandingPageSection />;
-  if (isLoading) return <div>Loading...</div>;
+  if (courseLoading) return <Loader />;
   if (error) return <div>Error loading course data</div>;
   if (!courseData) return <div>No course data available</div>;
+
+  const handleConfirmTransfer = async () => {
+    if (!file || !user || !courseId) return;
+
+    const formData = new FormData();
+    formData.append('Image', file);
+
+    setIsLoading(true); // Start loading
+
+    try {
+      const response = await fetch(
+        `https://lombeo-api-authorize.azurewebsites.net/authen/course/request-enroll-course?CourseId=${courseId}&InvoiceCode=Dekiru-${courseId}-${user.userName}`,
+        {
+          method: 'POST',
+          headers: {
+            'accept': 'text/plain',
+            'Authorization': `Bearer ${user.token}`,
+          },
+          body: formData,
+        }
+      );
+
+      const result = await response.json();
+      if (result.success) {
+        setNotificationMessage("Đăng ký khóa học thành công hãy chờ quản trị viên kiểm duyệt trong vòng 3-5 phút");
+        setNotificationType("success");
+        setShowNotification(true);
+      } else {
+        setNotificationMessage(`Đăng ký khóa học thất bại: ${result.message}`);
+        setNotificationType("error");
+        setShowNotification(true);
+      }
+    } catch (error) {
+      setNotificationMessage(`Đăng ký khóa học thất bại: ${error}`);
+      setNotificationType("error");
+      setShowNotification(true);
+      console.error('Error during enrollment request:', error);
+    } finally {
+      setIsLoading(false); // Stop loading
+    }
+  };
+
+  if (isLoading) return <Loader />;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-50 to-pink-50 p-8">
@@ -82,7 +142,7 @@ export default function PaymentUI() {
         </h1>
         <div className="grid md:grid-cols-2 gap-8">
           {/* Thông tin khóa học */}
-          <Card>
+          <Card className="mb-8">
             <CardHeader>
               <CardTitle>Chi tiết khóa học</CardTitle>
             </CardHeader>
@@ -196,11 +256,15 @@ export default function PaymentUI() {
                     <TableRow>
                       <TableCell>Giảm giá</TableCell>
                       <TableCell className="text-right text-green-600">
-                        -{courseData.regularPrice
+                        -
+                        {courseData.regularPrice
                           ? new Intl.NumberFormat("vi-VN", {
                               style: "currency",
                               currency: "VND",
-                            }).format(courseData.regularPrice - courseData.discountedPrice)
+                            }).format(
+                              courseData.regularPrice -
+                                courseData.discountedPrice
+                            )
                           : "N/A"}
                       </TableCell>
                     </TableRow>
@@ -231,7 +295,41 @@ export default function PaymentUI() {
                     )}
                   </div>
                 </div>
-                <Button className="w-full mt-4">
+                <div className="mt-6">
+                  <p className="font-semibold mb-2">
+                    Upload xác nhận chuyển khoản:
+                  </p>
+                  <div className="flex items-center justify-center w-full">
+                    <label
+                      htmlFor="dropzone-file"
+                      className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100"
+                    >
+                      <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                        <Upload className="w-10 h-10 mb-3 text-gray-400" />
+                        <p className="mb-2 text-sm text-gray-500">
+                          <span className="font-semibold">Click để upload</span>{" "}
+                          hoặc kéo và thả
+                        </p>
+                        <p className="text-xs text-gray-500">
+                          File ảnh hoặc PDF (MAX. 5MB)
+                        </p>
+                      </div>
+                      <input
+                        id="dropzone-file"
+                        type="file"
+                        className="hidden"
+                        onChange={handleFileChange}
+                        accept="image/*,.pdf"
+                      />
+                    </label>
+                  </div>
+                  {file && (
+                    <div className="mt-4 text-sm text-gray-500">
+                      File đã chọn: {file.name}
+                    </div>
+                  )}
+                </div>
+                <Button className="w-full mt-4" disabled={!file} onClick={handleConfirmTransfer}>
                   Xác nhận chuyển khoản thành công
                 </Button>
                 <p className="text-sm text-gray-600 mt-4 text-center">
@@ -244,6 +342,13 @@ export default function PaymentUI() {
           </div>
         </div>
       </div>
+      {showNotification && (
+        <PopupNotify
+          message={notificationMessage}
+          type={notificationType}
+          onClose={() => setShowNotification(false)}
+        />
+      )}
     </div>
   );
 }
