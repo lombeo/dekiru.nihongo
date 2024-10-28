@@ -32,19 +32,18 @@ export default function HomePage() {
   console.log(user);
   return (
     <div className="min-h-screen bg-gray-100">
-
-      <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold text-gray-900">
+      <main className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <h1 className="text-3xl font-bold text-gray-900 text-center sm:text-left">
           Chào mừng trở lại, {user?.userName}-様!
         </h1>
         <div className="px-4 py-6 sm:px-0">
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {/* Tiến Độ Tổng Thể */}
-            <Card>
+            <Card className="flex flex-col">
               <CardHeader>
                 <CardTitle>Tiến Độ Tổng Thể</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="flex-grow">
                 <div className="space-y-2">
                   <Progress value={progress} className="w-full" />
                   <p className="text-sm text-gray-500">
@@ -55,11 +54,11 @@ export default function HomePage() {
             </Card>
 
             {/* Biểu Đồ Tiến Độ Hàng Tuần */}
-            <Card className="col-span-2">
+            <Card className="flex flex-col col-span-2">
               <CardHeader>
                 <CardTitle>Tiến Độ Hàng Tuần</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="flex-grow">
                 <div className="h-[200px]">
                   <ResponsiveContainer width="100%" height="100%">
                     <LineChart data={progressData}>
@@ -79,11 +78,11 @@ export default function HomePage() {
             </Card>
 
             {/* Bài Học Đề Xuất */}
-            <Card>
+            <Card className="flex flex-col">
               <CardHeader>
                 <CardTitle>Bài Học Đề Xuất</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="flex-grow">
                 <ul className="space-y-2">
                   <li>
                     <Link
@@ -120,11 +119,11 @@ export default function HomePage() {
             </Card>
 
             {/* Bài Tập Thực Hành */}
-            <Card>
+            <Card className="flex flex-col">
               <CardHeader>
                 <CardTitle>Thực Hành Hàng Ngày</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="flex-grow">
                 <ul className="space-y-2">
                   <li>
                     <Link
@@ -161,11 +160,11 @@ export default function HomePage() {
             </Card>
 
             {/* Phần Cộng Đồng */}
-            <Card>
+            <Card className="flex flex-col">
               <CardHeader>
                 <CardTitle>Cộng Đồng</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="flex-grow">
                 <ul className="space-y-2">
                   <li>
                     <Link
@@ -204,7 +203,7 @@ export default function HomePage() {
 
           {/* Hành Động Nhanh */}
           <div className="mt-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4 text-center sm:text-left">
               Hành Động Nhanh
             </h2>
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 text-gray-900">

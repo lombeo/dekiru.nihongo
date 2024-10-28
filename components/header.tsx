@@ -22,7 +22,10 @@ export default function Header() {
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsDropdownOpen(false);
       }
     }
@@ -173,34 +176,42 @@ export default function Header() {
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             <Link
-              href="/lessons"
+              href="/learning"
               className="block px-3 py-2 rounded-md text-base font-medium hover:text-red-200 hover:bg-red-700"
             >
               Bài học
             </Link>
             <Link
-              href="/practice"
+              href="/live"
               className="block px-3 py-2 rounded-md text-base font-medium hover:text-red-200 hover:bg-red-700"
             >
-              Thực hành
+              Trò chuyện cùng giảng viên
             </Link>
             <Link
-              href="/community"
+              href="/survey"
               className="block px-3 py-2 rounded-md text-base font-medium hover:text-red-200 hover:bg-red-700"
             >
-              Cộng đồng
+              Khảo sát
             </Link>
             <Link
-              href="/resources"
+              href="/payment/payment-request"
               className="block px-3 py-2 rounded-md text-base font-medium hover:text-red-200 hover:bg-red-700"
             >
-              Tài nguyên
+              Yêu cầu đăng ký
             </Link>
           </div>
           <div className="pt-4 pb-3 border-t border-red-700">
             <div className="px-2 space-y-1">
               {isLoggedIn ? (
                 <>
+                  {user?.role === "Adminstrator" && (
+                    <Link
+                      href="/payment/payment-management"
+                      className="block px-3 py-2 rounded-md text-base font-medium hover:text-red-200 hover:bg-red-700"
+                    >
+                      Quản lý thanh toán
+                    </Link>
+                  )}
                   <Link
                     href="/profile"
                     className="block px-3 py-2 rounded-md text-base font-medium hover:text-red-200 hover:bg-red-700"
@@ -223,13 +234,13 @@ export default function Header() {
               ) : (
                 <>
                   <Link
-                    href="/login"
+                    href="/"
                     className="block px-3 py-2 rounded-md text-base font-medium hover:text-red-200 hover:bg-red-700"
                   >
                     Đăng nhập
                   </Link>
                   <Link
-                    href="/register"
+                    href="/"
                     className="block px-3 py-2 rounded-md text-base font-medium hover:text-red-200 hover:bg-red-700"
                   >
                     Đăng ký

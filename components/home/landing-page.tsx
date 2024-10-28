@@ -67,9 +67,9 @@ export default function LandingPageSection() {
   return (
     <section className="bg-gradient-to-br from-red-50 to-pink-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row items-center justify-between h-[780px]">
+        <div className="flex flex-col lg:flex-row items-center justify-between h-auto lg:h-[780px]"> {/* Adjust height for smaller screens */}
           {/* Login Form */}
-          <div className="w-full max-w-md p-8 bg-gradient-to-r from-red-500 to-pink-500 bg-opacity-50 rounded-lg shadow-lg">
+          <div className="w-full max-w-md p-8 bg-gradient-to-r from-red-500 to-pink-500 bg-opacity-50 rounded-lg shadow-lg mb-8 lg:mb-0"> {/* Add margin bottom for spacing on smaller screens */}
             <h2 className="text-2xl font-bold text-white mb-6">
               ログイン • Đăng nhập
             </h2>
@@ -129,7 +129,7 @@ export default function LandingPageSection() {
           </div>
 
           {/* Introduction */}
-          <div className="w-full lg:w-1/2 mt-8 lg:mt-0 lg:ml-12">
+          <div className="w-full lg:w-1/2 mt-8 lg:mt-0 lg:ml-12 text-center lg:text-left"> {/* Center text on smaller screens */}
             <h1 className="text-4xl font-bold bg-gradient-to-r from-pink-200 to-pink-700 bg-clip-text text-transparent mb-6 animate-gradient">
               Chào mừng đến với 日本語 Dekiru Nihongo
             </h1>

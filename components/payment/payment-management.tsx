@@ -34,8 +34,8 @@ import HomePage from "../home/home-page";
 import { useQuery } from "@tanstack/react-query";
 import { Loader } from "../loader";
 import Image from "next/image";
-import { saveAs } from "file-saver";
-
+import { saveAs } from "file-saver"; // Adjust the path as necessary
+import Modal from "@/components/ui/modal"; // Adjust the path as necessary
 // Mock data for demonstration purposes
 const courseRevenue = [
   { name: "Japanese Beginner", revenue: 5000 },
@@ -67,6 +67,22 @@ export default function PaymentManagement() {
   const [courseRevenue, setCourseRevenue] = useState<
     { name: string; revenue: number }[]
   >([]);
+
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  const [isImageLoading, setIsImageLoading] = useState(true);
+
+  const handleImageClick = (image: string) => {
+    setSelectedImage(image);
+  };
+
+  const closeModal = () => {
+    setSelectedImage(null);
+  };
+
+  const handleImageLoadComplete = () => {
+    setIsImageLoading(false);
+  };
 
   const fetchRequests = async () => {
     if (!user) throw new Error("User is not authenticated");
@@ -296,7 +312,7 @@ export default function PaymentManagement() {
               <TabsList>
                 <TabsTrigger value="pending">Đang Chờ</TabsTrigger>
                 <TabsTrigger value="accepted">Đã Chấp Nhận</TabsTrigger>
-                <TabsTrigger value="rejected">Đã Từ Chối</TabsTrigger>
+                <TabsTrigger value="rejected">ã Từ Chối</TabsTrigger>
               </TabsList>
               {["pending", "accepted", "rejected"].map((status) => (
                 <TabsContent key={status} value={status}>
@@ -335,7 +351,7 @@ export default function PaymentManagement() {
                             <TableCell>
                               <TooltipProvider>
                                 <Tooltip>
-                                  <TooltipTrigger>
+                                  <TooltipTrigger onClick={() => handleImageClick(req.image)}>
                                     <ImageIcon className="h-6 w-6" />
                                   </TooltipTrigger>
                                   <TooltipContent side="right">
@@ -385,6 +401,20 @@ export default function PaymentManagement() {
           </CardContent>
         </Card>
       </div>
+
+      {selectedImage && (
+        <Modal onClose={closeModal}>
+          {isImageLoading && <Loader />}
+          <Image
+            src={selectedImage}
+            alt="Selected Image"
+            className="w-full h-auto"
+            width={600}
+            height={600}
+            onLoadingComplete={handleImageLoadComplete}
+          />
+        </Modal>
+      )}
     </div>
   );
 }
