@@ -45,7 +45,7 @@ export default function PaymentManagement() {
   const fetchRequests = async () => {
     if (!user) throw new Error("User is not authenticated");
 
-    const response = await fetch('https://localhost:7233/authen/course/get-enroll-request', {
+    const response = await fetch('https://lombeo-api-authorize.azurewebsites.net/authen/course/get-enroll-request', {
       method: 'GET',
       headers: {
         'accept': 'text/plain',
@@ -76,7 +76,7 @@ export default function PaymentManagement() {
   const fetchCourseRevenue = async () => {
     if (!user) throw new Error("User is not authenticated");
 
-    const response = await fetch('https://localhost:7233/authen/course/get-course-revenue', {
+    const response = await fetch('https://lombeo-api-authorize.azurewebsites.net/authen/course/get-course-revenue', {
       method: 'GET',
       headers: {
         'accept': 'text/plain',
@@ -124,7 +124,7 @@ export default function PaymentManagement() {
 
   const handleStatusChange = async (id: string, newStatus: string) => {
     try {
-      const response = await fetch(`https://localhost:7233/authen/course/manage-enroll-course?InvoiceCode=${id}&Status=${newStatus === "accepted" ? 0 : 1}`, {
+      const response = await fetch(`https://lombeo-api-authorize.azurewebsites.net/authen/course/manage-enroll-course?InvoiceCode=${id}&Status=${newStatus === "accepted" ? 0 : 1}`, {
         method: 'POST',
         headers: {
           'accept': 'text/plain',
