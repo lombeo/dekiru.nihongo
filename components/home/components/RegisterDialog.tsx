@@ -65,7 +65,7 @@ export default function RegisterDialog({
 
       const responseBody = await response.json();
 
-      setNotificationMessage(responseBody?.message || "An error occurred")
+      setNotificationMessage(responseBody?.message || "Đăng ký thành công")
       setNotificationType(responseBody?.success ? "success" : "error")
       setShowNotification(true)
 
