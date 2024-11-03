@@ -116,6 +116,14 @@ export default function Header() {
                           Quản lý thanh toán
                         </Link>
                       )}
+                      {user?.role === "Adminstrator" && (
+                        <Link
+                          href="/estimate-revenue"
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        >
+                          Ước tính doanh thu
+                        </Link>
+                      )}
                       <Link
                         href="/profile"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
@@ -210,6 +218,14 @@ export default function Header() {
                       className="block px-3 py-2 rounded-md text-base font-medium hover:text-red-200 hover:bg-red-700"
                     >
                       Quản lý thanh toán
+                    </Link>
+                  )}
+                  {user?.role === "Adminstrator" && (
+                    <Link
+                      href="/estimate-revenue"
+                      className="block px-3 py-2 rounded-md text-base font-medium hover:text-red-200 hover:bg-red-700"
+                    >
+                      Ước tính doanh thu
                     </Link>
                   )}
                   <Link
