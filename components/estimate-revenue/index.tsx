@@ -1,31 +1,31 @@
-"use client";
+"use client"
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react"
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/components/ui/card"
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@/components/ui/tabs";
+} from "@/components/ui/tabs"
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/components/ui/select"
 import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/components/ui/chart";
+} from "@/components/ui/chart"
 import {
   Line,
   LineChart,
@@ -39,13 +39,13 @@ import {
   PieChart,
   Pie,
   Cell,
-} from "recharts";
+} from "recharts"
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
+} from "@/components/ui/accordion"
 import {
   Table,
   TableBody,
@@ -53,27 +53,27 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { useUser } from "@/context/UserContext";
-import HomePage from "../home/home-page";
+} from "@/components/ui/table"
+import { useUser } from "@/context/UserContext"
+import HomePage from "../home/home-page"
 
 const initialData = {
   "Sơ cấp": { price: 99000, revenue: 3663000, color: "#FF6384" },
   "Trung cấp": { price: 499000, revenue: 1996000, color: "#36A2EB" },
   "Cao cấp": { price: 599000, revenue: 3594000, color: "#FFCE56" },
   "Tổng hợp đề JLPT": { price: 229000, revenue: 3289000, color: "#4BC0C0" },
-};
+}
 
+// Constants and Parameters
 const totalInitialRevenue = Object.values(initialData).reduce(
   (sum, course) => sum + course.revenue,
   0
-);
+)
+const growthRate = 1 // 100% annual growth rate
+const marketingCostRate = 0.1 // 20% of revenue
+const maintenanceCostRate = 0.1 // 10% of revenue
 
-const growthRate = 0.5; // 50% annual growth rate
-const marketingCostRate = 0.2; // 20% of revenue
-const maintenanceCostRate = 0.1; // 10% of revenue
-const otherCostsRate = 0.05; // 5% of revenue
-
+// Expenses Breakdown
 const expenses = [
   {
     name: "Chi phí marketing",
@@ -81,169 +81,151 @@ const expenses = [
     justification: "Cần thiết để thu hút học viên mới và giữ chân học viên cũ",
     worthiness: "Xứng đáng vì giúp tăng doanh thu và mở rộng thị phần",
     breakdown: [
-      { item: "Quảng cáo Facebook", cost: 5000000 },
-      { item: "Quảng cáo Google", cost: 7000000 },
-      { item: "Influencer Marketing", cost: 10000000 },
-      { item: "Email Marketing", cost: 3000000 },
-      { item: "Tổ chức sự kiện", cost: 15000000 },
+      {
+        item: "Quảng cáo Facebook",
+        cost: totalInitialRevenue * marketingCostRate * 0.2,
+      },
+      {
+        item: "Quảng cáo Google",
+        cost: totalInitialRevenue * marketingCostRate * 0.3,
+      },
+      {
+        item: "Tổ chức sự kiện",
+        cost: totalInitialRevenue * marketingCostRate * 0.5,
+      },
     ],
   },
   {
     name: "Chi phí duy trì hệ thống",
-    description: "Hosting, bảo trì website, cập nhật nội dung",
+    description: "Hosting, bảo trì website, nâng cấp hệ thống",
     justification: "Đảm bảo website hoạt động ổn định và nội dung luôn mới",
     worthiness:
       "Xứng đáng vì giúp duy trì chất lượng dịch vụ và sự hài lòng của học viên",
     breakdown: [
-      { item: "Hosting và tên miền", cost: 2000000 },
-      { item: "Bảo trì website", cost: 5000000 },
-      { item: "Cập nhật nội dung", cost: 8000000 },
-      { item: "Phần mềm quản lý học viên", cost: 3000000 },
+      {
+        item: "Hosting và tên miền",
+        cost: totalInitialRevenue * maintenanceCostRate * 0.05,
+      },
+      {
+        item: "Bảo trì website",
+        cost: totalInitialRevenue * maintenanceCostRate * 0.5,
+      },
+      {
+        item: "Nâng cấp hệ thống",
+        cost: totalInitialRevenue * maintenanceCostRate * 0.45,
+      },
     ],
-  },
-  {
-    name: "Chi phí khác",
-    description: "Phí pháp lý, văn phòng phẩm, đào tạo nhân viên",
-    justification: "Cần thiết cho hoạt động hàng ngày và phát triển đội ngũ",
-    worthiness:
-      "Xứng đáng vì giúp duy trì hoạt động kinh doanh và nâng cao chất lượng nhân sự",
-    breakdown: [
-      { item: "Phí pháp lý", cost: 3000000 },
-      { item: "Văn phòng phẩm", cost: 1000000 },
-      { item: "Đào tạo nhân viên", cost: 5000000 },
-      { item: "Phần mềm văn phòng", cost: 2000000 },
-    ],
-  },
-];
+  }
+]
 
+// New Courses Data
 const newCourses = [
-  {
-    name: "Khóa học JLPT N1",
-    developmentCost: 12000000,
-    estimatedRevenue: 2000000,
-    color: "#FF9F40",
-  },
-  {
-    name: "Khóa học tiếng Nhật cho doanh nghiệp",
-    developmentCost: 14000000,
-    estimatedRevenue: 3000000,
-    color: "#FF6384",
-  },
-  {
-    name: "Khóa học văn hóa Nhật Bản",
-    developmentCost: 11000000,
-    estimatedRevenue: 2000000,
-    color: "#36A2EB",
-  },
-];
+  { name: "Khóa học JLPT N1", developmentCost: 0, estimatedRevenue: 2000000, color: "#FF9F40" },
+  { name: "Khóa học tiếng Nhật cho doanh nghiệp", developmentCost: 5000000, estimatedRevenue: 3000000, color: "#FF6384" }
+]
 
+// Function to Generate Monthly Data
 const generateMonthlyData = () => {
-  const monthlyData = [];
-  let currentRevenue = totalInitialRevenue;
+  const monthlyData = []
+  let currentRevenue = totalInitialRevenue
   const totalExpenses = expenses.reduce(
-    (sum, expense) =>
-      sum + expense.breakdown.reduce((sum, item) => sum + item.cost, 0),
+    (sum, expense) => sum + expense.breakdown.reduce((subSum, item) => subSum + item.cost, 0),
     0
-  );
-  let newCoursesLaunched = false;
+  )
+  let newCoursesLaunched = false
 
   for (let month = 1; month <= 36; month++) {
-    const revenue = currentRevenue * (1 + growthRate / 12);
-    const marketingCost = revenue * marketingCostRate;
-    const maintenanceCost = revenue * maintenanceCostRate;
-    const otherCosts = revenue * otherCostsRate;
+    const monthlyGrowthRate = Math.pow(1 + growthRate, 1/12) - 1
+    const revenue = currentRevenue * (1 + monthlyGrowthRate)
+    const marketingCost = revenue * marketingCostRate
+    const maintenanceCost = revenue * maintenanceCostRate
 
-    // Add new course development costs in the first year
-    let developmentCost = 0;
+    let developmentCost = 0
     if (month <= 12) {
       developmentCost = newCourses.reduce(
-        (sum, course) => sum + course.developmentCost / 12,
+        (sum, course) => sum + course.developmentCost,
         0
-      );
+      )
     }
 
-    // Add new course revenue starting from the second year
     if (month > 12 && !newCoursesLaunched) {
       currentRevenue += newCourses.reduce(
         (sum, course) => sum + course.estimatedRevenue,
         0
-      );
-      newCoursesLaunched = true;
+      )
+      newCoursesLaunched = true
     }
 
-    const totalCosts =
-      marketingCost +
-      maintenanceCost +
-      otherCosts +
-      totalExpenses / 12 +
-      developmentCost;
-    const profit = revenue - totalCosts;
+    const totalCosts = marketingCost + maintenanceCost + totalExpenses / 36 + developmentCost
+    const profit = revenue - totalCosts
 
     monthlyData.push({
       month,
       revenue: Math.round(revenue),
       marketingCost: Math.round(marketingCost),
       maintenanceCost: Math.round(maintenanceCost),
-      otherCosts: Math.round(otherCosts),
       developmentCost: Math.round(developmentCost),
       totalCosts: Math.round(totalCosts),
       profit: Math.round(profit),
-    });
+    })
 
-    currentRevenue = revenue;
+    currentRevenue = revenue
   }
 
-  return monthlyData;
-};
+  return monthlyData
+}
 
-const monthlyData = generateMonthlyData();
+const monthlyData = generateMonthlyData()
 
+// Function to Generate Yearly Data
 const generateYearlyData = () => {
   return monthlyData
     .filter((data, index) => (index + 1) % 12 === 0)
     .map((data, index) => ({
       ...data,
       year: index + 1,
-      revenue: Math.round(data.revenue / 1000000),
-      marketingCost: Math.round(data.marketingCost / 1000000),
-      maintenanceCost: Math.round(data.maintenanceCost / 1000000),
-      otherCosts: Math.round(data.otherCosts / 1000000),
-      developmentCost: Math.round(data.developmentCost / 1000000),
-      totalCosts: Math.round(data.totalCosts / 1000000),
-      profit: Math.round(data.profit / 1000000),
-    }));
-};
+      revenue: Math.round(data.revenue / 1000000 * 100) / 100,
+      marketingCost: Math.round(data.marketingCost / 1000000 * 100) / 100,
+      maintenanceCost: Math.round(data.maintenanceCost / 1000000 * 100) / 100,
+      developmentCost: Math.round(data.developmentCost / 1000000 * 100) / 100,
+      totalCosts: Math.round(data.totalCosts / 1000000 * 100) / 100,
+      profit: Math.round(data.profit / 1000000 * 100) / 100,
+    }))
+}
 
-const yearlyData = generateYearlyData();
+const yearlyData = generateYearlyData()
 
 const generateCourseGrowthData = () => {
   return Object.entries(initialData).map(([name, data]) => {
-    const monthlyGrowth = [];
-    let currentRevenue = data.revenue;
+    const monthlyGrowth = []
+    let currentRevenue = data.revenue
 
     for (let month = 1; month <= 36; month++) {
-      currentRevenue *= 1 + growthRate / 12;
+      const monthlyGrowthRate = Math.pow(1 + growthRate, 1/12) - 1
+      currentRevenue *= (1 + monthlyGrowthRate)
       monthlyGrowth.push({
         month,
         revenue: Math.round(currentRevenue),
-      });
+      })
     }
 
-    return { name, monthlyGrowth, color: data.color };
-  });
-};
+    return { name, monthlyGrowth, color: data.color }
+  })
+}
 
-const courseGrowthData = generateCourseGrowthData();
+const courseGrowthData = generateCourseGrowthData()
 
-export default function RevenueForecast() {
-  const [hoveredMonth, setHoveredMonth] = useState<number | null>(null);
-  const [selectedYear, setSelectedYear] = useState("1");
-  const userContext = useUser();
-  const user = userContext?.user || null;
-  if (user === null) {
-    return <HomePage />;
-  }
-  if (!(user?.role === "Adminstrator")) return <HomePage />;
+export default function RevenueForecast({ initialProps = {} }) {
+  const [hoveredMonth, setHoveredMonth] = useState<number | null>(null)
+  const [selectedYear, setSelectedYear] = useState("1")
+  const userContext = useUser()
+  const user = userContext?.user || null
+
+//   if (user === null) {
+//     return <HomePage />
+//   }
+//   if (!(user?.role === "Administrator")) return <HomePage />
+
   return (
     <div className="container mx-auto p-4 bg-gray-50 min-h-screen">
       <h1 className="text-3xl font-bold text-center mb-8 text-gray-800">
@@ -351,7 +333,7 @@ export default function RevenueForecast() {
                     label: "Tổng Chi Phí",
                     color: "hsl(var(--chart-2))",
                   },
-                  profit: {
+                  profit:  {
                     label: "Lợi Nhuận",
                     color: "hsl(var(--chart-3))",
                   },
@@ -492,18 +474,13 @@ export default function RevenueForecast() {
                   name="Chi Phí Duy Trì (Triệu ₫)"
                 />
                 <Bar
-                  dataKey="otherCosts"
-                  fill="var(--color-otherCosts)"
-                  name="Chi Phí Khác (Triệu ₫)"
-                />
-                <Bar
                   dataKey="developmentCost"
                   fill="var(--color-developmentCost)"
                   name="Chi Phí Phát Triển (Triệu ₫)"
                 />
                 <Bar
                   dataKey="profit"
-                  fill="var(--color-profit)"
+                  fill="green"
                   name="Lợi Nhuận (Triệu ₫)"
                 />
               </BarChart>
@@ -541,7 +518,7 @@ export default function RevenueForecast() {
               <LineChart
                 onMouseMove={(e) => {
                   if (e.activeTooltipIndex) {
-                    setHoveredMonth(e.activeTooltipIndex + 1);
+                    setHoveredMonth(e.activeTooltipIndex + 1)
                   }
                 }}
                 onMouseLeave={() => setHoveredMonth(null)}
@@ -582,7 +559,7 @@ export default function RevenueForecast() {
                         i < 12
                           ? 0
                           : course.estimatedRevenue *
-                            (1 + growthRate / 12) ** (i - 12),
+                            Math.pow(1 + growthRate, (i - 12) / 12),
                     }))}
                     type="monotone"
                     dataKey="revenue"
@@ -635,15 +612,15 @@ export default function RevenueForecast() {
                         <TableRow key={itemIndex}>
                           <TableCell>{item.item}</TableCell>
                           <TableCell>
-                            {item.cost.toLocaleString("vi-VN")}
+                            {Math.round(item.cost * (1 + growthRate)).toLocaleString("vi-VN")}
                           </TableCell>
                           <TableCell>
-                            {Math.round(item.cost * 1.1).toLocaleString(
+                            {Math.round(item.cost * Math.pow(1 + growthRate, 2)).toLocaleString(
                               "vi-VN"
                             )}
                           </TableCell>
                           <TableCell>
-                            {Math.round(item.cost * 1.21).toLocaleString(
+                            {Math.round(item.cost * Math.pow(1 + growthRate, 3)).toLocaleString(
                               "vi-VN"
                             )}
                           </TableCell>
@@ -662,7 +639,7 @@ export default function RevenueForecast() {
         <CardHeader>
           <CardTitle>Dự Kiến Khóa Học Mới</CardTitle>
           <CardDescription>
-            Chi phí phát triển và doanh thu ước tính theo năm
+            Chi phí phát triển
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -671,8 +648,6 @@ export default function RevenueForecast() {
               <TableRow>
                 <TableHead>Tên khóa học</TableHead>
                 <TableHead>Chi phí phát triển (₫)</TableHead>
-                <TableHead>Doanh thu ước tính Năm 2 (₫)</TableHead>
-                <TableHead>Doanh thu ước tính Năm 3 (₫)</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -682,14 +657,6 @@ export default function RevenueForecast() {
                   <TableCell>
                     {course.developmentCost.toLocaleString("vi-VN")}
                   </TableCell>
-                  <TableCell>
-                    {(course.estimatedRevenue * 12).toLocaleString("vi-VN")}
-                  </TableCell>
-                  <TableCell>
-                    {Math.round(
-                      course.estimatedRevenue * 12 * 1.15
-                    ).toLocaleString("vi-VN")}
-                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -697,5 +664,5 @@ export default function RevenueForecast() {
         </CardContent>
       </Card>
     </div>
-  );
+  )
 }
