@@ -70,48 +70,48 @@ const totalInitialRevenue = Object.values(initialData).reduce(
   0
 )
 const growthRate = 1 // 100% annual growth rate
-const marketingCostRate = 0.1 // 20% of revenue
+const marketingCostRate = 0.1 // 10% of revenue
 const maintenanceCostRate = 0.1 // 10% of revenue
 
 // Expenses Breakdown
 const expenses = [
   {
-    name: "Chi phí marketing",
+    name: "Chi phí marketing (10% doanh thu)",
     description: "Quảng cáo trên mạng xã hội, SEO, email marketing",
     justification: "Cần thiết để thu hút học viên mới và giữ chân học viên cũ",
     worthiness: "Xứng đáng vì giúp tăng doanh thu và mở rộng thị phần",
     breakdown: [
       {
-        item: "Quảng cáo Facebook",
+        item: "Quảng cáo Facebook (20% tổng chi phí marketing)",
         cost: totalInitialRevenue * marketingCostRate * 0.2,
       },
       {
-        item: "Quảng cáo Google",
+        item: "Quảng cáo Google (30% tổng chi phí marketing)",
         cost: totalInitialRevenue * marketingCostRate * 0.3,
       },
       {
-        item: "Tổ chức sự kiện",
+        item: "Tổ chức sự kiện (50% tổng chi phí marketing)",
         cost: totalInitialRevenue * marketingCostRate * 0.5,
       },
     ],
   },
   {
-    name: "Chi phí duy trì hệ thống",
+    name: "Chi phí duy trì hệ thống (10% doanh thu)",
     description: "Hosting, bảo trì website, nâng cấp hệ thống",
     justification: "Đảm bảo website hoạt động ổn định và nội dung luôn mới",
     worthiness:
       "Xứng đáng vì giúp duy trì chất lượng dịch vụ và sự hài lòng của học viên",
     breakdown: [
       {
-        item: "Hosting và tên miền",
+        item: "Hosting và tên miền (5% tổng chi phí duy trì)",
         cost: totalInitialRevenue * maintenanceCostRate * 0.05,
       },
       {
-        item: "Bảo trì website",
+        item: "Bảo trì website (50% tổng chi phí duy trì)",
         cost: totalInitialRevenue * maintenanceCostRate * 0.5,
       },
       {
-        item: "Nâng cấp hệ thống",
+        item: "Nâng cấp hệ thống (45% tổng chi phí duy trì)",
         cost: totalInitialRevenue * maintenanceCostRate * 0.45,
       },
     ],
