@@ -305,6 +305,12 @@ export default function RevenueForecast({ initialProps = {} }) {
                     </TableCell>
                   </TableRow>
                 ))}
+                <TableRow>
+                  <TableCell colSpan={2} className="font-bold">Tổng Doanh Thu</TableCell>
+                  <TableCell className="font-bold">
+                    {totalInitialRevenue.toLocaleString("vi-VN")}
+                  </TableCell>
+                </TableRow>
               </TableBody>
             </Table>
           </CardContent>
@@ -313,7 +319,7 @@ export default function RevenueForecast({ initialProps = {} }) {
 
       <Card className="mb-8">
         <CardHeader>
-          <CardTitle>Tổng Quan Doanh Thu</CardTitle>
+          <CardTitle>Tổng Quan Doanh Thu (Giả sử mức tăng trưởng là 100%/năm)</CardTitle>
           <CardDescription>Dự báo cho 3 năm tới</CardDescription>
         </CardHeader>
         <CardContent>
